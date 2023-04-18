@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/e-comm-team-brogrammers-fn/badge.svg?branch=develop)](https://coveralls.io/github/atlp-rwanda/e-comm-team-brogrammers-fn?branch=develop)
+
 # E-Commercy Brogrammers Mall
 
 E-Commercy Brogrammers Mall is an e-commerce web application built using [ReactJS](https://react.dev/) and [Redux](https://redux.js.org/). The project is being developed by a Fall team, which means it is expected to be completed by the end of the Fall semester.
