@@ -1,0 +1,45 @@
+# This workflow will Run tests with coverage
+name: running test
+
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage/
+
+      - name: Send coverage report to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm run coveralls
+
+      - name: Create coverage badge
+        uses: actions-ecosystem/action-create-comment@v1
+        with:
+          body: |
+            [![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/e-comm-team-brogrammers-fn/badge.svg?branch=)](https://coveralls.io/github/atlp-rwanda/e-comm-team-brogrammers-fn?branch=)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
