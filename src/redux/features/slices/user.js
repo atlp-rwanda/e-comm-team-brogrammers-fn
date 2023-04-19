@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import UserThunk from '../actions/user';
-// eslint-disable-next-line no-unused-vars
 import LogoutThunk from '../actions/logout';
 
 const initialState = {
@@ -14,29 +13,32 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
-  extraReducers: {
-    [UserThunk.pending]: (state) => {
-      state.loading = true;
-      state.error = false;
-    },
-    [UserThunk.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = true;
-      state.errorMessage = { ...payload };
-    },
-    [UserThunk.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      if (payload.error) {
-        state.error = true;
-        state.errorMessage = payload?.error?.response?.data?.message || 'error';
-      } else {
+  extraReducers: (builder) => {
+    builder
+      .addCase(UserThunk.pending, (state) => {
+        state.loading = true;
         state.error = false;
-        state.user = payload;
-      }
-    },
+      })
+      .addCase(UserThunk.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = { ...payload };
+      })
+      .addCase(UserThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        if (payload.error) {
+          state.error = true;
+          state.errorMessage =
+            payload?.error?.response?.data?.message || 'error';
+        } else {
+          state.error = false;
+          state.user = payload;
+        }
+      })
+      .addCase(LogoutThunk.fulfilled, (state, { payload }) => {
+        if (payload.status === 200) state.user = null;
+      });
   },
 });
-
-// export const { toggle, set } = booleanSlice.actions;
 
 export default userSlice.reducer;
