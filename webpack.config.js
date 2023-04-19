@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => ({
@@ -21,11 +22,11 @@ module.exports = (env) => ({
   plugins: [
     env.local
       ? new Dotenv({
-        path: './.env',
-      })
+          path: './.env',
+        })
       : new Dotenv({
-        systemvars: true,
-      }),
+          systemvars: true,
+        }),
     new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: './public/index.html',
