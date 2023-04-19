@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import GoogleButton from '../components/google-button';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 // eslint-disable-next-line import/no-named-as-default
 import Input from '../components/input';
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import signupSchema from '../validations/signup';
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import signupThunk from '../redux/features/actions/signup';
 
 function Signup() {
@@ -83,7 +81,7 @@ function Signup() {
             name="confirmPassword"
             placeholder="Re-Enter your Password"
             register={register('confirmPassword')}
-            errors={errors?.comfirmPassword?.message}
+            errors={errors?.confirmPassword?.message}
           />
 
           <button type="submit" className="btn1" data-testid="submit">
@@ -106,7 +104,7 @@ function Signup() {
           <p className="error" data-testid="form-error" />
         </form>
         <b className="or">Or</b>
-        <GoogleButton />
+        <GoogleLoginButton />
         <p>
           Already have account?{' '}
           <b>

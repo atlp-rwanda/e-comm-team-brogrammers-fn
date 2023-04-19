@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import signupThunk from '../actions/signup';
 
 export const signupSlice = createSlice({
