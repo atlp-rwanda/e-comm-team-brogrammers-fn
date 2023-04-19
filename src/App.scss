@@ -5,4 +5,68 @@
   --gray-color: #888;
   --light-gray-color: #ddd;
   --error-color: #ff003d;
+  --fr-vw: calc(100vw / 12);
+}
+
+a {
+  text-decoration: none;
+  color: var(--sec-color);
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  height: 2.5rem;
+  padding: 0.3rem 1rem;
+  border-radius: 10000px;
+  background-color: var(--light-gray-color);
+  width: calc(var(--fr-vw) * 5);
+  max-width: 100%;
+  gap: 0.3rem;
+  
+  input {
+    padding: 0.2rem 0rem;
+    font-size: 1em;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 3vw;
+  }
+  
+  button {
+    padding: 0.2rem 0rem;
+    background-color: transparent;
+    border: none;
+    padding-inline: 5px;
+
+    svg {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
+.p-404 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-inline: auto;
+  width: calc(var(--fr-vw) * 5);
+  gap: 1rem;
+  margin-top: 70px;
+
+  h1 {
+    font-size: 10em;
+    font-weight: 300;
+    margin-bottom: -1rem;
+  }
+
+  h2 {
+    font-size: 2em;
+    font-weight: 600;
+  }
 }
