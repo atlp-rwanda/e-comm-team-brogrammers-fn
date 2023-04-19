@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
+    'plugin:storybook/recommended',
+  ],
   overrides: [],
   parserOptions: {
     ecmaFeatures: {
@@ -15,7 +20,12 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'import/no-unresolved': ['error', { commonjs: true }],
+    'import/no-unresolved': [
+      'error',
+      {
+        commonjs: true,
+      },
+    ],
     'no-param-reassign': 'off',
   },
 };
