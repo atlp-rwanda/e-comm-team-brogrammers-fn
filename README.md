@@ -51,6 +51,7 @@ the main dependencies to run this project are
 In the project directory, you can run:
 
 #### Start the project
+
 ```sh
 npm start
 ```
@@ -62,6 +63,7 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 #### Build
+
 ```sh
 npm run build
 ```
@@ -75,6 +77,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://create-react-app.dev/docs/production-build/) for more information.
 
 #### Testing
+
 ```sh
 npm test
 ```
