@@ -1,22 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: true,
-}
+};
 
 export const booleanSlice = createSlice({
   name: 'boolean',
   initialState,
   reducers: {
     toggle: (state) => {
-      state.value = !state.value
+      state.value = !state.value;
     },
     set: (state, action) => {
-      state.value = action.payload
-    }
+      state.value = action.payload;
+    },
   },
-})
+});
 
-export const { toggle, set } = booleanSlice.actions
+export const { toggle, set } = booleanSlice.actions;
 
-export default booleanSlice.reducer
+export default booleanSlice.reducer;
