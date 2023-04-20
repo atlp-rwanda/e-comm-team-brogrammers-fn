@@ -2,6 +2,7 @@ import './App.scss';
 
 import { Routes, Route } from 'react-router-dom';
 import Home from './Views/Home';
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
 import NotFound from './Views/404';
 import GoogleLoginButton from './components/GoogleLoginButton';
