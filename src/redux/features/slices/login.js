@@ -23,18 +23,18 @@ export const loginSlice = createSlice({
       state.errorMessage = { ...payload };
     },
     [LoginThunk.fulfilled]: (state, { payload }) => {
-      state.loading = false;
       if (payload.error) {
         state.error = true;
         state.errorMessage = payload?.error?.response?.data?.message || 'error';
       } else if (payload.token) {
+        localStorage.setItem('token', payload.token);
         state.error = false;
         state.token = payload.token;
-        localStorage.setItem('token', payload.token);
       } else {
         state.error = true;
         state.errorMessage = 'unknown error';
       }
+      state.loading = false;
     },
   },
 });

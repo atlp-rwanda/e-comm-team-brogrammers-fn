@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../images/logo.png';
+import UserThunk from '../redux/features/actions/user';
 
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token, loading: tokenLoad } = useSelector((s) => s.login);
+  const { user, loading } = useSelector((s) => s.user);
+
+  useEffect(() => {
+    if (!tokenLoad && token) {
+      setTimeout(() => dispatch(UserThunk()), 1000);
+    }
+  }, [token]);
+
   return (
     <header className="body-header">
       <h2 aria-hidden="true" className="brand" onClick={() => navigate('/')}>
@@ -34,7 +46,36 @@ function Header() {
             </defs>
           </svg>
         </div>
-        <Link to="/login">Login</Link>
+        {!loading && user ? (
+          <div className="user">
+            <div className="profile">
+              <img className="profile" alt="profile" src={user?.avatar} />
+            </div>
+            <div className="drop-down">
+              <div className="user-drop">
+                <section className="top">
+                  <div className="profile">
+                    <img className="profile" alt="profile" src={user?.avatar} />
+                  </div>
+                  <h2>{user?.username}</h2>
+                </section>
+                <section>
+                  <span>View Shop</span>
+                  <span>Cart</span>
+                  <span>Edit Profile</span>
+                  <button type="button" className="btn1">
+                    Add product
+                  </button>
+                </section>
+                <section>
+                  <span className="error">Logout</span>
+                </section>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </nav>
     </header>
   );
