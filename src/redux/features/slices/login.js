@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import LoginThunk from '../actions/login';
 
 const initialState = {
+  isLoggedIn: false,
   token: localStorage.getItem('token'),
   loading: false,
   error: false,
@@ -30,6 +31,7 @@ export const loginSlice = createSlice({
         localStorage.setItem('token', payload.token);
         state.error = false;
         state.token = payload.token;
+        state.isLoggedIn = true;
       } else {
         state.error = true;
         state.errorMessage = 'unknown error';
@@ -38,7 +40,5 @@ export const loginSlice = createSlice({
     },
   },
 });
-
-// export const { toggle, set } = booleanSlice.actions;
 
 export default loginSlice.reducer;

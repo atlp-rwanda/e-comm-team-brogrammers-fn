@@ -6,6 +6,8 @@ import Login from './Views/Login';
 import NotFound from './Views/404';
 import Header from './components/header';
 import Footer from './components/footer';
+import ChangePassword from './Views/Password';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <PrivateRoute path="/change-password" element={<ChangePassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
