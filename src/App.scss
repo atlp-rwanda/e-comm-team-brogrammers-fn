@@ -8,13 +8,11 @@
   --back-color-2: #eee;
   --main-color: #111;
   --sec-color: #f90;
-  --dark-sec-color: #d80;
   --light-gray-color: #ddd;
   --gray-color: #888;
   --error-color: #ff003d;
   --fr-vw: calc(100vw / 12);
   --re-space: 3rem;
-  --sm-re-space: 5vw;
   --md-space: 5rem;
   --xsm-space: 10px;
   --sm-box-padding: 0.6rem 1rem;
@@ -41,10 +39,6 @@ a {
   padding: var(--sm-box-padding);
   font-size: 1em;
   font-weight: bold;
-
-  &:hover {
-    background-color: var(--dark-sec-color);
-  }
 }
 
 .back-angular {
@@ -82,16 +76,6 @@ header.body-header {
     justify-content: flex-end;
     gap: calc(var(--xsm-space) * 2);
 
-    > * {
-      position: relative;
-
-      &:hover {
-        .drop-down {
-          display: block;
-        }
-      }
-    }
-
     a {
       color: inherit;
     }
@@ -105,69 +89,6 @@ header.body-header {
         fill: currentColor;
         stroke: currentColor;
       }
-    }
-
-    .profile {
-      aspect-ratio: 1/1;
-      height: 2.5rem;
-
-      img {
-        border-radius: 100000px;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-      }
-    }
-
-    .drop-down {
-      display: none;
-      position: absolute;
-      max-width: 100vw;
-      width: max-content;
-      top: 100%;
-      right: 0;
-      color: var(--main-color);
-      z-index: 1;
-      box-shadow: 0 5px 15px -5px var(--gray-color);
-      contain: content;
-      border-radius: 10px;
-    }
-
-    .user {
-      .user-drop {
-        @include flex-column();
-        width: 30vw;
-        max-width: 100vw;
-        min-width: 200px;
-
-        > * {
-          @include flex-column();
-          padding: calc(var(--xsm-space) * 3) 2rem;
-          gap: var(--xsm-space);
-          border-top: 1px solid var(--light-gray-color);
-        }
-
-        .top {
-          background-color: var(--light-gray-color);
-          gap: var(--xsm-space);
-          align-items: center;
-          padding: 2rem 0;
-
-          .profile {
-            height: 3.5rem;
-          }
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 550px) {
-    & {
-      padding: 0.5rem var(--sm-re-space);
-    }
-
-    nav {
-      display: none;
     }
   }
 }
@@ -256,15 +177,6 @@ footer.body-footer {
       height: 2.5rem;
     }
   }
-
-  @media screen and (max-width: 550px) {
-    & {
-      padding: 1rem var(--sm-re-space) 2rem;
-      gap: var(--xsm-space);
-      flex-direction: column;
-      align-items: center;
-    }
-  }
 }
 
 .center-xy {
@@ -322,28 +234,22 @@ footer.body-footer {
 
 .sign {
   width: 40rem;
-  max-width: 90vw;
-  @include flex-column();
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
   gap: calc(var(--xsm-space) * 1.6);
   margin: 2rem auto 3rem;
   padding: 3rem 5rem;
   border-radius: var(--xsm-space);
 
   form {
-    @include flex-column();
+    display: flex;
+    flex-direction: column;
     gap: calc(var(--xsm-space) * 1.6);
 
     > .error {
       margin-top: calc(-1 * var(--xsm-space));
       padding-inline: var(--xsm-space);
-    }
-  }
-
-  @container (max-width: 550px) {
-    & {
-      max-width: 100vw;
-      padding: 3rem var(--sm-re-space);
-      margin-inline: var(--sm-re-space);
     }
   }
 }

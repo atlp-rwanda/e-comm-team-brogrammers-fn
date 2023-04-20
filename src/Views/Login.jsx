@@ -35,13 +35,9 @@ function Login() {
   };
   return (
     <section className="center-xy">
-      <div className="sign back-angular" data-testid="sign_div">
+      <div className="sign back-angular">
         <h2>Login to your account</h2>
-        <form
-          className="login"
-          onSubmit={handleSubmit(submit)}
-          data-testid="login-form"
-        >
+        <form className="login" onSubmit={handleSubmit(submit)}>
           <Input
             type="text"
             placeholder="Email"
@@ -54,7 +50,7 @@ function Login() {
             register={{ ...register('password') }}
             errors={errors?.password?.message}
           />
-          <button type="submit" className="btn1" data-testid="submit">
+          <button type="submit" className="btn1">
             {loading ? (
               <div className="lds-ellipsis">
                 <div />
@@ -68,11 +64,7 @@ function Login() {
               </span>
             )}
           </button>
-          {error && (
-            <p className="error" data-testid="form-error">
-              {errorMessage}
-            </p>
-          )}
+          {error && <p className="error">{errorMessage}</p>}
         </form>
         <p>Forgot password?</p>
         <GoogleButton />

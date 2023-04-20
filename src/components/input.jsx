@@ -30,15 +30,9 @@ function Input({
           required={required}
           name={name}
           {...register}
-          data-testid="input-element"
         />
         {type.toLowerCase() === 'password' && (
-          <span
-            className="icon"
-            onClick={seePassword}
-            role="presentation"
-            data-testid="see-button"
-          >
+          <span className="icon" onClick={seePassword} role="presentation">
             <svg
               width="31"
               height="22"
@@ -54,11 +48,7 @@ function Input({
           </span>
         )}
       </div>
-      {errors && (
-        <p className="error" data-testid="errors">
-          {errors}
-        </p>
-      )}
+      {errors && <p className="error">{errors}</p>}
     </div>
   );
 }

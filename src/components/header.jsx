@@ -1,29 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import logo from '../images/logo.png';
-import UserThunk from '../redux/features/actions/user';
 
 function Header() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { token, loading: tokenLoad } = useSelector((s) => s.login);
-  const { user, loading } = useSelector((s) => s.user);
-
-  useEffect(() => {
-    if (!tokenLoad && token) {
-      setTimeout(() => dispatch(UserThunk()), 1000);
-    }
-  }, [token]);
-
   return (
     <header className="body-header">
-      <h2
-        aria-hidden="true"
-        className="brand"
-        onClick={() => navigate('/')}
-        data-testid="brand"
-      >
+      <h2 aria-hidden="true" className="brand" onClick={() => navigate('/')}>
         <img alt="logo" src={logo} />
         <span>
           <span className="sec-color">B</span>rogrammers Mall
@@ -51,38 +34,7 @@ function Header() {
             </defs>
           </svg>
         </div>
-        {!loading && user ? (
-          <div className="user">
-            <div className="profile" data-testid="profile">
-              <img className="profile" alt="profile" src={user?.avatar} />
-            </div>
-            <div className="drop-down">
-              <div className="user-drop">
-                <section className="top">
-                  <div className="profile">
-                    <img className="profile" alt="profile" src={user?.avatar} />
-                  </div>
-                  <h2>{user?.username}</h2>
-                </section>
-                <section>
-                  <span>View Shop</span>
-                  <span>Cart</span>
-                  <span>Edit Profile</span>
-                  <button type="button" className="btn1">
-                    Add product
-                  </button>
-                </section>
-                <section>
-                  <span className="error">Logout</span>
-                </section>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <Link to="/login" data-testid="login">
-            Login
-          </Link>
-        )}
+        <Link to="/login">Login</Link>
       </nav>
     </header>
   );

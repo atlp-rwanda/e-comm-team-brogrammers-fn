@@ -27,13 +27,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm i
-      - run: npm test
       - run: npm run build
+      - run: npm test
       - name: Deploy Preview
-        uses: actions/setup-node@v3
+        uses: my/deploy-action@v1
         with:
           environment: preview
           ref: ${{ github.event.pull_request.head.sha }}
           deploy_key: ${{ secrets.DEPLOY_KEY }}
         if: github.event.pull_request.reviews == null
-
