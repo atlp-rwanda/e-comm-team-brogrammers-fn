@@ -36,4 +36,3 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           deploy_key: ${{ secrets.DEPLOY_KEY }}
         if: github.event.pull_request.reviews == null
-
