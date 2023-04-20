@@ -1,25 +1,23 @@
 /* eslint-disable react/button-has-type */
 import './App.scss';
-import { Routes, Route } from 'react-router-dom';
+import './components/GoogleLoginButton.scss';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Views/Home';
 import Login from './Views/Login';
 import NotFound from './Views/404';
-import Header from './components/header';
-import Footer from './components/footer';
+import GoogleLoginButton from './components/GoogleLoginButton';
 
 function App() {
   return (
-    <>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login/google" element={<GoogleLoginButton />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 

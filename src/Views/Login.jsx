@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import GoogleButton from '../components/google-button';
 import Input from '../components/input';
 import loginSchema from '../validations/login';
 import LoginThunk from '../redux/features/actions/login';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 
 function Login() {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ function Login() {
           )}
         </form>
         <p>Forgot password?</p>
-        <GoogleButton />
+        <GoogleLoginButton />
         <p>
           Don’t have account?{' '}
           <b>
