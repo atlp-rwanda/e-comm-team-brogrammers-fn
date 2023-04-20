@@ -3,6 +3,11 @@
   flex-direction: column;
 }
 
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
 :root {
   --back-color: #fff;
   --back-color-2: #eee;
@@ -93,6 +98,16 @@ header.body-header {
   nav {
     justify-content: flex-end;
     gap: calc(var(--xsm-space) * 2);
+
+    > * {
+      position: relative;
+
+      &:hover {
+        .drop-down {
+          display: block;
+        }
+      }
+    }
 
     > * {
       position: relative;
@@ -228,6 +243,7 @@ a {
 
 .p-404 {
   @include flex-column();
+  @include flex-column();
   text-align: center;
   align-items: center;
   margin-inline: auto;
@@ -343,6 +359,7 @@ footer.body-footer {
   border-radius: var(--xsm-space);
 
   form {
+    @include flex-column();
     @include flex-column();
     gap: calc(var(--xsm-space) * 1.6);
 
