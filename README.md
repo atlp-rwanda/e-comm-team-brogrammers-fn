@@ -1,5 +1,7 @@
 # E-Commercy Brogrammers Mall
 
+To access BrogrammersMall deployed application, visit https://brogrammersmall.netlify.app/
+
 E-Commercy Brogrammers Mall is an e-commerce web application built using [ReactJS](https://react.dev/) and [Redux](https://redux.js.org/). The project is being developed by a Fall team, which means it is expected to be completed by the end of the Fall semester.
 
 The goal of the project is to create a fully functional online mall where users can browse and purchase a wide variety of products. The mall will have multiple stores, each selling different types of products, such as clothing, electronics, and home goods. Users will be able to create accounts, add items to their shopping cart, and make payments securely through the site.
