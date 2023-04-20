@@ -3,7 +3,9 @@ name: React.js CI/CD
 on:
   push:
     branches: ['develop']
+    branches: ['develop']
   pull_request:
+    branches: ['develop']
     branches: ['develop']
     types: [opened, synchronize, reopened]
 

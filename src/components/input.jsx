@@ -55,9 +55,14 @@ function Input({
         )}
       </div>
       {errors && (
-        <p className="error" data-testid="errors">
-          {errors}
-        </p>
+        <>
+          <p className="error" data-testid="errors">
+            {errors}
+          </p>
+          <p className="success" data-testid="success">
+            {}
+          </p>
+        </>
       )}
     </div>
   );
