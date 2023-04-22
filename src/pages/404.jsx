@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import SearchBox from '../components/search';
+// import '../components/ProductList.css'
 
 function NotFound() {
   return (

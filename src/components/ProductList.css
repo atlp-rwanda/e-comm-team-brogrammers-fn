@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Apply some global styles */
+body {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+h2 {
+  margin: 0 auto;
+  color: darkorange;
+  align-items: center;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Style for the product list */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Style for each product card */
+.product-card {
+  width: calc(25% - 16px);
+  margin-bottom: 32px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the product image */
+.product-image {
+  height: 80px;
+  margin-right: 10px;
+  width: 80px;
+  /* aspect-ratio: 80; */
+}
+
+.product-image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Style for the product info */
+.product-info {
+  flex: 1;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  margin-bottom: 8px;
+}
+
+.product-info .price {
+  font-weight: bolder;
+  color: darkorange;
+}
+.product-quantity {
+  font-weight: bolder;
+}
+.product-price {
+  font-size: 1.2rem;
+  color: darkorange;
+  margin: 0;
+}
+
+.add-to-cart {
+  background-color: darkorange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 1px;
+}
+
+/* Show 3 cards per row on tablet screens */
+@media only screen and (max-width: 768px) {
+  .product-card {
+    width: calc(33.33% - 16px);
+  }
+}
+
+/* Show 2 cards per row on phone screens */
+@media only screen and (max-width: 480px) {
+  .product-card {
+    width: calc(50% - 16px);
+  }
+}
+
+/* Resize images to avoid overlapping with content */
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}

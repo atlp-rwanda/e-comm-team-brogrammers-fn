@@ -2,35 +2,38 @@ name: React.js CI/CD
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: ['develop']
   pull_request:
-    branches: [ "develop" ]
+    branches: ['develop']
     types: [opened, synchronize, reopened]
 
+env:
+  REACT_APP_SERVER_URL: https://brogrammers-ecomerce1.onrender.com
+
 jobs:
-  build:
-  deploy-preview:
-    runs-on: self-hosted
+  build-and-deploy-preview:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i
-    - run: npm run build 
-    - run: npm test
-    - name: Deploy Preview
-      uses: my/deploy-action@v1
-      with: 
-        environment: preview
-        ref: ${{ github.event.pull_request.head.sha }}
-        deploy_key: ${{ secrets.DEPLOY_KEY }}
-      if: github.event.pull_request.reviews == null
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm i
+      - run: npm test
+      - run: npm run build
+      - name: Deploy Preview
+        uses: actions/setup-node@v3
+        with:
+          environment: preview
+          ref: ${{ github.event.pull_request.head.sha }}
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+        if: github.event.pull_request.reviews == null
+

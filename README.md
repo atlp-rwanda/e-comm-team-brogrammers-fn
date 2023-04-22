@@ -1,4 +1,4 @@
-# E-Commercy Brogrammers Mall
+# E-Commerce Brogrammers Mall
 
 To access BrogrammersMall deployed application, visit https://brogrammersmall.netlify.app/
 
