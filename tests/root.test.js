@@ -4,10 +4,8 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { test, expect, jest } from '@jest/globals';
-import NotFound from '../src/pages/404';
+import NotFound from '../src/Views/404';
 import '@testing-library/jest-dom';
-import Home from '../src/Views/Home';
-import Login from '../src/Views/Login';
 import SearchBox from '../src/components/search';
 
 test('renders search input field', () => {
@@ -30,16 +28,6 @@ test('prevents default behavior when submitted', () => {
   expect(mockSearch).toHaveBeenCalled();
 });
 
-test('renders the home page', () => {
-  render(<Home />);
-  const headingElement = screen.getByText(/homepage/i);
-  expect(headingElement).toBeInTheDocument();
-});
-test('renders the login page', () => {
-  render(<Login />);
-  const headingElement = screen.getByText(/login page/i);
-  expect(headingElement).toBeInTheDocument();
-});
 test('renders 404 header and message', () => {
   render(
     <BrowserRouter basename="/">

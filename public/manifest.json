@@ -1,0 +1,20 @@
+{
+  "short_name": "e-comm-team-brogrammers-fn",
+  "name": "E-Commercy Brogrammers Mall",
+  "icons": [
+    {
+      "src": "Frame.png",
+      "type": "image/png",
+      "sizes": "66x44"
+    },
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "800x800"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#111111",
+  "background_color": "#ffffff"
+}
