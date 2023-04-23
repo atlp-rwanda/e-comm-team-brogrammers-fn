@@ -1,65 +1,64 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+// import 'react-toastify/dist/ReactToastify.css';
 import './reset.scss';
+
+const isValidEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
+const isValidPassword = (password) => {
+  const regex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+{}|;:'",.<>/?])(?!.*\s).{8,}$/;
+  return regex.test(password);
+};
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Password validation
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      setErrorMessage(
-        'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one symbol (!@#$&*)'
-      );
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, confirmPassword }),
-      });
-      const data = await response.json();
-      setSuccessMessage(data.message);
-    } catch (error) {
-      setErrorMessage(error.message);
+  const handleEmailChange = (event) => {
+    const { value } = event.target;
+    setEmail(value);
+    if (!isValidEmail(value)) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
     }
   };
 
-  // const handleVerifyToken = async (token) => {
-  //   try {
-  //     const response = await fetch('/api/verify-token', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ token }),
-  //     });
-  //     const data = await response.json();
-  //     setSuccessMessage(data.message);
-  //     setTimeout(() => {
-  //       window.location.href = '/login'; // Navigate to login page after success message is displayed
-  //     }, 3000);
-  //   } catch (error) {
-  //     setErrorMessage(error.message);
-  //   }
-  // };
+  const handlePasswordChange = ({ target: { value } }) => {
+    setPassword(value);
+    if (!isValidPassword(value)) {
+      setPasswordError(
+        'Password must be at least 8 characters, 1 uppercase letter, 1 symbol, and 1 number'
+      );
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleConfirmPasswordChange = ({ target: { value } }) => {
+    setConfirmPassword(value);
+    if (value !== password) {
+      setConfirmPasswordError('Passwords do not match');
+    } else {
+      setConfirmPasswordError('');
+    }
+  };
 
   const handleTogglePassword = (type) => {
     if (type === 'password') {
@@ -69,36 +68,122 @@ function ResetPassword() {
     }
   };
 
+  const clearForm = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setEmailError('');
+    setPasswordError('');
+    setConfirmPasswordError('');
+  };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let hasError = false;
+  
+    if (!isValidEmail(email)) {
+      setEmailError('Invalid email address');
+      hasError = true;
+    } else {
+      setEmailError('');
+    }
+  
+    if (!isValidPassword(password)) {
+      setPasswordError(
+        'Password must be at least 8 characters, 1 uppercase letter, 1 symbol, and 1 number'
+      );
+      hasError = true;
+    } else {
+      setPasswordError('');
+    }
+  
+    if (password !== confirmPassword) {
+      setConfirmPasswordError('Passwords do not match');
+      hasError = true;
+    } else {
+      setConfirmPasswordError('');
+    }
+  
+    if (!hasError) {
+      try {
+        const response = await axios.post(
+          'https://brogrammers-ecomerce1.onrender.com/users/reset-password',
+          { email, newPassword: password },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        if (response.status === 200) {
+          toast.success(
+            'Please check your email to Reset your Password.',
+            {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
+          );
+          clearForm();
+        } 
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          toast.error('Email not found in the database.', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          clearForm();
+        } else {
+          toast.error('An error occurred while submitting form', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          clearForm();
+        }
+      }
+    }
+  };
+  
+      
   return (
     <div className="reset">
       <form onSubmit={handleSubmit}>
         <h1>Reset Password</h1>
-        {errorMessage && <p className="error">{errorMessage}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
+
         <div className="input-container">
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            id="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
+            required
           />
+          {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
         </div>
+
         <div className="input-container">
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
             name="password"
             placeholder="Password"
-            required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            minLength={8}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)"
+            onChange={handlePasswordChange}
+            required
           />
+          {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
           <span
             className="show-password"
             onClick={() => handleTogglePassword('password')}
@@ -113,18 +198,20 @@ function ResetPassword() {
             <FontAwesomeIcon icon={faEye} />
           </span>
         </div>
+
         <div className="input-container">
           <input
             type={showConfirmPassword ? 'text' : 'password'}
             id="confirm-password"
             name="confirm-password"
             placeholder="Re-Enter Password"
-            required
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            minLength={8}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)"
+            onChange={handleConfirmPasswordChange}
+            required
           />
+          {confirmPasswordError && (
+            <div style={{ color: 'red' }}>{confirmPasswordError}</div>
+          )}
           <span
             className="show-password"
             onClick={() => handleTogglePassword('confirm-password')}
