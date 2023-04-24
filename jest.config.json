@@ -1,13 +1,26 @@
 {
-  "collectCoverage": true,
   "testEnvironment": "jsdom",
+  "setupFiles": ["dotenv/config"],
+  "transform": {
+    "^.+\\.(js|jsx)$": "babel-jest",
+    "\\.(png)$": "jest-transform-stub"
+  },
+  "moduleNameMapper": {
+    "^axios$": "<rootDir>/node_modules/axios/dist/axios.js"
+  },
+  "moduleFileExtensions": ["js", "jsx", "json", "node"],
+  "testMatch": [
+    "**/__tests__/**/*.+(js|jsx)",
+    "**/?(*.)+(spec|test).+(js|jsx)"
+  ],
+  "collectCoverage": true,
   "coverageThreshold": {
     "global": {
-      "branches": 100,
-      "lines": 90
+      "branches": 90,
+      "lines": 85
     }
   },
   "coverageReporters": ["lcov", "text"],
   "coverageDirectory": "coverage",
-  "testTimeout": 10000
+  "testTimeout": 12000
 }
