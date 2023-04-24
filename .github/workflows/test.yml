@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: ["develop"]
 
+env: 
+  REACT_APP_SERVER_URL: https://brogrammers-ecomerce1.onrender.com
+
 jobs:
   test:
     runs-on: ubuntu-latest
