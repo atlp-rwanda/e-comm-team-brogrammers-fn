@@ -1,7 +1,8 @@
+/* eslint-disable import/no-named-as-default-member */
 import './App.scss';
 
 import { Routes, Route } from 'react-router-dom';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
+// eslint-disable-next-line import/no-named-as-default
 import Home from './Views/Home';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
@@ -14,6 +15,7 @@ import GoogleLoginButton from './components/GoogleLoginButton';
 import Header from './components/header';
 import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
+import Products from './Views/viewProducts';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/login/google" element={<GoogleLoginButton />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
