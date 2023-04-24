@@ -36,10 +36,3 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: npm run coveralls
-
-      - name: Create coverage badge
-        uses: actions-ecosystem/action-create-comment@v1
-        with:
-          body: |
-            [![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/e-comm-team-brogrammers-fn/badge.svg?branch=)](https://coveralls.io/github/atlp-rwanda/e-comm-team-brogrammers-fn?branch=)
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
