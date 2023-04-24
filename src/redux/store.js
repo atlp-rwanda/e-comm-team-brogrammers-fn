@@ -8,6 +8,7 @@ import userReducer from './features/slices/user';
 import signupReducer from './features/slices/signup';
 import logoutReducer from './features/slices/logout';
 import passwordReducer from './features/slices/password';
+import productSlice from './features/slices/product';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -18,5 +19,6 @@ export const store = configureStore({
     signup: signupReducer,
     logout: logoutReducer,
     password: passwordReducer,
+    products: productSlice.reducer,
   },
 });

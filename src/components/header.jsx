@@ -1,107 +1,20 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert2';
 import logo from '../images/logo.png';
 import UserThunk from '../redux/features/actions/user';
-import LogoutThunk from '../redux/features/actions/logout';
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
   const { user, loading } = useSelector((s) => s.user);
-  const {
-    loading: logoutLoad,
-    error: logoutError,
-    logout: isLogout,
-  } = useSelector((s) => s.logout);
-
-  const logoutPopup = swal.mixin({
-    customClass: {
-      confirmButton: 'btn1 btn-success swal-button',
-      cancelButton: 'btn1 btn-danger swal-button',
-    },
-    buttonsStyling: false,
-  });
 
   useEffect(() => {
     if (!tokenLoad && token) {
       setTimeout(() => dispatch(UserThunk()), 1000);
     }
   }, [token]);
-
-  useEffect(() => {
-    if (isLogout)
-      logoutPopup
-        .fire({
-          title: 'Come back soon!',
-          text: 'You have been logged out to your account!',
-          iconHtml:
-            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>',
-          confirmButtonText: 'Continue',
-          iconColor: '#4c4',
-        })
-        .then(() => window.location.assign('/'));
-  }, [logoutLoad, logoutError, isLogout]);
-
-  const logout = useCallback(() => {
-    logoutPopup
-      .fire({
-        text: 'Are you sure you want to sign out?',
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cancel',
-        confirmButtonText: 'Sign out',
-        reverseButtons: true,
-      })
-      .then((res) => {
-        if (res.isConfirmed) {
-          dispatch(LogoutThunk());
-        }
-      });
-  }, []);
-
-  const userDrop = useRef();
-  const userDropContainer = useRef();
-  const [userDropView, setUserDropView] = useState(false);
-
-  const userDropFunct = useCallback(
-    (event) => {
-      const myBox = userDropContainer.current;
-      const isClickInside = myBox.contains(event.target);
-      if (isClickInside) {
-        if (userDrop.current.contains(event.target)) {
-          setUserDropView(true);
-          return;
-        }
-        setUserDropView((prev) => !prev);
-      } else {
-        setUserDropView(false);
-      }
-    },
-    [userDropContainer, userDropContainer.current, userDrop.current]
-  );
-
-  useEffect(() => {
-    const myBox = userDropContainer.current;
-    if (!myBox || myBox == null) return;
-    document.addEventListener('click', userDropFunct);
-
-    // eslint-disable-next-line consistent-return
-    return () => {
-      document.removeEventListener('click', userDropFunct);
-    };
-  }, [userDropContainer.current, userDropContainer, user]);
-
-  useEffect(() => {
-    const drop = userDrop.current;
-    if (!drop) return;
-
-    if (userDropView) drop.style.display = 'block';
-    else drop.style.display = 'none';
-  }, [userDropView, userDrop.current]);
 
   return (
     <header className="body-header">
@@ -139,15 +52,11 @@ function Header() {
           </svg>
         </div>
         {!loading && user ? (
-          <div className="user" ref={userDropContainer}>
-            <div className="profile" aria-hidden="true" data-testid="profile">
+          <div className="user">
+            <div className="profile" data-testid="profile">
               <img className="profile" alt="profile" src={user?.avatar} />
             </div>
-            <div
-              className="drop-down"
-              ref={userDrop}
-              style={{ display: 'none' }}
-            >
+            <div className="drop-down">
               <div className="user-drop">
                 <section className="top">
                   <div className="profile">
@@ -165,14 +74,7 @@ function Header() {
                   </button>
                 </section>
                 <section>
-                  <span
-                    className="pointer"
-                    data-testid="logout"
-                    aria-hidden="true"
-                    onClick={logout}
-                  >
-                    Logout
-                  </span>
+                  <span className="error">Logout</span>
                 </section>
               </div>
             </div>

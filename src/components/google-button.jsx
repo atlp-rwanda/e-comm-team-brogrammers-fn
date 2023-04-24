@@ -36,5 +36,4 @@ function GoogleButton() {
     </button>
   );
 }
-
 export default GoogleButton;

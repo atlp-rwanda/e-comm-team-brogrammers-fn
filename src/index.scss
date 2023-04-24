@@ -52,3 +52,115 @@ code {
   flex-direction: column;
   gap: 1rem;
 }
+/*  styles on get all products*/
+
+.productCard {
+  margin: 50px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Style for the product list */
+.product-list {
+  display: flex;
+  margin: auto;
+  padding: 5px;
+  // align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Style for each product card */
+.product-card {
+  // width: calc(25% - 16px);
+  margin-bottom: 32px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  min-width: 300px;
+  display: flex;
+  flex: 1;
+  height: 470px;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 250px !important;
+  object-fit: cover;
+  background-color: #888;
+  flex: 1;
+}
+
+/* Style for the product image */
+.product-image {
+  height: 80px;
+  margin-right: 10px;
+  width: 80px;
+  /* aspect-ratio: 80; */
+}
+/* Style for the product info */
+.product-info {
+  flex: 1;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  margin-bottom: 8px;
+}
+
+.product-info .price {
+  font-weight: bolder;
+  color: darkorange;
+}
+.product-quantity {
+  font-weight: bolder;
+}
+.product-price {
+  font-size: 1.2rem;
+  color: darkorange;
+  margin: 0;
+}
+
+.add-to-cart {
+  background-color: darkorange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  margin-top: 5px;
+}
+
+/* Show 3 cards per row on tablet screens */
+@media only screen and (max-width: 768px) {
+  .product-card {
+    width: calc(33.33% - 16px);
+  }
+}
+
+/* Show 2 cards per row on phone screens */
+@media only screen and (max-width: 480px) {
+  .product-card {
+    width: calc(50% - 16px);
+  }
+}
+
+/* Resize images to avoid overlapping with content */
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
