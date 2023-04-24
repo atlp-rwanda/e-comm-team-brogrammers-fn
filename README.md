@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/e-comm-team-brogrammers-fn/badge.svg?branch=develop)](https://coveralls.io/github/atlp-rwanda/e-comm-team-brogrammers-fn?branch=develop)
+
 # E-Commercy Brogrammers Mall
 
 To access BrogrammersMall deployed application, visit https://brogrammersmall.netlify.app/
