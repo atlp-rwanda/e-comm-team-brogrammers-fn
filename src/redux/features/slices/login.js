@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import LoginThunk from '../actions/login';
+import LogoutThunk from '../actions/logout';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -24,6 +25,7 @@ export const loginSlice = createSlice({
         state.errorMessage = { ...payload };
       })
       .addCase(LoginThunk.fulfilled, (state, { payload }) => {
+        state.loading = false;
         if (payload.error) {
           state.error = true;
           state.errorMessage =
@@ -32,11 +34,10 @@ export const loginSlice = createSlice({
           localStorage.setItem('token', payload.token);
           state.error = false;
           state.token = payload.token;
-        } else {
-          state.error = true;
-          state.errorMessage = 'unknown error';
         }
-        state.loading = false;
+      })
+      .addCase(LogoutThunk.fulfilled, (state, { payload }) => {
+        if (payload.status === 200) state.token = null;
       });
   },
 });

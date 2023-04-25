@@ -12,12 +12,12 @@ import { store } from '../../src/redux/store';
 import LoginThunk from '../../src/redux/features/actions/login';
 import UserThunk from '../../src/redux/features/actions/user';
 
-describe('testing header component', () => {
-  const testUser = {
-    email: 'jean@gmail.com',
-    password: '123@Pass',
-  };
+const testUser = {
+  email: 'jean@gmail.com',
+  password: '123@Pass',
+};
 
+describe('testing header component', () => {
   beforeEach(() => {
     localStorage.clear();
   });
@@ -55,5 +55,67 @@ describe('testing header component', () => {
     expect(brand).toBeInTheDocument();
     fireEvent.click(brand);
     expect(window.location.pathname).toBe('/');
+  });
+});
+
+describe('testing logout', () => {
+  beforeEach(async () => {
+    await act(async () => {
+      await store.dispatch(LoginThunk(testUser));
+      await store.dispatch(UserThunk());
+    });
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter basename="/" a>
+          <Header />
+        </BrowserRouter>
+      </Provider>
+    );
+  });
+
+  test('logout text', async () => {
+    const logout = screen.getByTestId('logout');
+    expect(logout).not.toBeNull();
+    expect(logout).toBeInTheDocument();
+  });
+
+  test('logout popup', async () => {
+    const logout = screen.getByTestId('logout');
+    fireEvent.click(logout);
+
+    const signout = screen.getByText('Sign out');
+    expect(signout).not.toBeNull();
+    expect(signout).toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.click(signout);
+      await new Promise((resolve) => {
+        setTimeout(resolve, 5000);
+      });
+    });
+
+    const {
+      user: { user },
+      login: { token },
+      logout: { logout: isLogout },
+    } = store.getState();
+    expect(isLogout).toBe(true);
+    expect(user).toBeNull();
+    expect(token).toBeNull();
+    expect(localStorage.getItem('token')).toBeNull();
+
+    const Continue = screen.getByText('Continue');
+    expect(Continue).not.toBeNull();
+    expect(Continue).toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.click(Continue);
+      await new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      });
+    });
+
+    expect(window.location.pathname).toEqual('/');
   });
 });

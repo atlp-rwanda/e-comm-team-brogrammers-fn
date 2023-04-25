@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Home() {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <>
       <h1>Homepage</h1>
-      <Link to="/login">Login</Link>
+      {user && (
+        <p>
+          Welcome <b>{user.username}</b>
+        </p>
+      )}
     </>
   );
 }

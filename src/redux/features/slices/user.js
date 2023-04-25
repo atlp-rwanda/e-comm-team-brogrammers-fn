@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import UserThunk from '../actions/user';
+import LogoutThunk from '../actions/logout';
 
 const initialState = {
   user: null,
@@ -33,6 +34,9 @@ export const userSlice = createSlice({
           state.error = false;
           state.user = payload;
         }
+      })
+      .addCase(LogoutThunk.fulfilled, (state, { payload }) => {
+        if (payload.status === 200) state.user = null;
       });
   },
 });
