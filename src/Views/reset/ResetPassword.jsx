@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -78,7 +79,6 @@ function ResetPassword() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let hasError = false;
-    setIsLoading(true);
 
     if (!isValidEmail(email)) {
       setEmailError('Invalid email address');
@@ -104,9 +104,10 @@ function ResetPassword() {
     }
 
     if (!hasError) {
+      setIsLoading(true);
       try {
         const response = await axios.post(
-          'https://brogrammers-ecomerce1.onrender.com/users/reset-password',
+          `${process.env.REACT_APP_API_URL}/users/reset-password`,
           { email, newPassword: password },
           {
             headers: {
@@ -152,8 +153,6 @@ function ResetPassword() {
       }
     }
   };
-
-  const buttonText = isLoading ? 'Loading...' : 'Reset Password';
 
   return (
     <div className="reset">
@@ -234,8 +233,12 @@ function ResetPassword() {
           </span>
         </div>
 
-        <button type="submit" disabled={isLoading}>
-          {buttonText}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={isLoading ? 'button-loading' : ''}
+        >
+          {isLoading ? '' : 'Reset Password'}
         </button>
         <h5>
           Back to <Link to="/login">Login</Link>

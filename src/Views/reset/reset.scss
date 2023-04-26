@@ -78,6 +78,22 @@
         font-size: 18px;
       }
     }
+    .button-loading::before {
+      content: '...';
+      animation: button-loading 1s infinite;
+    }
+
+    @keyframes button-loading {
+      0% {
+        content: '.';
+      }
+      33% {
+        content: '..';
+      }
+      66% {
+        content: '...';
+      }
+    }
   }
   .icon {
     color: blue;
