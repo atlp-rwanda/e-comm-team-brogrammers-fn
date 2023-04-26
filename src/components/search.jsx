@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 
 function SearchBox({ onSearch }) {
   const search = (e) => {
     e.preventDefault();
-    onSearch();
+    onSearch && onSearch();
   };
   return (
     <form className="search-box" onSubmit={search}>

@@ -119,16 +119,10 @@ function Header() {
         <nav className="menu">
           <ul>
             <li>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/">Shop</a>
-            </li>
-            <li>
-              <a href="/">About</a>
-            </li>
-            <li>
-              <a href="/">Contact</a>
+              <Link to="/products">Shop</Link>
             </li>
           </ul>
         </nav>

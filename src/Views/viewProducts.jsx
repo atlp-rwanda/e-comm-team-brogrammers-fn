@@ -1,7 +1,7 @@
 import ProductList from '../components/productList';
 import SearchTop from '../components/searchTop';
 
-function getProducts() {
+function ViewProducts() {
   return (
     <div className="productCard">
       <SearchTop />
@@ -10,4 +10,4 @@ function getProducts() {
   );
 }
 
-export default getProducts;
+export default ViewProducts;
