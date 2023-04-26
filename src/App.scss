@@ -54,6 +54,15 @@ a {
     var(--back-color-2)
   );
 }
+.my-4 {
+  margin-top: 1rem; /* 1 rem is equivalent to 4 units in Tailwind */
+  margin-bottom: 1rem; /* 1 rem is equivalent to 4 units in Tailwind */
+}
+
+.px-2 {
+  padding-left: 0.5rem; /* 0.5 rem is equivalent to 2 units in Tailwind */
+  padding-right: 0.5rem; /* 0.5 rem is equivalent to 2 units in Tailwind */
+}
 
 header.body-header {
   width: 100%;

@@ -14,7 +14,7 @@ import UserThunk from '../../src/redux/features/actions/user';
 
 describe('testing header component', () => {
   const testUser = {
-    email: 'jean@gmail.com',
+    email: 'john@gmail.com',
     password: '123@Pass',
   };
 

@@ -12,7 +12,7 @@ describe('test login states', () => {
     password: '123@Strong',
   };
   const userAccount = {
-    email: 'jean@gmail.com',
+    email: 'john@gmail.com',
     password: '123@Pass',
   };
   beforeEach(() => {

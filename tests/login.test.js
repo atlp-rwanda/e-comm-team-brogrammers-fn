@@ -57,7 +57,7 @@ describe('testing render Login page', () => {
 describe('testing Login form', () => {
   let loginForm;
   const user = {
-    email: 'jean@gmail.com',
+    email: 'john@gmail.com',
     password: '123@Pass',
   };
   const wrongUser = {

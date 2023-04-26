@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import booleanReducer from './features/slices/sample';
 import loginReducer from './features/slices/login';
 import userReducer from './features/slices/user';
+import passwordReducer from './features/slices/password';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -10,5 +11,6 @@ export const store = configureStore({
     user: userReducer,
     boolean: booleanReducer,
     login: loginReducer,
+    password: passwordReducer,
   },
 });
