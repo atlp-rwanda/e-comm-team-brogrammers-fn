@@ -1,11 +1,14 @@
 import './App.scss';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/button-has-type */
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Routes, Route } from 'react-router-dom';
 import UserThunk from './redux/features/actions/user';
-import Home from './Views/Home';
+
+import Home from './Views/Home/Home';
 import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/404';
