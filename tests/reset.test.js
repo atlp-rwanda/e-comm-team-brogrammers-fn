@@ -151,18 +151,18 @@ test('toggles password visibility', () => {
   const passwordInput = screen.getByPlaceholderText('Password');
   const toggleButton = screen.getByTestId('toggle-password');
 
-  expect(passwordInput.type).toBe('password');
-  act(() => {
-    fireEvent.click(toggleButton);
-  });
+  // expect(passwordInput.type).toBe('password');
+  expect(passwordInput).toHaveAttribute('type', 'password');
 
-  expect(passwordInput.type).toBe('text');
+  fireEvent.click(toggleButton);
 
-  act(() => {
-    fireEvent.click(toggleButton);
-  });
+  // expect(passwordInput.type).toBe('text');
+  expect(passwordInput).toHaveAttribute('type', 'text');
 
-  expect(passwordInput.type).toBe('password');
+  fireEvent.click(toggleButton);
+
+  // expect(passwordInput.type).toBe('password');
+  expect(passwordInput).toHaveAttribute('type', 'password');
 });
 
 test('displays error toast if email is not found', async () => {
