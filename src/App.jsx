@@ -13,7 +13,6 @@ import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/404';
 import ResetPassword from './Views/reset/ResetPassword';
-import GoogleLoginButton from './components/GoogleLoginButton';
 import ResetVerify from './Views/ResetVerify';
 import Resetfail from './Views/Resetfail';
 import Header from './components/header';
@@ -59,7 +58,6 @@ function App() {
             <Route path="/products/addItem" element={<AddItem />} />
           </Route>
           <Route path="/products" element={<Products />} />
-          <Route path="/login/google" element={<GoogleLoginButton />} />
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>

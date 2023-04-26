@@ -16,13 +16,25 @@ $light-gray-color: #ddd;
 $error-color: #ff003d;
 $fr-vw: calc(100vw / 12);
 
+.body-header {
+  align-items: center;
+  @media screen and (max-width: 550px) {
+    & {
+      flex-direction: column;
+      padding: 0.15rem;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+  }
+}
+
 .header {
   background-color: var(--main-color);
   color: var(--back-color);
 
   .menu {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
@@ -56,7 +68,10 @@ $fr-vw: calc(100vw / 12);
   @media screen and (max-width: 768px) {
     .menu {
       justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
     }
+    // flex-direction: column;
   }
 }
 
@@ -68,10 +83,30 @@ $fr-vw: calc(100vw / 12);
 
   .main {
     flex: 1;
-    display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    gap: 1rem;
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    // flex-direction: column;
+
+    // align-items: center;
+
+    .product-container {
+      .product-list {
+        max-width: 1200px;
+        align-items: center;
+        margin-right: auto;
+        margin-left: auto;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        gap: 1rem;
+      }
+    }
     .welcome {
       padding: 2rem 1rem;
       display: flex;
@@ -283,14 +318,15 @@ $fr-vw: calc(100vw / 12);
 }
 
 footer {
-  background-color: $back-color;
+  border-bottom: 1px solid $back-color;
   color: $main-color;
   padding: 2rem;
+  background-color: $light-gray-color;
 
   .footer-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     .footer-links ul,
     .footer-social ul {
@@ -339,16 +375,16 @@ footer {
 
 .contact {
   background-color: $light-gray-color;
-  padding: 4rem 2rem;
+  padding: 2rem;
   margin-top: 1rem;
 
   .container {
     max-width: 600px;
 
     h2 {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       text-align: center;
-      font-size: 2rem;
+      font-size: 1.4rem;
       color: $main-color;
     }
 
