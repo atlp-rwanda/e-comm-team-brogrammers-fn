@@ -177,9 +177,14 @@ function Header() {
             </div>
           </div>
         ) : (
-          <Link to="/login" data-testid="login">
-            Login
-          </Link>
+          <>
+            <Link to="/login" data-testid="login">
+              Login
+            </Link>
+            <Link to="/signup" data-testid="signup">
+              signup
+            </Link>
+          </>
         )}
       </nav>
     </header>

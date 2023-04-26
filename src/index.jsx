@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+// eslint-disable-next-line import/no-named-as-default
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
