@@ -8,13 +8,19 @@ import GoogleLoginButton from '../components/GoogleLoginButton';
 import Input from '../components/input';
 import signupSchema from '../validations/signup';
 import signupThunk from '../redux/features/actions/signup';
+import { showErrorMessage, showSuccessMessage } from '../utils/toast';
 
 function Signup() {
   const { isLoading, errorMessage, successMessage } = useSelector(
     (state) => state.signup
   );
-
-  useEffect(() => {}, [errorMessage, isLoading, successMessage]);
+  useEffect(() => {
+    if (errorMessage) {
+      showErrorMessage(errorMessage);
+    } else {
+      showSuccessMessage(successMessage);
+    }
+  }, [errorMessage, isLoading, successMessage]);
 
   const {
     register,
@@ -26,7 +32,7 @@ function Signup() {
   });
 
   const dispatch = useDispatch();
-  const submit = (datas) => {
+  const submit = async (datas) => {
     const { email, password, username, gender } = datas;
     dispatch(signupThunk({ email, password, username, gender }));
     reset();

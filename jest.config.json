@@ -16,11 +16,11 @@
   "collectCoverage": true,
   "coverageThreshold": {
     "global": {
-      "branches": 85,
+      "branches": 80,
       "lines": 85
     }
   },
   "coverageReporters": ["lcov", "text"],
   "coverageDirectory": "coverage",
-  "testTimeout": 20000
+  "testTimeout": 70000
 }

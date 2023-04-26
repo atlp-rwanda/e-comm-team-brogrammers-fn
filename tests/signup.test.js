@@ -148,8 +148,7 @@ describe('testing signup form', () => {
         target: { value: user.confirmPassword },
       });
       fireEvent.select(male);
-      fireEvent.submit(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      fireEvent.click(submitButton);
     });
   });
 });

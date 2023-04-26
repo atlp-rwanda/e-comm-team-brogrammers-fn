@@ -41,7 +41,4 @@ export const loginSlice = createSlice({
       });
   },
 });
-
-// export const { toggle, set } = booleanSlice.actions;
-
 export default loginSlice.reducer;

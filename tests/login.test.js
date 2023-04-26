@@ -57,7 +57,7 @@ describe('testing render Login page', () => {
 describe('testing Login form', () => {
   let loginForm;
   const user = {
-    email: 'jean@gmail.com',
+    email: 'john@gmail.com',
     password: '123@Pass',
   };
   const wrongUser = {
@@ -112,7 +112,7 @@ describe('testing Login form', () => {
       fireEvent.change(emailInput, { target: { value: user.email } });
       fireEvent.change(passwordInput, { target: { value: user.password } });
       fireEvent.click(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const { login } = store.getState();

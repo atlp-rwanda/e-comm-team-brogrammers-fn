@@ -159,6 +159,7 @@ function Header() {
                   <span>View Shop</span>
                   <span>Cart</span>
                   <span>Edit Profile</span>
+                  <Link to="/change-password">change password</Link>
                   <button type="button" className="btn1">
                     Add product
                   </button>
