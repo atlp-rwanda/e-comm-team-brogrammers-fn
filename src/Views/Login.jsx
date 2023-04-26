@@ -1,12 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import Input from '../components/input';
+import { decodeToken } from 'react-jwt';
 import loginSchema from '../validations/login';
 import LoginThunk from '../redux/features/actions/login';
 import GoogleLoginButton from '../components/GoogleLoginButton';
+import Input from '../components/input';
+import { showErrorMessage, showSuccessMessage } from '../utils/toast';
 
 function Login() {
   const navigate = useNavigate();
@@ -14,7 +17,14 @@ function Login() {
 
   useEffect(() => {
     if (!loading && !error && token) {
-      setTimeout(() => navigate('/'), 3000);
+      const decodedToken = decodeToken(token);
+      const mustUpdatePassword = decodedToken?.mustUpdatePassword;
+      if (mustUpdatePassword) {
+        showErrorMessage('Your password has expired update it');
+        setTimeout(() => navigate('/change-password'), 5000);
+      } else {
+        setTimeout(() => navigate('/'), 5000);
+      }
     }
   }, [error, errorMessage, loading, token]);
 
@@ -29,16 +39,25 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  const submit = (data) => {
-    dispatch(LoginThunk(data));
-    reset();
+  const submit = async (data) => {
+    const response = await dispatch(LoginThunk(data)).unwrap();
+    if (
+      response.error &&
+      response.error.response &&
+      response.error.response.status === 401
+    ) {
+      showErrorMessage(response.error.response.data.message);
+    } else {
+      showSuccessMessage('Login successful');
+      reset();
+    }
   };
   return (
     <section className="center-xy">
       <div className="sign back-angular" data-testid="sign_div">
         <h2>Login to your account</h2>
         <form
-          className="login"
+          className="login my-4 px-2"
           onSubmit={handleSubmit(submit)}
           data-testid="login-form"
         >
@@ -79,7 +98,7 @@ function Login() {
         <p>
           Don’t have account?{' '}
           <b>
-            <Link to="/">Signup</Link>
+            <Link to="/signup">Signup</Link>
           </b>
         </p>
       </div>

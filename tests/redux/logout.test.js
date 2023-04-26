@@ -7,14 +7,14 @@ import LogoutThunk from '../../src/redux/features/actions/logout';
 import LoginThunk from '../../src/redux/features/actions/login';
 
 const testUser = {
-  email: 'jean@gmail.com',
+  email: 'john@gmail.com',
   password: '123@Pass',
 };
 
 test('logout', async () => {
   await act(async () => {
     store.dispatch(LoginThunk(testUser));
-    await new Promise((resolve) => setTimeout(resolve, 6000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
   });
 
   const { login } = store.getState();
@@ -23,7 +23,7 @@ test('logout', async () => {
 
   await act(async () => {
     store.dispatch(LogoutThunk());
-    await new Promise((resolve) => setTimeout(resolve, 6000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
   });
 
   const {
@@ -35,7 +35,7 @@ test('logout', async () => {
 
   await act(async () => {
     store.dispatch(LogoutThunk());
-    await new Promise((resolve) => setTimeout(resolve, 6000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
   });
 
   const {

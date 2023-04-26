@@ -10,8 +10,9 @@ export const signupSlice = createSlice({
     errorMessage: undefined,
     successMessage: undefined,
   },
-  extraReducers: (builer) => {
-    builer
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
       .addCase(signupThunk.pending, (state) => {
         state.isLoading = true;
         state.data = null;
@@ -28,6 +29,7 @@ export const signupSlice = createSlice({
         } else {
           state.errorMessage = undefined;
           state.successMessage =
+            action.payload.message ||
             'Account created please check your email for verification';
         }
       })
@@ -37,5 +39,4 @@ export const signupSlice = createSlice({
       });
   },
 });
-export const signupActions = (state) => state.signup.data;
 export default signupSlice.reducer;
