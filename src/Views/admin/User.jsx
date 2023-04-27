@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -11,6 +12,8 @@ import {
   faBars,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+
+
 import { Link, useLocation } from 'react-router-dom';
 
 function AdminDashboard() {

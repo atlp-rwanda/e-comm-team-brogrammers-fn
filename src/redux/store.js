@@ -9,6 +9,10 @@ import productSlice from './features/slices/product';
 import categoriesReducer from './features/slices/categories';
 import addItemReducer from './features/slices/additem';
 
+import collectionSlice from './features/slices/sellerCollection';
+import oneProductSlice from './features/slices/oneProduct';
+import statusSlice from './features/slices/sellerStatus';
+import reviewSlice from './features/slices/productReview';
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -21,5 +25,9 @@ export const store = configureStore({
     products: productSlice.reducer,
     categories: categoriesReducer,
     addedItem: addItemReducer,
+    collection: collectionSlice.reducer,
+    statistics: statusSlice.reducer,
+    oneproduct: oneProductSlice.reducer,
+    review: reviewSlice.reducer,
   },
 });

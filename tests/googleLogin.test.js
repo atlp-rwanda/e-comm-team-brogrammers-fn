@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'mock-local-storage';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -36,4 +38,28 @@ describe('Google Login', () => {
       navigateMock(`/?key=${token}&email=${email}`);
     });
   });
+
+  // test('renders with default query parameters', () => {
+  // const email = 'user@example.com';
+  // const key = '12345';
+  // const params = `?key=${key}&email=${email}`;
+
+  // render(
+  // <BrowserRouter>
+  // <Routes>
+  // <Route
+  // path="/"
+  // element={<GoogleLogin />}
+  // location={{
+  //             pathname: '/',
+  //             search: params,
+  //           }}
+  // />
+  // </Routes>
+  // </BrowserRouter>
+  // );
+
+  // expect(localStorage.getItem('token')).toBe(key);
+  // expect(localStorage.getItem('userEmail')).toBe(email);
+  // });
 });
