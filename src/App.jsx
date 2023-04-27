@@ -14,6 +14,12 @@ import GoogleLoginButton from './components/GoogleLoginButton';
 import Header from './components/header';
 import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
+// eslint-disable-next-line import/no-unresolved
+import SellerCollection from './Views/SellerCollection';
+// eslint-disable-next-line import/no-unresolved, import/extensions
+import OneProduct from './components/OneProduct';
+// eslint-disable-next-line import/no-unresolved
+import Statistics from './Views/UserStatistics';
 
 function App() {
   return (
@@ -24,7 +30,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/collection" element={<SellerCollection />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/oneProduct/:id" element={<OneProduct />} />
+          <Route path="/statistics" element={<Statistics />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

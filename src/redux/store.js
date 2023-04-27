@@ -7,7 +7,10 @@ import userReducer from './features/slices/user';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import signupReducer from './features/slices/signup';
 import logoutReducer from './features/slices/logout';
-
+import productSlice from './features/slices/sellerCollection';
+import oneProductSlice from './features/slices/oneProduct';
+import statusSlice from './features/slices/sellerStatus';
+import reviewSlice from './features/slices/productReview';
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -16,5 +19,9 @@ export const store = configureStore({
     login: loginReducer,
     signup: signupReducer,
     logout: logoutReducer,
+    collection: productSlice.reducer,
+    statistics: statusSlice.reducer,
+    oneproduct: oneProductSlice.reducer,
+    review: reviewSlice.reducer,
   },
 });

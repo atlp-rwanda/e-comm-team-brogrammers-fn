@@ -159,6 +159,12 @@ function Header() {
                   <span>View Shop</span>
                   <span>Cart</span>
                   <span>Edit Profile</span>
+                  <span>
+                    {' '}
+                    <Link to="/collection" data-testid="signup">
+                      your collection
+                    </Link>
+                  </span>
                   <button type="button" className="btn1">
                     Add product
                   </button>
