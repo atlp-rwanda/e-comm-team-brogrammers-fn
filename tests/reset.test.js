@@ -165,6 +165,34 @@ test('toggles password visibility', () => {
   expect(passwordInput).toHaveAttribute('type', 'password');
 });
 
+test('toggles password visibility when clicked', () => {
+  const { getByTestId } = render(
+    <BrowserRouter>
+      <ResetPassword />
+    </BrowserRouter>
+  );
+  const togglePassword = getByTestId('toggle-password');
+  const toggleConfirmPassword = getByTestId('toggle-confirm-password');
+  const passwordInput = screen.getByPlaceholderText('Password');
+  const confirmPasswordInput = screen.getByPlaceholderText('Re-Enter Password');
+
+  // Initially, the password and confirm password inputs should have a type of 'password'
+  expect(passwordInput.type).toBe('password');
+  expect(confirmPasswordInput.type).toBe('password');
+
+  // Simulate a click event on the toggle password button
+  fireEvent.click(togglePassword);
+
+  // The password input should now have a type of 'text'
+  expect(passwordInput.type).toBe('text');
+
+  // Simulate a click event on the toggle confirm password button
+  fireEvent.click(toggleConfirmPassword);
+
+  // The confirm password input should now have a type of 'text'
+  expect(confirmPasswordInput.type).toBe('text');
+});
+
 test('displays error toast if email is not found', async () => {
   axios.post.mockRejectedValueOnce({ response: { status: 404 } });
 

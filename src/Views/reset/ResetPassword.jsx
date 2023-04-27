@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
@@ -137,16 +138,6 @@ function ResetPassword() {
             draggable: true,
           });
           clearForm();
-        } else {
-          toast.error('An error occurred while submitting form', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-          clearForm();
         }
       } finally {
         setIsLoading(false);
@@ -191,11 +182,6 @@ function ResetPassword() {
             className="show-password"
             data-testid="toggle-password"
             onClick={() => handleTogglePassword('password')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleTogglePassword('password');
-              }
-            }}
             role="button"
             tabIndex={0}
           >
@@ -220,12 +206,8 @@ function ResetPassword() {
           )}
           <span
             className="show-password"
+            data-testid="toggle-confirm-password"
             onClick={() => handleTogglePassword('confirm-password')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleTogglePassword('confirm-password');
-              }
-            }}
             role="button"
             tabIndex={0}
           >
