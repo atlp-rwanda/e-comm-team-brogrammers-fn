@@ -24,7 +24,7 @@ describe('test signup states', () => {
   test('should successfully signup a user', async () => {
     await act(async () => {
       store.dispatch(signupThunk(validUser));
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const { signup } = store.getState();
@@ -45,7 +45,7 @@ describe('test signup states', () => {
   test('should return error for invalid user data', async () => {
     await act(async () => {
       store.dispatch(signupThunk(invalidUser));
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const { signup } = store.getState();

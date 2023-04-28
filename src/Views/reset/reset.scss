@@ -1,0 +1,216 @@
+.reset {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f2f2f2;
+
+  form {
+    width: 40%;
+    padding: 20px;
+    background: linear-gradient(-35deg, #ddd 50%, #eee 50%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 55%;
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 10%;
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      width: 70%;
+      position: relative;
+
+      input[id='email'],
+      input[type='text'],
+      input[type='password'] {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        font-size: 15px;
+        box-sizing: border-box;
+        height: 5vh;
+        box-shadow: 0 0 5px -4px var(#111);
+      }
+
+      .show-password {
+        position: absolute;
+        top: 24%;
+        right: 10px;
+        transform: translateY(-30%);
+        cursor: pointer;
+      }
+    }
+
+    button[type='submit'] {
+      background-color: #ff9900;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 70%;
+
+      &:hover {
+        background-color: #d80;
+      }
+    }
+
+    h5 {
+      text-align: right;
+      margin-right: 50%;
+
+      a {
+        color: #ff9900;
+        text-decoration: none;
+        font-size: 18px;
+      }
+    }
+    .button-loading::before {
+      content: '...';
+      animation: button-loading 1s infinite;
+    }
+
+    @keyframes button-loading {
+      0% {
+        content: '.';
+      }
+      33% {
+        content: '..';
+      }
+      66% {
+        content: '...';
+      }
+    }
+  }
+  .icon {
+    color: blue;
+    font-size: 24px;
+  }
+
+  .fa-icon {
+    @extend .icon;
+  }
+}
+
+/* Set the root font size */
+:root {
+  font-size: 16px;
+}
+
+/* Toast message styles */
+.toastify {
+  &__toast {
+    font-size: 1.2rem;
+    background-color: lightgreen;
+    color: #333;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &__close-button {
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+  &--success {
+    &__toast {
+      background-color: lightgreen;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .reset {
+    form {
+      width: 80%;
+      padding: 10px;
+      height: 48vh;
+      h1 {
+        font-size: 20px;
+        margin-top: 5%;
+        margin-bottom: 10px;
+      }
+
+      .input-container {
+        width: 90%;
+
+        input[type='email'],
+        input[type='text'],
+        input[type='password'] {
+          margin-bottom: 10px;
+          font-size: 14px;
+        }
+
+        .show-password {
+          top: 25%;
+          right: 5px;
+        }
+      }
+
+      button[type='submit'] {
+        font-size: 14px;
+        margin-bottom: 10px;
+        width: 90%;
+      }
+
+      h5 {
+        margin-right: 50%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+  .reset {
+    form {
+      width: 60%;
+      height: 45vh;
+      padding: 30px;
+      h1 {
+        font-size: 28px;
+        margin-top: 5%;
+        margin-bottom: 15px;
+      }
+
+      .input-container {
+        width: 80%;
+        position: relative;
+
+        input[type='email'],
+        input[type='text'],
+        input[type='password'] {
+          margin-bottom: 15px;
+          font-size: 18px;
+          height: 4vh;
+        }
+
+        .show-password {
+          top: 25%;
+        }
+      }
+
+      button[type='submit'] {
+        font-size: 18px;
+        margin-bottom: 15px;
+        width: 80%;
+      }
+      h5 {
+        margin-right: 50%;
+      }
+    }
+  }
+}
