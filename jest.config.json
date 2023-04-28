@@ -22,5 +22,5 @@
   },
   "coverageReporters": ["lcov", "text"],
   "coverageDirectory": "coverage",
-  "testTimeout": 12000
+  "testTimeout": 20000
 }

@@ -18,6 +18,7 @@ import NotFound from './Views/404';
 import ResetPassword from './Views/reset/ResetPassword';
 import GoogleLoginButton from './components/GoogleLoginButton';
 import ResetVerify from './Views/ResetVerify';
+import Resetfail from './Views/Resetfail';
 import Header from './components/header';
 import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/reset-pass" element={<ResetPassword />} />
           <Route path="/verifypass" element={<ResetVerify />} />
+          <Route path="/verifyfail" element={<Resetfail />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
           <Route path="/products" element={<Products />} />
           <Route path="/login/google" element={<GoogleLoginButton />} />
