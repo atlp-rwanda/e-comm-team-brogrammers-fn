@@ -74,7 +74,7 @@ function Login() {
             </p>
           )}
         </form>
-        <p>Forgot password?</p>
+        <Link to="/reset-pass">Forgot password?</Link>
         <GoogleLoginButton />
         <p>
           Don’t have account?{' '}
