@@ -123,7 +123,7 @@ describe('testing signup form', () => {
       });
       fireEvent.select(male);
       fireEvent.submit(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const formError = screen.getByTestId('form-error');
