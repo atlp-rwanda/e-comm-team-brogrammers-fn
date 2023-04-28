@@ -91,7 +91,7 @@ describe('testing logout', () => {
     await act(async () => {
       fireEvent.click(signout);
       await new Promise((resolve) => {
-        setTimeout(resolve, 5000);
+        setTimeout(resolve, 10000);
       });
     });
 

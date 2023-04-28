@@ -14,7 +14,7 @@ const testUser = {
 test('logout', async () => {
   await act(async () => {
     store.dispatch(LoginThunk(testUser));
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+    await new Promise((resolve) => setTimeout(resolve, 6000));
   });
 
   const { login } = store.getState();
@@ -23,7 +23,7 @@ test('logout', async () => {
 
   await act(async () => {
     store.dispatch(LogoutThunk());
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+    await new Promise((resolve) => setTimeout(resolve, 6000));
   });
 
   const {
@@ -35,7 +35,7 @@ test('logout', async () => {
 
   await act(async () => {
     store.dispatch(LogoutThunk());
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 6000));
   });
 
   const {

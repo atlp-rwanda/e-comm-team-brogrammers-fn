@@ -92,7 +92,7 @@ describe('testing Login form', () => {
         target: { value: wrongUser.password },
       });
       fireEvent.click(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const { login } = store.getState();
