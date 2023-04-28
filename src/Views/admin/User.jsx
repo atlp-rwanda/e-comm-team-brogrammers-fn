@@ -1,7 +1,6 @@
 /* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import './style.scss';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChartSimple,
@@ -10,36 +9,73 @@ import {
   faCalendarDays,
   faNewspaper,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useLocation } from 'react-router-dom';
 
 function AdminDashboard() {
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios
+        .get(`${process.env.REACT_APP_SERVER_URL}/users/all`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setUsers(response.data.results);
+        })
+        .catch((err) => {
+          setError(err.response.data.message);
+        });
+    }
+  }, []);
+
   return (
     <div className="container">
       <div className="sidebar">
         <h2>Admin Dashboard</h2>
         <ul>
           <li>
-            <Link to="/">
+            <Link
+              to="/home"
+              className={location.pathname === '/home' ? 'active' : ''}
+            >
               <FontAwesomeIcon icon={faChartSimple} /> Dashboard
             </Link>
           </li>
           <li>
-            <Link to="/home">
+            <Link
+              to="/product"
+              className={location.pathname === '/product' ? 'active' : ''}
+            >
               <FontAwesomeIcon icon={faTruck} /> Product
             </Link>
           </li>
           <li>
-            <Link to="/admin/user">
+            <Link
+              to="/admin/user"
+              className={location.pathname === '/admin/user' ? 'active' : ''}
+            >
               <FontAwesomeIcon icon={faUser} /> Users
             </Link>
           </li>
           <li>
-            <Link to="/orders">
+            <Link
+              to="/orders"
+              className={location.pathname === '/orders' ? 'active' : ''}
+            >
               <FontAwesomeIcon icon={faCalendarDays} /> Orders
             </Link>
           </li>
           <li>
-            <Link to="/newsletter">
+            <Link
+              to="/newsletter"
+              className={location.pathname === '/newsletter' ? 'active' : ''}
+            >
               <FontAwesomeIcon icon={faNewspaper} /> Newsletter
             </Link>
           </li>
@@ -52,6 +88,7 @@ function AdminDashboard() {
             <button>Add User</button>
           </Link>
         </div>
+        {error && <div className="error">{error}</div>}
         <div className="table-wrapper">
           <table className="table">
             <thead>
@@ -65,184 +102,21 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>John doe</td>
-                <td>brogrammer@gmail.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>ben@gmail.com</td>
-                <td>Male</td>
-                <td>buyer</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Seller</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>seller</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>female</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Buyer</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Seller</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Seller</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>buyer</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>John doe</td>
-                <td>john@example.com</td>
-                <td>Male</td>
-                <td>Admin</td>
-                <td className="red">True</td>
-                <td className="action">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-
-              {/* Add more rows here if needed */}
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.gender}</td>
+                  <td>{user.role}</td>
+                  <td style={{ color: user.disabledUser ? 'red' : 'green' }}>
+                    {user.disabledUser ? 'True' : 'False'}
+                  </td>
+                  <td className="action">
+                    <button>Edit</button>
+                    <button className="delete">Delete</button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
