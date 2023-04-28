@@ -14,6 +14,7 @@ import GoogleLoginButton from './components/GoogleLoginButton';
 import Header from './components/header';
 import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
+import User from './Views/admin/User';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/admin/user" element={<User />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
