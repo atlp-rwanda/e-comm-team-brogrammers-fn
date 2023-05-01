@@ -19,7 +19,10 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'no-unused-vars': 'warn',
+    'import/order': 'warn',
     'react/react-in-jsx-scope': 'off',
+    'import/no-extraneous-dependencies': 'warn',
     'import/no-unresolved': [
       'error',
       {

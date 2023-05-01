@@ -1,18 +1,6 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-      - image: node:latest
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Run Tests
-          command: npm test
-
   codeclimate-test-coverage:
     docker:
       - image: node:latest
@@ -31,14 +19,8 @@ jobs:
             chmod +x ./cc-test-reporter
             ./cc-test-reporter before-build
             ./cc-test-reporter after-build --exit-code $?
-          env:
-            CC_TEST_REPORTER_ID: <your-cc-test-reporter-id>
-    when: always
-    requires:
-      - build
 
 workflows:
   build-and-test:
     jobs:
-      - build
       - codeclimate-test-coverage
