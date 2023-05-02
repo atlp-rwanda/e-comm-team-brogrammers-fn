@@ -18,8 +18,8 @@ import {
 
 describe('passwordSlice reducer', () => {
   const validCredentials = {
-    email: 'nambajeeedwin@gmail.com',
-    password: '123@Pass3',
+    email: 'john@gmail.com',
+    password: '123@Pass',
   };
 
   beforeEach(async () => {
@@ -35,7 +35,7 @@ describe('passwordSlice reducer', () => {
   });
 
   test('should update successMessage when password is changed', async () => {
-    const newPassword = '123@Pass3';
+    const newPassword = '123@Pass';
 
     await act(async () => {
       store.dispatch(
