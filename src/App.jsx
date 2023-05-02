@@ -26,6 +26,7 @@ import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
 import ChangePassword from './Views/Password';
 import PrivateRoute from './components/PrivateRoute';
+import UserProfile from './Views/UserProfile';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/verifypass" element={<ResetVerify />} />
           <Route path="/verifyfail" element={<Resetfail />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
           </Route>
