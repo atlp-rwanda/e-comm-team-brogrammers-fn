@@ -30,6 +30,7 @@ import Settings from './components/Settings/Settings';
 import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
+import UserProfile from './Views/UserProfile';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -59,9 +60,11 @@ function App() {
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/collection" element={<SellerCollection />} />
           <Route path="/" element={<PrivateRoute />}>
+            <Route path="/UserProfile" element={<UserProfile />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
           <Route
             path="/collection/manageProducts"
@@ -71,7 +74,6 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
-          <Route path="/settings" element={<Settings />} />
           <Route path="/payment-success" element={<PaymentSuccessPage />} />
           <Route path="/payment-failed" element={<PaymentFailurePage />} />
           <Route path="*" element={<NotFound />} />
