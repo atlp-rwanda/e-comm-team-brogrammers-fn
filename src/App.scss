@@ -2238,3 +2238,107 @@ nav.filter-nav {
 .form-control[readonly] {
   background-color: white;
 }
+
+/* CSS for profile picture */
+.profile img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+/* CSS for profile section */
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sm-box-padding);
+  width: 300px;
+  background: #888888;
+}
+
+/* CSS for all images */
+img {
+  margin-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* CSS for task list */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  font-weight: bold;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: relative;
+}
+
+ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CSS for search bar */
+.search {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+/* CSS for information container */
+.changes {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+/* CSS for entire page */
+.olivier {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* CSS for content section */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
+  padding-top: 10px;
+  background: #dddddd;
+  height: 300px;
+}
+
+/* CSS for user information container */
+.container {
+  background: #dddddd;
+  margin-top: 15px;
+  width: 60%;
+  height: 600px;
+}
+
+/* CSS for user information section */
+.icon-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-top: 80px;
+  padding-left: 30%;
+}
+
+/* CSS for user information values section */
+.icon-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-top: 80px;
+  padding-left: 30px;
+}
