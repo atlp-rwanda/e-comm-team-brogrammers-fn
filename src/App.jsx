@@ -88,9 +88,7 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/payment-success" element={<PaymentSuccessPage />} />
-          <Route path="/payment-failed" element={<PaymentFailurePage />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
