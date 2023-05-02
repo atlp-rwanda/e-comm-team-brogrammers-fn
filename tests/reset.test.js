@@ -134,7 +134,7 @@ test('handles form submission', async () => {
 
   await waitFor(() =>
     expect(axios.post).toHaveBeenCalledWith(
-      'https://brogrammers-ecomerce1.onrender.com/users/reset-password',
+      `${process.env.REACT_APP_SERVER_URL}/users/reset-password`,
       { email: 'brogrammer@gmail.com', newPassword: 'Test1234!' },
       { headers: { 'Content-Type': 'application/json' } }
     )
