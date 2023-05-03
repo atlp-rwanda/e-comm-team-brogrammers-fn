@@ -70,7 +70,7 @@ function Header() {
   const userDropFunct = useCallback(
     (event) => {
       const myBox = userDropContainer.current;
-      const isClickInside = myBox.contains(event.target);
+      const isClickInside = !!(myBox && myBox.contains(event.target));
       if (isClickInside) {
         if (userDrop.current.contains(event.target)) {
           setUserDropView(true);
