@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import './App.scss';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
