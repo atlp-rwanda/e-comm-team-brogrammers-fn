@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import LoginThunk from '../actions/login';
 import LogoutThunk from '../actions/logout';
 
-const initialState = {
+export const initialState = {
   token: localStorage.getItem('token'),
   mfaCode: 0,
   loading: false,

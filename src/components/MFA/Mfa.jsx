@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import { loginSlice } from '../../redux/features/slices/login';
-import axios from '../../redux/configs/axios';
 import Input from '../input';
 
 const mfaCodeSchema = yup.object().shape({
@@ -28,7 +28,7 @@ function Mfa({ email }) {
 
   const submit = (data) => {
     toast.promise(
-      axios.post('/users/verify-mfa', {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/users/verify-mfa`, {
         mfa_code: Number(data.mfa_code),
         email,
       }),

@@ -5,6 +5,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/self-closing-comp */
 import React from 'react';
+import './LandingPage.scss';
 import {
   AiFillFacebook,
   AiFillTwitterCircle,

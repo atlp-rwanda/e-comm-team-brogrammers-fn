@@ -46,7 +46,7 @@ function Settings() {
   };
 
   return (
-    <div className="settings-page">
+    <div className="settings-page" data-testid="settings-page">
       <div className="section">
         <div className="title">Mutli-Factor Authentication</div>
         {!token || loading || tokenLoad ? (
@@ -55,7 +55,12 @@ function Settings() {
           <div className="option">
             <div className="label">Enable MFA</div>
             <label htmlFor="mfa" className="toggle-switch">
-              <input onChange={handleEnableMfa} type="checkbox" id="mfa" />
+              <input
+                onChange={handleEnableMfa}
+                data-testid="mfa"
+                type="checkbox"
+                id="mfa"
+              />
               <span className="slider" />
             </label>
           </div>
