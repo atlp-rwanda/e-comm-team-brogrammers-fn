@@ -41,6 +41,4 @@ export const logoutSlice = createSlice({
   },
 });
 
-// export const { toggle, set } = booleanSlice.actions;
-
 export default logoutSlice.reducer;

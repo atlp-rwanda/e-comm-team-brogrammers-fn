@@ -54,12 +54,6 @@ code {
 }
 /*  styles on get all products*/
 
-.productCard {
-  margin: 50px;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -68,12 +62,11 @@ code {
 
 /* Style for the product list */
 .product-list {
-  display: flex;
+  display: grid;
   margin: auto;
-  padding: 5px;
-  // align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 /* Style for each product card */

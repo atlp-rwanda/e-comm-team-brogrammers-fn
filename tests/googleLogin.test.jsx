@@ -1,13 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'mock-local-storage';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { test, expect, describe, jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
-
-// eslint-disable-next-line no-unused-vars
-import { MemoryRouter, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import GoogleLogin from '../src/components/GoogleLoginButton';
 
 describe('Google Login', () => {

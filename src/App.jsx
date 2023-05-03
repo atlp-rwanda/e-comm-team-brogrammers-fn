@@ -1,23 +1,14 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-unused-vars */
 import './App.scss';
-
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/button-has-type */
-import { ToastContainer } from 'react-toastify';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
-// eslint-disable-next-line import/no-named-as-default
+import UserThunk from './redux/features/actions/user';
 import Home from './Views/Home';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
-// eslint-disable-next-line import/no-named-as-default
 import Signup from './Views/Signup';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import NotFound from './Views/404';
-// eslint-disable-next-line no-unused-vars
 import ResetPassword from './Views/reset/ResetPassword';
 import GoogleLoginButton from './components/GoogleLoginButton';
 import ResetVerify from './Views/ResetVerify';
@@ -28,8 +19,18 @@ import VerifyEmail from './Views/VerifyEmail';
 import ChangePassword from './Views/Password';
 import PrivateRoute from './components/PrivateRoute';
 import Products from './Views/viewProducts';
+import AddItem from './Views/products/addItem';
 
 function App() {
+  const { token, loading: tokenLoad } = useSelector((s) => s.login);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!tokenLoad && token) {
+      setTimeout(() => dispatch(UserThunk()), 1000);
+    }
+  }, [token]);
+
   return (
     <>
       <Header />
@@ -45,6 +46,7 @@ function App() {
           <Route path="/verifyEmail" element={<VerifyEmail />} />
           <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/products/addItem" element={<AddItem />} />
           </Route>
           <Route path="/products" element={<Products />} />
           <Route path="/login/google" element={<GoogleLoginButton />} />

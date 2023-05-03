@@ -13,10 +13,7 @@ const loginSchema = yup.object().shape({
     .matches(/^(?=.*[a-z])/, 'Must Contain One Lowercase Character')
     .matches(/^(?=.*[A-Z])/, 'Must Contain One Uppercase Character')
     .matches(/^(?=.*[0-9])/, 'Must Contain One Number Character')
-    .matches(
-      /^(?=.*[!@#\\$%\\^&\\*])/,
-      'Must Contain  One Special Case Character'
-    ),
+    .matches(/^(?=.*[!@#$%^&*()])/, 'Must Contain  One Special Case Character'),
 });
 
 export default loginSchema;

@@ -1,14 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { configureStore } from '@reduxjs/toolkit';
 import booleanReducer from './features/slices/sample';
-// eslint-disable-next-line import/no-named-as-default
 import loginReducer from './features/slices/login';
 import userReducer from './features/slices/user';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import signupReducer from './features/slices/signup';
 import logoutReducer from './features/slices/logout';
 import passwordReducer from './features/slices/password';
 import productSlice from './features/slices/product';
+import categoriesReducer from './features/slices/categories';
+import addItemReducer from './features/slices/additem';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -20,5 +19,7 @@ export const store = configureStore({
     logout: logoutReducer,
     password: passwordReducer,
     products: productSlice.reducer,
+    categories: categoriesReducer,
+    addedItem: addItemReducer,
   },
 });

@@ -1,10 +1,10 @@
 import ProductList from '../components/productList';
-import SearchBox from '../components/search';
+import SearchTop from '../components/searchTop';
 
 function getProducts() {
   return (
     <div className="productCard">
-      <SearchBox className="searchProduct" /> <br />
+      <SearchTop />
       <ProductList />
     </div>
   );

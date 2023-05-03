@@ -1,12 +1,8 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Input from '../../components/input';
 
 const isValidEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,8 +22,6 @@ function ResetPassword() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (event) => {
@@ -57,14 +51,6 @@ function ResetPassword() {
       setConfirmPasswordError('Passwords do not match');
     } else {
       setConfirmPasswordError('');
-    }
-  };
-
-  const handleTogglePassword = (type) => {
-    if (type === 'password') {
-      setShowPassword(!showPassword);
-    } else if (type === 'confirm-password') {
-      setShowConfirmPassword(!showConfirmPassword);
     }
   };
 
@@ -146,85 +132,51 @@ function ResetPassword() {
   };
 
   return (
-    <div className="reset">
-      <form onSubmit={handleSubmit}>
+    <div className="center-xy">
+      <form onSubmit={handleSubmit} className="sign back-angular">
         <h1>Reset Password</h1>
 
-        <div className="input-container">
-          <input
-            value={email}
-            id="email"
-            placeholder="Email"
-            onChange={handleEmailChange}
-            required
-          />
-          {emailError && (
-            <div style={{ color: 'red', fontSize: '13px' }}>{emailError}</div>
-          )}
-        </div>
+        <Input
+          value={email}
+          id="email"
+          placeholder="Email"
+          onChange={handleEmailChange}
+          required
+          errors={emailError}
+        />
 
-        <div className="input-container">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-          {passwordError && (
-            <div style={{ color: 'red', fontSize: '13px' }}>
-              {passwordError}
-            </div>
-          )}
-          <span
-            className="show-password"
-            data-testid="toggle-password"
-            onClick={() => handleTogglePassword('password')}
-            role="button"
-            tabIndex={0}
-          >
-            <FontAwesomeIcon icon={faEye} />
-          </span>
-        </div>
+        <Input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+          required
+          errors={passwordError}
+        />
 
-        <div className="input-container">
-          <input
-            type={showConfirmPassword ? 'text' : 'password'}
-            id="confirm-password"
-            name="confirm-password"
-            placeholder="Re-Enter Password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            required
-          />
-          {confirmPasswordError && (
-            <div style={{ color: 'red', fontSize: '13px' }}>
-              {confirmPasswordError}
-            </div>
-          )}
-          <span
-            className="show-password"
-            data-testid="toggle-confirm-password"
-            onClick={() => handleTogglePassword('confirm-password')}
-            role="button"
-            tabIndex={0}
-          >
-            <FontAwesomeIcon icon={faEye} />
-          </span>
-        </div>
+        <Input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          placeholder="Re-Enter Password"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          required
+          errors={confirmPasswordError}
+        />
 
         <button
           type="submit"
           disabled={isLoading}
-          className={isLoading ? 'button-loading' : ''}
+          className={`btn1 ${isLoading ? 'button-loading' : ''}`}
         >
           {isLoading ? '' : 'Reset Password'}
         </button>
-        <h5>
+        <p>
           Back to <Link to="/login">Login</Link>
-        </h5>
+        </p>
       </form>
     </div>
   );

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function Input({
   type = 'text',
   placeholder,
+  onChange,
   className = '',
   defaultValue = '',
   register = null,
@@ -28,6 +29,7 @@ function Input({
           defaultValue={defaultValue}
           placeholder={placeholder}
           required={required}
+          onChange={onChange}
           name={name}
           {...register}
           data-testid="input-element"
