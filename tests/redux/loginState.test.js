@@ -15,7 +15,7 @@ describe('test login states', () => {
   test('should return error for wrong credentials', async () => {
     await act(async () => {
       store.dispatch(LoginThunk(wrongUser));
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     });
 
     const { login } = store.getState();
