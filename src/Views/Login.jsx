@@ -43,9 +43,17 @@ function Login() {
 
   const submit = async (data) => {
     try {
-      await dispatch(LoginThunk(data)).unwrap();
-      showSuccessMessage('Login successful');
+    const response = await dispatch(LoginThunk(data)).unwrap();
+    if (
+      response.error &&
+      response.error.response &&
+      response.error.response.status === 401
+    ) {
+      showErrorMessage(response.error.response.data.message);
+    } else {
+      if (!mfa) showSuccessMessage('Login successful');
       reset();
+    }
     } catch (e) {
       if (e.error.message.toLowerCase() === 'network error') {
         showErrorMessage('Network Error');
