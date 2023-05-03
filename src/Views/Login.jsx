@@ -48,7 +48,7 @@ function Login() {
     ) {
       showErrorMessage(response.error.response.data.message);
     } else {
-      showSuccessMessage('Login successful');
+      if (!mfa) showSuccessMessage('Login successful');
       reset();
     }
   };

@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
-import Home from './Views/Home';
+import Home from './Views/Home/Home';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
 // eslint-disable-next-line import/no-named-as-default

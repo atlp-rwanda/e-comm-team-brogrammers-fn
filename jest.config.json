@@ -1,11 +1,13 @@
 {
   "testEnvironment": "jsdom",
   "setupFiles": ["dotenv/config"],
+
   "transform": {
     "^.+\\.(js|jsx)$": "babel-jest",
     "\\.(png)$": "jest-transform-stub"
   },
   "moduleNameMapper": {
+    "^.+\\.(css|less|scss)$": "babel-jest",
     "^axios$": "<rootDir>/node_modules/axios/dist/axios.js"
   },
   "moduleFileExtensions": ["js", "jsx", "json", "node"],
