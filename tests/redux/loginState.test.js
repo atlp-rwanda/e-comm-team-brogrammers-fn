@@ -1,5 +1,4 @@
 /* eslint-disable no-promise-executor-return */
-/* eslint-disable import/no-extraneous-dependencies */
 import { act } from '@testing-library/react';
 import { test, describe, expect } from '@jest/globals';
 import { store } from '../../src/redux/store';

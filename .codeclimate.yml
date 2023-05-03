@@ -1,0 +1,26 @@
+version: "2" 
+
+checks:
+  file-lines:
+    enabled: false
+  method-lines:
+    enabled: true
+    config:
+      threshold: 200
+  similar-code:
+    enabled: false
+
+exclude_patterns:
+- "config/"
+- "db/"
+- "dist/"
+- "features/"
+- "**/node_modules/"
+- "script/"
+- "**/spec/"
+- "**/test/"
+- "**/tests/"
+- "tests/"
+- "**/vendor/"
+- "**/*_test.go"
+- "**/*.d.ts"

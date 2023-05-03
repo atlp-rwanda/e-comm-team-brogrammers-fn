@@ -5,9 +5,9 @@ import PasswordThunk from '../actions/password';
 
 const initialState = {
   token: localStorage.getItem('token'),
-  currentPassword: null,
-  newPassword: null,
-  confirmPassword: null,
+  currentPassword: '',
+  newPassword: '',
+  confirmPassword: '',
   isLoading: false,
   error: false,
   errorMessage: undefined,

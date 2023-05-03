@@ -1,13 +1,10 @@
-/* eslint-disable import/no-duplicates */
 /* eslint-disable no-promise-executor-return */
-/* eslint-disable import/no-extraneous-dependencies */
 import { act } from '@testing-library/react';
 import { test, describe, expect, beforeEach, afterEach } from '@jest/globals';
 import { store } from '../../src/redux/store';
 import LoginThunk from '../../src/redux/features/actions/login';
-import passwordReducer from '../../src/redux/features/slices/password';
 import PasswordThunk from '../../src/redux/features/actions/password';
-import {
+import passwordReducer, {
   setSuccessMessage,
   setCurrentPassword,
   setNewPassword,
@@ -18,14 +15,15 @@ import {
 
 describe('passwordSlice reducer', () => {
   const validCredentials = {
-    email: 'nambajeeedwin@gmail.com',
-    password: '123@Pass3',
+    email: 'mary@gmail.com',
+    password: '123@Pass',
   };
+  const newPassword = '123@Pass';
 
   beforeEach(async () => {
     await act(async () => {
       store.dispatch(LoginThunk(validCredentials));
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise((resolve) => setTimeout(resolve, 18000));
     });
   });
 
@@ -35,8 +33,6 @@ describe('passwordSlice reducer', () => {
   });
 
   test('should update successMessage when password is changed', async () => {
-    const newPassword = '123@Pass3';
-
     await act(async () => {
       store.dispatch(
         PasswordThunk({
@@ -62,7 +58,7 @@ describe('passwordSlice reducer', () => {
       store.dispatch(
         PasswordThunk({
           oldPassword: wrongPassword,
-          newPassword: 'newPass123@',
+          newPassword: 'newPass123',
         })
       );
       await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -75,27 +71,26 @@ describe('passwordSlice reducer', () => {
     expect(password.confirmPassword).toBe('');
     expect(password.error).toBe(null);
   });
-});
-describe('password slice reducers', () => {
+
   test('setCurrentPassword', () => {
     const state = { currentPassword: 'oldPass123' };
-    const action = setCurrentPassword('newPass123');
+    const action = setCurrentPassword('newPass123@');
     const newState = passwordReducer(state, action);
-    expect(newState.currentPassword).toBe('newPass123');
+    expect(newState.currentPassword).toBe('newPass123@');
   });
 
   test('setNewPassword', () => {
     const state = { newPassword: null };
-    const action = setNewPassword('newPass123');
+    const action = setNewPassword(newPassword);
     const newState = passwordReducer(state, action);
-    expect(newState.newPassword).toBe('newPass123');
+    expect(newState.newPassword).toBe(newPassword);
   });
 
   test('setConfirmPassword', () => {
     const state = { confirmPassword: null };
-    const action = setConfirmPassword('newPass123');
+    const action = setConfirmPassword(newPassword);
     const newState = passwordReducer(state, action);
-    expect(newState.confirmPassword).toBe('newPass123');
+    expect(newState.confirmPassword).toBe(newPassword);
   });
 
   test('setIsLoading', () => {

@@ -1,6 +1,6 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/atlp-rwanda/e-comm-team-brogrammers-fn/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/atlp-rwanda/e-comm-team-brogrammers-fn/tree/develop) 
 [![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/e-comm-team-brogrammers-fn/badge.svg?branch=develop)](https://coveralls.io/github/atlp-rwanda/e-comm-team-brogrammers-fn?branch=develop) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4035972fbc698bca2ed815035d7d100f294036fb36e1992a50caf0edd79aad51/maintainability)](https://codeclimate.com/github/atlp-rwanda/e-comm-team-brogrammers-fn/maintainability) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/1f3302ee847d20b399be/maintainability)](https://codeclimate.com/github/atlp-rwanda/e-comm-team-brogrammers-fn/maintainability)
 
 # E-Commercy Brogrammers Mall
 

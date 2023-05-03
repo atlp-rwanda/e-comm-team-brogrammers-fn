@@ -1,5 +1,3 @@
-/* eslint-disable no-promise-executor-return */
-/* eslint-disable import/no-extraneous-dependencies */
 import { test, describe, expect } from '@jest/globals';
 import { store } from '../../src/redux/store';
 import { toggle, set } from '../../src/redux/features/slices/sample';
