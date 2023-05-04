@@ -4,7 +4,9 @@ import LogoutThunk from '../actions/logout';
 
 export const initialState = {
   token: localStorage.getItem('token'),
+  mfaCode: 0,
   loading: false,
+  mfa: false,
   error: false,
   errorMessage: undefined,
 };
@@ -12,7 +14,12 @@ export const initialState = {
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    login(state, { payload }) {
+      localStorage.setItem('token', payload.token);
+      state.token = payload.token;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(LoginThunk.pending, (state) => {
@@ -34,6 +41,15 @@ export const loginSlice = createSlice({
           localStorage.setItem('token', payload.token);
           state.error = false;
           state.token = payload.token;
+        } else if (
+          typeof payload.message === 'string' &&
+          payload.message.includes('check your email')
+        ) {
+          state.mfa = true;
+          state.error = false;
+        } else {
+          state.error = true;
+          state.errorMessage = 'unknown error';
         }
       })
       .addCase(LogoutThunk.fulfilled, (state, { payload }) => {

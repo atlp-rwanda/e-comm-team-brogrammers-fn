@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { loginSlice } from '../redux/features/slices/login';
 
 function GoogleLoginButton() {
   const location = useLocation();
-  const searchParams = useState(new URLSearchParams(location.search));
-  const params = useState(Object.fromEntries(searchParams.entries()));
-  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const params = Object.fromEntries(searchParams.entries());
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (params.key && params.email) {
-      localStorage.setItem('token', `${params.key}`);
-      localStorage.setItem('userEmail', params.email);
-      navigate('/');
+      dispatch(loginSlice.actions.login({ token: params.key }));
+      toast.success('You have logged in!');
     }
   }, [params, location, searchParams]);
 
