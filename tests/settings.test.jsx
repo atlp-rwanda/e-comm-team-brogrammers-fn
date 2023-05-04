@@ -3,14 +3,7 @@ import { screen, render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {
-  beforeAll,
-  afterAll,
-  expect,
-  it,
-  describe,
-  beforeEach,
-} from '@jest/globals';
+import { expect, it, describe, beforeEach } from '@jest/globals';
 import Settings from '../src/components/Settings/Settings';
 import '@testing-library/jest-dom';
 
