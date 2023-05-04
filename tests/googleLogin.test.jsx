@@ -1,43 +1,51 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'mock-local-storage';
+/* eslint-disable no-undef */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { test, expect, describe, jest } from '@jest/globals';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
+import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { loginSlice } from '../src/redux/features/slices/login';
+import '@testing-library/jest-dom';
 
-// eslint-disable-next-line no-unused-vars
-import { MemoryRouter, BrowserRouter, Routes, Route } from 'react-router-dom';
-import GoogleLogin from '../src/components/GoogleLoginButton';
+import GoogleLoginButton from '../src/components/GoogleLoginButton';
 
-describe('Google Login', () => {
-  test('renders correctly', () => {
-    render(
-      <BrowserRouter basename="/">
-        {' '}
-        <GoogleLogin />
-      </BrowserRouter>
-    );
-    const linkElement = screen.getByText(/Google Login/i);
-    expect(linkElement).toHaveProperty('href');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+  useLocation: jest.fn(() => ({
+    search: '?key=123&email=test@example.com',
+  })),
+}));
+
+jest.mock('react-hot-toast', () => ({
+  toast: { success: jest.fn() },
+}));
+
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+}));
+
+describe('GoogleLoginButton', () => {
+  let dispatch;
+  beforeEach(() => {
+    dispatch = jest.fn();
+
+    useDispatch.mockImplementation(() => dispatch);
   });
 
-  test('updates local storage and navigates to home page', () => {
-    const token = '12345';
-    const email = 'user@example.com';
-    const navigateMock = jest.fn();
+  it('should render the button', () => {
+    const { getByText } = render(<GoogleLoginButton />);
+    expect(getByText('Google Login')).toBeInTheDocument();
+  });
 
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        setItem: jest.fn(),
-      },
-      writable: true,
-    });
+  it('should call the login action when the key and email are present in the query params', () => {
+    render(<GoogleLoginButton />);
+    expect(dispatch).toHaveBeenCalledWith(
+      loginSlice.actions.login({ token: '123' })
+    );
+  });
 
-    render(<GoogleLogin />, { wrapper: MemoryRouter });
-
-    act(() => {
-      navigateMock(`/?key=${token}&email=${email}`);
-    });
+  it('should show a success toast when the key and email are present in the query params', () => {
+    render(<GoogleLoginButton />);
+    expect(toast.success).toHaveBeenCalledWith('You have logged in!');
   });
 });

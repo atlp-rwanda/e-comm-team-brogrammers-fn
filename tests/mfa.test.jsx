@@ -23,7 +23,11 @@ const mockStore = configureMockStore();
 jest.mock('axios');
 jest.mock('react-hot-toast', () => ({
   toast: {
-    promise: jest.fn(),
+    promise: jest.fn((promise, options) =>
+      promise
+        ? Promise.resolve(options.success({ data: { token: 'Success' } }))
+        : Promise.resolve(options.error('Error.'))
+    ),
   },
 }));
 
@@ -73,7 +77,14 @@ describe('Mfa component', () => {
         )
       );
 
-      expect(store.getActions()).toEqual([]);
+      expect(store.getActions()).toEqual([
+        {
+          payload: {
+            token: 'Success',
+          },
+          type: 'login/login',
+        },
+      ]);
       expect(toast.promise).toHaveBeenCalled();
     });
 
@@ -99,6 +110,14 @@ describe('Mfa component', () => {
 
       expect(store.getActions()).toEqual([]);
       expect(toast.promise).toHaveBeenCalled();
+      expect(await toast.promise(false, { error: () => 'Error.' })).toBe(
+        'Error.'
+      );
+      expect(
+        await toast.promise(true, {
+          success: () => 'MFA code was validated succesfully!',
+        })
+      ).toBe('MFA code was validated succesfully!');
     });
   });
 });

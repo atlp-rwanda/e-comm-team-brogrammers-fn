@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert2';
 import logo from '../images/logo.png';
@@ -116,6 +116,21 @@ function Header() {
           <span className="sec-color">B</span>rogrammers Mall
         </span>
       </h2>
+      <div className="header">
+        <nav className="menu">
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/">Shop</a>
+            </li>
+            <li>
+              <a href="/">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <nav>
         <div>
           <svg
@@ -160,6 +175,7 @@ function Header() {
                   <span>Cart</span>
                   <span>Edit Profile</span>
                   <Link to="/change-password">change password</Link>
+                  <NavLink to="/settings">Settings </NavLink>
                   <button type="button" className="btn1">
                     Add product
                   </button>
