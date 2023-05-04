@@ -13,7 +13,9 @@ import { showErrorMessage, showSuccessMessage } from '../utils/toast';
 
 function Login() {
   const navigate = useNavigate();
-  const { error, errorMessage, loading, token } = useSelector((s) => s.login);
+  const { error, errorMessage, mfa, loading, token } = useSelector(
+    (s) => s.login
+  );
 
   useEffect(() => {
     if (!loading && !error && token) {
