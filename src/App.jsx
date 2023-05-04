@@ -5,11 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
 import UserThunk from './redux/features/actions/user';
-
-
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Home from './Views/Home/Home';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/404';
