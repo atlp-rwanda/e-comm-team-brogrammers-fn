@@ -159,6 +159,9 @@ function Header() {
                   <span>Cart</span>
                   <span>Edit Profile</span>
                   <Link to="/change-password">change password</Link>
+                  {user.role === 'admin' && (
+                    <Link to="/admin/user">Dashboard</Link>
+                  )}
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <button
                       type="button"
