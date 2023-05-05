@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
+// eslint-disable-next-line import/no-named-as-default
 import Home from './Views/Home';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Login from './Views/Login';
@@ -26,6 +27,7 @@ import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
 import ChangePassword from './Views/Password';
 import PrivateRoute from './components/PrivateRoute';
+import Products from './Views/viewProducts';
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
           </Route>
+          <Route path="/products" element={<Products />} />
+          <Route path="/login/google" element={<GoogleLoginButton />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ToastContainer />

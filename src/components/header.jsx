@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +26,7 @@ function Header() {
   });
 
   useEffect(() => {
-    if (!tokenLoad && token) {
+    if (!tokenLoad && token && !user) {
       setTimeout(() => dispatch(UserThunk()), 1000);
     }
   }, [token]);
@@ -160,9 +159,15 @@ function Header() {
                   <span>Cart</span>
                   <span>Edit Profile</span>
                   <Link to="/change-password">change password</Link>
-                  <button type="button" className="btn1">
-                    Add product
-                  </button>
+                  {user && user.role.toLowerCase() !== 'buyer' && (
+                    <button
+                      type="button"
+                      className="btn1"
+                      onClick={() => navigate('/products/additem')}
+                    >
+                      Add product
+                    </button>
+                  )}
                 </section>
                 <section>
                   <span
