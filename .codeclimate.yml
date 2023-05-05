@@ -9,6 +9,10 @@ checks:
       threshold: 200
   similar-code:
     enabled: false
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 10
 
 exclude_patterns:
 - "config/"

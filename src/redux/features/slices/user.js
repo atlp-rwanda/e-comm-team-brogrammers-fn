@@ -4,7 +4,7 @@ import LogoutThunk from '../actions/logout';
 
 const initialState = {
   user: null,
-  loading: false,
+  loading: true,
   error: false,
   errorMessage: undefined,
 };

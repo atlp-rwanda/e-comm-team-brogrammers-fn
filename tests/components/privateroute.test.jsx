@@ -1,10 +1,5 @@
-/* eslint-disable import/no-duplicates */
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { shallow } from 'enzyme';
-import Enzyme from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import { beforeEach, afterEach, it, expect, describe } from '@jest/globals';
 import { Navigate, Outlet } from 'react-router-dom';
 import Adapter from '@cfaester/enzyme-adapter-react-18';

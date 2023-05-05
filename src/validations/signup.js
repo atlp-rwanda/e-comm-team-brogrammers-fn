@@ -14,10 +14,7 @@ const signupSchema = yup.object().shape({
     .matches(/^(?=.*[a-z])/, 'Must Contain One Lowercase Character')
     .matches(/^(?=.*[A-Z])/, 'Must Contain One Uppercase Character')
     .matches(/^(?=.*[0-9])/, 'Must Contain One Number Character')
-    .matches(
-      /^(?=.*[!@#\\$%\\^&\\*])/,
-      'Must Contain  One Special Case Character'
-    ),
+    .matches(/^(?=.*[!@#$%^&*()])/, 'Must Contain  One Special Case Character'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')

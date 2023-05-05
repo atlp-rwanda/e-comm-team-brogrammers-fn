@@ -4,11 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleLoginButton from '../components/GoogleLoginButton';
-// eslint-disable-next-line import/no-named-as-default
 import Input from '../components/input';
 import signupSchema from '../validations/signup';
 import signupThunk from '../redux/features/actions/signup';
 import { showErrorMessage, showSuccessMessage } from '../utils/toast';
+import Select from '../components/select';
 
 function Signup() {
   const { isLoading, errorMessage, successMessage } = useSelector(
@@ -42,7 +42,7 @@ function Signup() {
       <div className="sign back-angular" data-testid="signup-div">
         <h2>Create Account Here</h2>
         <form
-          className="login"
+          className="login "
           onSubmit={handleSubmit(submit)}
           data-testid="signup-form"
         >
@@ -62,18 +62,16 @@ function Signup() {
             errors={errors?.username?.message}
           />
 
-          <select
+          <Select
             name="gender"
-            id="gender"
             placeholder="Gender"
-            {...register('gender')}
+            register={register('gender')}
           >
-            <option>Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Both">Both</option>
             <option value="None">None</option>
-          </select>
+          </Select>
           {errors.gender && <p className="error">{errors.gender.message}</p>}
           <Input
             type="password"
@@ -100,13 +98,12 @@ function Signup() {
               </div>
             ) : (
               <span>
-                {' '}
                 {!isLoading && !errors ? 'signup Successful' : 'signup '}
               </span>
             )}
           </button>
-          <p className="error"> {errorMessage}</p>
-          <p className="success"> {successMessage}</p>
+          {errorMessage && <p className="error">{errorMessage}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
           <p className="error" data-testid="form-error" />
         </form>
         <b className="or">Or</b>

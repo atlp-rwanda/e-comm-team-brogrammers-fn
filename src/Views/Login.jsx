@@ -57,7 +57,7 @@ function Login() {
       <div className="sign back-angular" data-testid="sign_div">
         <h2>Login to your account</h2>
         <form
-          className="login my-4 px-2"
+          className="login my-4"
           onSubmit={handleSubmit(submit)}
           data-testid="login-form"
         >

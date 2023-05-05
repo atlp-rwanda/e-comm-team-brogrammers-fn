@@ -1,6 +1,8 @@
 /* eslint-disable no-promise-executor-return */
 import { act } from '@testing-library/react';
 import { test, describe, expect, beforeEach, afterEach } from '@jest/globals';
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
 import { store } from '../../src/redux/store';
 import LoginThunk from '../../src/redux/features/actions/login';
 import PasswordThunk from '../../src/redux/features/actions/password';
@@ -13,6 +15,8 @@ import passwordReducer, {
   setErrorMessage,
 } from '../../src/redux/features/slices/password';
 
+const mock = new MockAdapter(axios);
+
 describe('passwordSlice reducer', () => {
   const validCredentials = {
     email: 'mary@gmail.com',
@@ -21,6 +25,11 @@ describe('passwordSlice reducer', () => {
   const newPassword = '123@Pass';
 
   beforeEach(async () => {
+    mock.onPost(`/users/login`).reply(200, {
+      email: validCredentials.email,
+      token: 'token example',
+      message: 'Login Successfully',
+    });
     await act(async () => {
       store.dispatch(LoginThunk(validCredentials));
       await new Promise((resolve) => setTimeout(resolve, 18000));
@@ -30,9 +39,13 @@ describe('passwordSlice reducer', () => {
   afterEach(() => {
     store.dispatch(setSuccessMessage(undefined));
     store.dispatch(setErrorMessage(undefined));
+    mock.reset();
   });
 
   test('should update successMessage when password is changed', async () => {
+    mock.onPatch(`/users/change-password`).reply(200, {
+      message: 'Password updated successfully',
+    });
     await act(async () => {
       store.dispatch(
         PasswordThunk({
@@ -40,7 +53,7 @@ describe('passwordSlice reducer', () => {
           newPassword,
         })
       );
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise((resolve) => setTimeout(resolve, 15000));
     });
 
     const { password } = store.getState();
@@ -52,6 +65,9 @@ describe('passwordSlice reducer', () => {
   });
 
   test('should return error when password change fails', async () => {
+    mock.onPatch(`/users/change-password`).reply(401, {
+      message: 'Incorrect old password',
+    });
     const wrongPassword = 'wrongPass123@';
 
     await act(async () => {

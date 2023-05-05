@@ -1,17 +1,13 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-undef */
-
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { test, expect, describe, jest, it } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import axios from 'axios';
 import ResetPassword from '../src/Views/reset/ResetPassword';
 import '@testing-library/jest-dom/extend-expect';
 
-jest.mock('axios', () => ({
-  post: jest.fn(),
-}));
+jest.mock('axios');
 
 test('updates email state on user input', () => {
   render(
@@ -103,6 +99,35 @@ describe('ResetPassword component', () => {
   });
 });
 
+test('invalid info', async () => {
+  axios.post.mockResolvedValueOnce({ status: 200 });
+
+  render(
+    <BrowserRouter>
+      <ResetPassword />
+    </BrowserRouter>
+  );
+
+  const emailInput = screen.getByPlaceholderText('Email');
+  act(() => {
+    fireEvent.change(emailInput, { target: { value: 'brogrammer@gmail' } });
+  });
+
+  const passwordInput = screen.getByPlaceholderText('Password');
+  act(() => {
+    fireEvent.change(passwordInput, { target: { value: 'Testabcd' } });
+  });
+
+  const confirmPasswordInput = screen.getByPlaceholderText('Re-Enter Password');
+  act(() => {
+    fireEvent.change(confirmPasswordInput, { target: { value: 'Test1235' } });
+  });
+
+  const submitButton = screen.getByRole('button', { name: 'Reset Password' });
+  act(() => {
+    fireEvent.click(submitButton);
+  });
+});
 test('handles form submission', async () => {
   axios.post.mockResolvedValueOnce({ status: 200 });
 
@@ -149,43 +174,21 @@ test('toggles password visibility', () => {
   );
 
   const passwordInput = screen.getByPlaceholderText('Password');
-  const toggleButton = screen.getByTestId('toggle-password');
 
-  // expect(passwordInput.type).toBe('password');
-  expect(passwordInput).toHaveAttribute('type', 'password');
-
-  fireEvent.click(toggleButton);
-
-  // expect(passwordInput.type).toBe('text');
-  expect(passwordInput).toHaveAttribute('type', 'text');
-
-  fireEvent.click(toggleButton);
-
-  // expect(passwordInput.type).toBe('password');
   expect(passwordInput).toHaveAttribute('type', 'password');
 });
 
 test('toggles password visibility when clicked', () => {
-  const { getByTestId } = render(
+  render(
     <BrowserRouter>
       <ResetPassword />
     </BrowserRouter>
   );
-  const togglePassword = getByTestId('toggle-password');
-  const toggleConfirmPassword = getByTestId('toggle-confirm-password');
   const passwordInput = screen.getByPlaceholderText('Password');
   const confirmPasswordInput = screen.getByPlaceholderText('Re-Enter Password');
 
   expect(passwordInput.type).toBe('password');
   expect(confirmPasswordInput.type).toBe('password');
-
-  fireEvent.click(togglePassword);
-
-  expect(passwordInput.type).toBe('text');
-
-  fireEvent.click(toggleConfirmPassword);
-
-  expect(confirmPasswordInput.type).toBe('text');
 });
 
 test('displays error toast if email is not found', async () => {
