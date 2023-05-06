@@ -20,6 +20,7 @@ import ChangePassword from './Views/Password';
 import PrivateRoute from './components/PrivateRoute';
 import Products from './Views/viewProducts';
 import AddItem from './Views/products/addItem';
+import User from './Views/admin/User';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/products" element={<Products />} />
           <Route path="/login/google" element={<GoogleLoginButton />} />
+          <Route path="/" element={<PrivateRoute path="/admin/user" />}>
+            <Route path="/admin/user" element={<User />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ToastContainer />
