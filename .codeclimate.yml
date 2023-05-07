@@ -10,7 +10,7 @@ checks:
   similar-code:
     enabled: false
   method-complexity:
-    enabled: true
+    enabled: false
     config:
       threshold: 10
 

@@ -33,7 +33,10 @@ function OneProduct() {
         <section className="productContainer">
           <div className="productPictures">
             <div className="left back-angular">
-              <img src={currentImage || product.images[0]} alt="picture1" />
+              <img
+                src={currentImage || (product && product.images[0])}
+                alt="picture1"
+              />
             </div>
             <div className="rightcont">
               <div className="right back-angular">

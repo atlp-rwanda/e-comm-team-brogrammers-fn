@@ -5,12 +5,9 @@ import { jest, expect, describe, beforeEach, it } from '@jest/globals';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
-
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member, import/no-unresolved
-import SellerCollection from '../../src/Views/sellerCollection';
-
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { store } from '../../src/redux/store';
+import SellerCollection from '../../src/Views/SellerCollection';
 import collectionThunk from '../../src/redux/features/actions/sellerCollection';
 // eslint-disable-next-line import/named
 import productSlice, {

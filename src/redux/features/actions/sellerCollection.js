@@ -4,7 +4,7 @@ import axios from '../../configs/axios';
 const collectionThunk = createAsyncThunk('user/collection', async (page) => {
   try {
     const res = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/products/collection?limit=4&page=${page}`,
+      `${process.env.REACT_APP_SERVER_URL}/products/collection?limit=10&page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

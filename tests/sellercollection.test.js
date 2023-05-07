@@ -26,7 +26,7 @@ import LoginThunk from '../src/redux/features/actions/login';
 import UserThunk from '../src/redux/features/actions/user';
 import axios from '../src/redux/configs/axios';
 import { store } from '../src/redux/store';
-import collectionThunk from '../src/redux/features/actions/sellerCollection';
+import ProductItem from '../src/components/ProductItem';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -177,70 +177,78 @@ describe('SellerCollection', () => {
       testUser.gender
     );
   });
-  describe('tes buttons', () => {
-    beforeEach(() => {
-      mock.onGet('/products/collection').reply(200, {
-        message: 'All products retrieved successfully',
-        allProducts: {
-          totalCount: 9,
-          totalPages: 1,
-          results: [
-            {
-              id: 'f36e4f85-42bf-41c4-b381-c877d0ff5847',
-              images: [
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-              ],
-              name: 'Handcrafted Cotton Bike',
-              description:
-                'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
-              quantity: 25321,
-              exp_date: '2025-03-28T17:44:28.226Z',
-              available: true,
-              price: 565,
-              category: 1,
-              createdAt: '2023-05-02T16:36:09.618Z',
-              updatedAt: '2023-05-02T16:36:09.618Z',
-              seller: {
-                username: 'John Doe',
-                email: 'john@gmail.com',
-              },
+
+  beforeEach(() => {
+    mock.onGet('/products/collection').reply(200, {
+      message: 'All products retrieved successfully',
+      allProducts: {
+        totalCount: 9,
+        totalPages: 1,
+        results: [
+          {
+            id: 'f36e4f85-42bf-41c4-b381-c877d0ff5847',
+            images: [
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+            ],
+            name: 'Handcrafted Cotton Bike',
+            description:
+              'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+            quantity: 25321,
+            exp_date: '2025-03-28T17:44:28.226Z',
+            available: true,
+            price: 565,
+            category: 1,
+            createdAt: '2023-05-02T16:36:09.618Z',
+            updatedAt: '2023-05-02T16:36:09.618Z',
+            seller: {
+              username: 'John Doe',
+              email: 'john@gmail.com',
             },
-            {
-              id: 'e0f5d2a9-7bd2-4446-9c46-5453cf7d4080',
-              images: [
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-                'https://loremflickr.com/640/480',
-              ],
-              name: 'Refined Steel Sausages',
-              description:
-                'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
-              quantity: 96215,
-              exp_date: '2025-02-17T21:01:57.872Z',
-              available: true,
-              price: 529,
-              category: 1,
-              createdAt: '2023-05-02T16:36:09.618Z',
-              updatedAt: '2023-05-02T16:36:09.618Z',
-              seller: {
-                username: 'John Doe',
-                email: 'john@gmail.com',
-              },
+          },
+          {
+            id: 'e0f5d2a9-7bd2-4446-9c46-5453cf7d4080',
+            images: [
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+              'https://loremflickr.com/640/480',
+            ],
+            name: 'Refined Steel Sausages',
+            description:
+              'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
+            quantity: 96215,
+            exp_date: '2025-02-17T21:01:57.872Z',
+            available: true,
+            price: 529,
+            category: 1,
+            createdAt: '2023-05-02T16:36:09.618Z',
+            updatedAt: '2023-05-02T16:36:09.618Z',
+            seller: {
+              username: 'John Doe',
+              email: 'john@gmail.com',
             },
-          ],
-        },
-      });
+          },
+        ],
+      },
     });
-    test('testing moving next', () => {
-      waitFor(() => {
-        const nextButton = screen.getByTestId('next-button');
-        expect(nextButton).toBeInTheDocument();
-        fireEvent.click(nextButton);
-      });
+  });
+
+  test('clicking the next button increments page', async () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <SellerCollection />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    await waitFor(() => {
+      expect(getByTestId('product')).toBeInTheDocument();
+      const nextButton = getByTestId('next-button');
+      fireEvent.click(nextButton);
     });
   });
 
@@ -301,20 +309,122 @@ describe('SellerCollection', () => {
       },
     });
   });
-
-  test('clicking the next button dispatches the collectionThunk action with the incremented page', () => {
-    waitFor(() => {
-      const { getByTestId } = render(
-        <Provider store={store}>
+  test('clicking the back button dispatches the collectionThunk action with the decrements page', () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <BrowserRouter basename="/">
           <SellerCollection />
-        </Provider>
-      );
+        </BrowserRouter>
+      </Provider>
+    );
 
-      const nextButton = getByTestId('next-button');
-
-      fireEvent.click(nextButton);
-
-      expect(store.getActions()).toEqual([collectionThunk(1)]);
+    waitFor(() => {
+      expect(getByTestId('product')).toBeInTheDocument();
+      const back = getByTestId('back-button');
+      fireEvent.click(back);
     });
+  });
+});
+
+beforeEach(() => {
+  mock.onGet('/products/collection').reply(200, {
+    message: 'All products retrieved successfully',
+    allProducts: {
+      totalCount: 9,
+      totalPages: 1,
+      results: [
+        {
+          id: 'f36e4f85-42bf-41c4-b381-c877d0ff5847',
+          images: [
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+          ],
+          name: 'Handcrafted Cotton Bike',
+          description:
+            'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+          quantity: 25321,
+          exp_date: '2025-03-28T17:44:28.226Z',
+          available: true,
+          price: 565,
+          category: 1,
+          createdAt: '2023-05-02T16:36:09.618Z',
+          updatedAt: '2023-05-02T16:36:09.618Z',
+          seller: {
+            username: 'John Doe',
+            email: 'john@gmail.com',
+          },
+        },
+        {
+          id: 'e0f5d2a9-7bd2-4446-9c46-5453cf7d4080',
+          images: [
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+            'https://loremflickr.com/640/480',
+          ],
+          name: 'Refined Steel Sausages',
+          description:
+            'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
+          quantity: 96215,
+          exp_date: '2025-02-17T21:01:57.872Z',
+          available: true,
+          price: 529,
+          category: 1,
+          createdAt: '2023-05-02T16:36:09.618Z',
+          updatedAt: '2023-05-02T16:36:09.618Z',
+          seller: {
+            username: 'John Doe',
+            email: 'john@gmail.com',
+          },
+        },
+      ],
+    },
+  });
+});
+
+test('clicking page button calls handleCustomPage', () => {
+  const { getByTestId } = render(
+    <Provider store={store}>
+      <BrowserRouter basename="/">
+        <SellerCollection />
+      </BrowserRouter>
+    </Provider>
+  );
+
+  waitFor(() => {
+    const back = getByTestId('custom-button');
+    fireEvent.click(back);
+  });
+});
+
+test(' tetsing rendering product Item', () => {
+  const product = {
+    id: 'e0f5d2a9-7bd2-4446-9c46-5453cf7d4080',
+    images: [
+      'https://loremflickr.com/640/480',
+      'https://loremflickr.com/640/480',
+      'https://loremflickr.com/640/480',
+      'https://loremflickr.com/640/480',
+    ],
+    name: 'Refined Steel Sausages',
+    description:
+      'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
+    quantity: 96215,
+    exp_date: '2025-02-17T21:01:57.872Z',
+    available: true,
+    price: 529,
+    category: 1,
+    createdAt: '2023-05-02T16:36:09.618Z',
+    updatedAt: '2023-05-02T16:36:09.618Z',
+    seller: {
+      username: 'John Doe',
+      email: 'john@gmail.com',
+    },
+  };
+  waitFor(() => {
+    render(<ProductItem product={product} />);
+    expect(screen.getAllByTestId('product')).toBeInTheDocument();
   });
 });
