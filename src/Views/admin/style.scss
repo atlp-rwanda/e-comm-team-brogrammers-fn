@@ -142,6 +142,35 @@
       }
     }
 
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: #333;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 3px;
+      }
+
+      button.active {
+        background-color: #f90;
+        color: #fff;
+      }
+
+      span {
+        color: #999;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px 10px;
+      }
+    }
+
     .action {
       display: flex;
     }
@@ -292,6 +321,81 @@
 
         td.action button {
           margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+// ---------------------------------------edit form-------------------------
+.form-wrapper {
+  width: 100vh;
+  margin: 0 auto;
+
+  h2 {
+    margin-top: 0;
+    padding-bottom: 6%;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+
+      button[type='submit'] {
+        background-color: #ff9900;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 20vh;
+
+        &:hover {
+          background-color: #d80;
+        }
+
+        &:focus {
+          outline: none;
+        }
+        .spinner {
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       }
     }
