@@ -1,4 +1,8 @@
 /* eslint-disable no-promise-executor-return */
+// _ eslint-disable no-promise-executor-return _/
+// _ eslint-disable import/no-extraneous-dependencies _/
+// _ eslint-disable no-promise-executor-return _/
+// _ eslint-disable import/no-extraneous-dependencies _/
 import { act } from '@testing-library/react';
 import { test, describe, expect } from '@jest/globals';
 import signupThunk from '../../src/redux/features/actions/signup';

@@ -171,6 +171,12 @@ function Header() {
                       Add product
                     </button>
                   )}
+                  <span>
+                    {' '}
+                    <Link to="collection" data-testid="signup">
+                      your collection
+                    </Link>
+                  </span>
                 </section>
                 <section>
                   <span

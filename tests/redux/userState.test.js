@@ -1,4 +1,6 @@
 /* eslint-disable no-promise-executor-return */
+// _ eslint-disable no-promise-executor-return _/
+// _ eslint-disable import/no-extraneous-dependencies _/
 import { act } from '@testing-library/react';
 import { test, describe, expect, beforeEach, afterEach } from '@jest/globals';
 import MockAdapter from 'axios-mock-adapter';
