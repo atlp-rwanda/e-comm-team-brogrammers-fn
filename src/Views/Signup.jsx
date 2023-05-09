@@ -107,7 +107,7 @@ function Signup() {
           <p className="error" data-testid="form-error" />
         </form>
         <b className="or">Or</b>
-        <GoogleLoginButton />
+        <GoogleLoginButton text="Signup with google" />
         <p>
           Already have account?{' '}
           <b>

@@ -26,7 +26,7 @@ import LoginThunk from '../src/redux/features/actions/login';
 import UserThunk from '../src/redux/features/actions/user';
 import axios from '../src/redux/configs/axios';
 import { store } from '../src/redux/store';
-import ProductItem from '../src/components/ProductItem';
+import ProductItem from '../src/components/productitem';
 
 Enzyme.configure({ adapter: new Adapter() });
 

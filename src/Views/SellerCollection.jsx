@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchBox from '../components/search';
-import ProductItem from '../components/ProductItem';
-import profileheader from '../images/cover image.png';
+import ProductItem from '../components/productitem';
 import collectionThunk from '../redux/features/actions/sellerCollection';
+import SearchTop from '../components/searchTop';
 
 function SellerCollection() {
   const { user, loading } = useSelector((state) => state.user);
@@ -85,124 +84,127 @@ function SellerCollection() {
     return buttons;
   };
   return (
-    <section className="center-xy">
-      {loading || !user ? (
-        <span className="loader" />
-      ) : (
-        <section>
-          <div className="xy-container">
-            <div className="search">
-              <SearchBox />
-            </div>
-            <div className="container2">
-              <div className="profile">
-                <img src={profileheader} alt="coverpicture" />
-              </div>
-              <div className="sellerProfile">
-                <div className="sellerPicture">
-                  <img src={user.avatar} alt="profile" />
+    <>
+      <SearchTop />
+      <section className="center-xy">
+        {loading || !user ? (
+          <span className="loader-2" />
+        ) : (
+          <section>
+            <div className="xy-container">
+              <div className="container2">
+                <div className="profile">
+                  <img src={user && user?.cover_image} alt="coverpicture" />
                 </div>
-                <div className="sellerInfo">
-                  <div>
+                <div className="sellerProfile">
+                  <div className="sellerPicture">
+                    <img src={user && user?.avatar} alt="profile" />
+                  </div>
+                  <div className="sellerInfo">
+                    <div>
+                      <p>
+                        <b>{user && user?.username}</b>
+                      </p>
+                      <p className="email">{user && user.email}</p>
+                    </div>
+                    <div className="edit">
+                      <button type="submit"> Edit profile</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="productsdescription">
+                <aside className="aside">
+                  <div className="sellerStatus">
                     <p>
-                      <b>{user.username}</b>
+                      Gender
+                      <br />
+                      <span>
+                        <b> {user && user?.gender}</b>{' '}
+                      </span>
                     </p>
-                    <p className="email">{user.email}</p>
-                  </div>
-                  <div className="edit">
-                    <button type="submit"> Edit profile</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="productsdescription">
-              <aside className="aside">
-                <div className="sellerStatus">
-                  <p>
-                    Gender
-                    <br />
-                    <span>
-                      <b> {user.gender}</b>{' '}
-                    </span>
-                  </p>
-                  <p>
-                    Total products
-                    <br />
-                    <span>
-                      <b>{collectionz.totalCount}</b>{' '}
-                    </span>
-                  </p>
-                  <p>
-                    your statistics
-                    <br />
-                    <span>
-                      <b>
-                        <Link to="/statistics" data-testid="signup">
-                          statistics
-                        </Link>{' '}
-                      </b>{' '}
-                    </span>
-                  </p>
-                </div>
-                <div className="productStatus">
-                  <p className="manageProducts"> Product Status</p>
-                  <p className="manageProducts"> Manage Products</p>
-                </div>
-              </aside>
-              {isLoading === 'loading' ? (
-                <span className="loader" />
-              ) : (
-                <div className="shopItems">
-                  <div>
-                    <p className="shop">
-                      <b>Shop</b> {collectionz.totalCount} results
+                    <p>
+                      Total products
+                      <br />
+                      <span>
+                        <b>{collectionz.totalCount}</b>{' '}
+                      </span>
+                    </p>
+                    <p>
+                      your statistics
+                      <br />
+                      <span>
+                        <b>
+                          <Link to="/statistics" data-testid="signup">
+                            statistics
+                          </Link>{' '}
+                        </b>{' '}
+                      </span>
                     </p>
                   </div>
-                  <div className="product" data-testid="product">
-                    {collections &&
-                      collections.map((collection) => (
-                        <ProductItem product={collection} key={collection.id} />
-                      ))}
+                  <div className="productStatus">
+                    <p className="manageProducts"> Product Status</p>
+                    <p className="manageProducts"> Manage Products</p>
                   </div>
-                  <div className="pages">
-                    {currentPage > 1 ? (
+                </aside>
+                {isLoading === 'loading' ? (
+                  <span className="loader" />
+                ) : (
+                  <div className="shopItems">
+                    <div>
+                      <p className="shop">
+                        <b>Shop</b> {collectionz.totalCount} results
+                      </p>
+                    </div>
+                    <div className="product" data-testid="product">
+                      {collections &&
+                        collections.map((collection) => (
+                          <ProductItem
+                            product={collection}
+                            key={collection.id}
+                          />
+                        ))}
+                    </div>
+                    <div className="pages">
+                      {currentPage > 1 ? (
+                        <button
+                          type="button"
+                          className="b2"
+                          onClick={handlePrevPage}
+                          data-testid="back-button"
+                        >
+                          Previous
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="b2"
+                          style={{ color: 'grey', cursor: 'not-allowed' }}
+                          onClick={handlePrevPage}
+                          data-testid="back-button"
+                        >
+                          {' '}
+                          Previous
+                        </button>
+                      )}
+                      {getPageNumbers()}
                       <button
                         type="button"
                         className="b2"
-                        onClick={handlePrevPage}
-                        data-testid="back-button"
+                        onClick={handleNextPage}
+                        data-testid="next-button"
                       >
-                        Previous
+                        Next
                       </button>
-                    ) : (
-                      <button
-                        type="button"
-                        className="b2"
-                        style={{ color: 'grey', cursor: 'not-allowed' }}
-                        onClick={handlePrevPage}
-                        data-testid="back-button"
-                      >
-                        {' '}
-                        Previous
-                      </button>
-                    )}
-                    {getPageNumbers()}
-                    <button
-                      type="button"
-                      className="b2"
-                      onClick={handleNextPage}
-                      data-testid="next-button"
-                    >
-                      Next
-                    </button>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>{' '}
             </div>{' '}
-          </div>{' '}
-        </section>
-      )}
-    </section>
+          </section>
+        )}
+      </section>
+    </>
   );
 }
 export default SellerCollection;

@@ -16,7 +16,7 @@ describe('Google Login', () => {
         <GoogleLogin />
       </BrowserRouter>
     );
-    const linkElement = screen.getByText(/Google Login/i);
+    const linkElement = screen.getByTestId('google-auth');
     expect(linkElement).toHaveProperty('href');
   });
 

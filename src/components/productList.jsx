@@ -1,137 +1,100 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/button-has-type */
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import fetchProducts from '../redux/features/actions/products';
-import ProductItem from './ProductItem';
+import ProductItem from './productitem';
+import Card1 from './loaders/card1';
+import { setSearchParams } from '../redux/features/slices/searchslice';
+import searchThunk from '../redux/features/actions/search';
+import PaginationButtons from './paginationbuttons';
 
 function ProductList() {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { products: allProduct, status } = useSelector(
+    (state) => state.products
+  );
+  const [q, setQ] = useState(undefined);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+  const [category, setCategory] = useState(undefined);
 
-  const products = product.products.results;
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageChange, setPageChange] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchProducts(currentPage));
-  }, [currentPage]);
-
-  const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage((prev) => prev - 1);
-  };
-
-  const handleCustomPage = (id) => {
-    setCurrentPage(id);
-  };
-  const getPageNumbers = () => {
-    const buttons = [];
-    // eslint-disable-next-line no-plusplus
-    for (let i = 1; i <= Math.min(3, product.products.totalPages); i++) {
-      buttons.push(
-        <button
-          type="button"
-          key={i}
-          id={i}
-          className={`btn-number ${currentPage === i ? 'active' : ''}`}
-          onClick={() => handleCustomPage(i)}
-        >
-          {i}
-        </button>
-      );
+    if ((q || min || max || category) && pageChange) {
+      setPageChange(false);
+      dispatch(setSearchParams({ q, min, max, category }));
+      dispatch(searchThunk({ q, min, max, category, page: currentPage }));
     }
+  }, [q, min, max, category, pageChange]);
 
-    // add dots between page 3 and 6
-    if (product.products.totalPages > 6) {
-      buttons.push(<span key="dots-start">...</span>);
-
-      for (
-        let i = Math.max(4, currentPage - 1);
-        i <= Math.min(currentPage + 1, 6);
-        // eslint-disable-next-line no-plusplus
-        i++
-      ) {
-        buttons.push(
-          <button
-            type="button"
-            key={i}
-            id={i}
-            className={`btn-number ${currentPage === i ? 'active' : ''}`}
-            onClick={() => handleCustomPage(i)}
-          >
-            {i}
-          </button>
-        );
-      }
-      buttons.push(<span key="dots-end">...</span>);
-    }
-
-    for (
-      let i = Math.max(product.products.totalPages - 2, 4);
-      i <= product.products.totalPages;
-      // eslint-disable-next-line no-plusplus
-      i++
+  useEffect(() => {
+    if (
+      !(
+        searchParams.get('q') ||
+        searchParams.get('min') ||
+        searchParams.get('max') ||
+        searchParams.get('category')
+      )
     ) {
-      buttons.push(
-        <button
-          type="button"
-          key={i}
-          id={i}
-          className={`btn-number ${currentPage === i ? 'active' : ''}`}
-          onClick={() => handleCustomPage(i)}
-        >
-          {i}
-        </button>
-      );
+      dispatch(fetchProducts(currentPage));
+      return;
     }
+    setQ(searchParams.get('q'));
+    setMin(searchParams.get('min'));
+    setMax(searchParams.get('max'));
+    setCategory(searchParams.get('category'));
+    setPageChange(true);
+  }, [searchParams, currentPage]);
 
-    return buttons;
-  };
+  const reset = useCallback(() => {
+    dispatch(
+      setSearchParams({
+        q: undefined,
+        min: undefined,
+        max: undefined,
+        category: undefined,
+      })
+    );
+    navigate('/products');
+  }, []);
 
   return (
-    <div className="product-list">
-      <div className="product">
-        {products &&
-          Array.isArray(products) &&
-          products.map((item) => <ProductItem product={item} key={item.id} />)}
-      </div>
-
-      <div className="pages">
-        {currentPage > 1 ? (
-          <button type="button" className="b2" onClick={handlePrevPage}>
-            {' '}
-            Previous
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="b2"
-            style={{
-              color: 'grey',
-              cursor: 'not-allowed',
-              ':hover': { color: 'grey', cursor: 'not-allowed' },
-            }}
-          >
-            {' '}
-            Previous
+    <section className="allProduct-list">
+      <div className="head">
+        <span>{category || 'All categories'}</span>
+        {min && <span>minimum: ${min}</span>}
+        {max && <span>maximum: ${max}</span>}
+        <span>
+          {allProduct?.totalCount !== 1
+            ? `${allProduct?.totalCount || 0} results`
+            : `${allProduct?.totalCount || 0} result`}
+        </span>
+        {(q || min || max || category) && (
+          <button type="button" className="btn1" onClick={reset}>
+            Reset
           </button>
         )}
-
-        {getPageNumbers()}
-
-        <button
-          type="button"
-          className="b2"
-          onClick={handleNextPage}
-          data-testid="next-button"
-        >
-          Next
-        </button>
       </div>
-    </div>
+      <div className="list">
+        {status === 'loading'
+          ? [...Array(6)].map((a, b) => <Card1 key={b} />)
+          : allProduct?.results &&
+            Array.isArray(allProduct?.results) &&
+            allProduct?.results?.map((item) => (
+              <ProductItem product={item} key={item.id} />
+            ))}
+      </div>
+      <PaginationButtons
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={allProduct?.totalPages}
+      />
+    </section>
   );
 }
 

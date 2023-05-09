@@ -16,16 +16,29 @@ $sec-color: #f90;
   margin: 0;
   padding: 0;
   outline: none;
+  outline-color: var(--sec-color);
   max-width: 100%;
 }
 
+// input:focus {
+//   outline: 2px solid var(--sec-color);
+// }
+
 body {
-  margin: 0;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+dialog {
+  margin: auto;
+
+  *:focus {
+    outline: auto;
+    outline-color: var(--sec-color);
+  }
 }
 
 #root {
@@ -58,102 +71,4 @@ code {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
-}
-
-/* Style for the product list */
-.product-list {
-  display: grid;
-  margin: auto;
-  padding: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-/* Style for each product card */
-.product-card {
-  // width: calc(25% - 16px);
-  margin-bottom: 32px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  min-width: 300px;
-  display: flex;
-  flex: 1;
-  height: 470px;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.product-card img {
-  width: 100%;
-  height: 250px !important;
-  object-fit: cover;
-  background-color: #888;
-  flex: 1;
-}
-
-/* Style for the product image */
-.product-image {
-  height: 80px;
-  margin-right: 10px;
-  width: 80px;
-  /* aspect-ratio: 80; */
-}
-/* Style for the product info */
-.product-info {
-  flex: 1;
-}
-
-.product-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-}
-
-.product-info p {
-  margin-bottom: 8px;
-}
-
-.product-info .price {
-  font-weight: bolder;
-  color: darkorange;
-}
-.product-quantity {
-  font-weight: bolder;
-}
-.product-price {
-  font-size: 1.2rem;
-  color: darkorange;
-  margin: 0;
-}
-
-.add-to-cart {
-  background-color: darkorange;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 5px 10px;
-  margin-top: 5px;
-}
-
-/* Show 3 cards per row on tablet screens */
-@media only screen and (max-width: 768px) {
-  .product-card {
-    width: calc(33.33% - 16px);
-  }
-}
-
-/* Show 2 cards per row on phone screens */
-@media only screen and (max-width: 480px) {
-  .product-card {
-    width: calc(50% - 16px);
-  }
-}
-
-/* Resize images to avoid overlapping with content */
-.product-card img {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
 }

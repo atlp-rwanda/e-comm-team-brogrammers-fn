@@ -18,14 +18,11 @@ import Footer from './components/footer';
 import VerifyEmail from './Views/VerifyEmail';
 import ChangePassword from './Views/Password';
 import PrivateRoute from './components/PrivateRoute';
-import Products from './Views/viewProducts';
+import Products from './Views/products/viewProducts';
 import AddItem from './Views/products/addItem';
 import User from './Views/admin/User';
-// eslint-disable-next-line import/no-unresolved
 import SellerCollection from './Views/SellerCollection';
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import OneProduct from './components/OneProduct';
-// eslint-disable-next-line import/no-unresolved
 import Statistics from './Views/UserStatistics';
 
 function App() {
@@ -54,7 +51,7 @@ function App() {
           <Route path="/oneProduct/:id" element={<OneProduct />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/collection" element={<SellerCollection />} />
-          <Route path="/" element={<PrivateRoute path="/change-password" />}>
+          <Route path="/" element={<PrivateRoute />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
           </Route>

@@ -1,14 +1,47 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSearchParams, useNavigate } from 'react-router-dom';
+import searchThunk from '../redux/features/actions/search';
+import { setSearchParams } from '../redux/features/slices/searchslice';
+import removeEmpty from '../helpers/removeEmpty';
 
-function SearchBox({ onSearch }) {
-  const search = (e) => {
-    e.preventDefault();
-    onSearch();
+function Searchbox() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { searchForm } = useSelector((state) => state.search);
+
+  const search = () => {
+    dispatch(searchThunk(searchForm));
+    navigate({
+      pathname: '/products',
+      search: `?${createSearchParams(removeEmpty(searchForm))}`,
+    });
   };
+
+  useEffect(() => {
+    // console.log(searchForm);
+  }, [searchForm]);
+
+  const submitSearch = useCallback(
+    (e) => {
+      e.preventDefault();
+      search();
+    },
+    [searchForm]
+  );
+
   return (
-    <form className="search-box" onSubmit={search}>
-      <input type="text" placeholder="Search" />
-      <button type="submit">
+    <form className="search-box" onSubmit={submitSearch}>
+      <input
+        type="text"
+        placeholder="Search Product"
+        name="q"
+        data-testid="search-input"
+        required
+        defaultValue={searchForm.q}
+        onChange={(e) => dispatch(setSearchParams({ q: e.target.value }))}
+      />
+      <button type="submit" data-testid="button-search">
         <svg
           width="32"
           height="32"
@@ -25,5 +58,4 @@ function SearchBox({ onSearch }) {
     </form>
   );
 }
-
-export default SearchBox;
+export default Searchbox;
