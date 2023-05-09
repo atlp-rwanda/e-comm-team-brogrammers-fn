@@ -9,14 +9,14 @@ import PaginationButtons from '../components/paginationbuttons';
 
 function SellerCollection() {
   const { user, loading } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
-
   useEffect(() => {
     if (!loading && (!user || user.role.toLowerCase() === 'buyer'))
       navigate('/');
   }, [user, loading]);
+  const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(collectionThunk(currentPage));
@@ -24,7 +24,7 @@ function SellerCollection() {
   const { collection: collectionz, status: isLoading } = useSelector(
     (state) => state.collection
   );
-  const collections = collectionz.results;
+  const collections = collectionz.results || [];
 
   return (
     <>
@@ -85,7 +85,15 @@ function SellerCollection() {
                   </div>
                   <div className="productStatus">
                     <p className="manageProducts"> Product Status</p>
-                    <p className="manageProducts"> Manage Products</p>
+                    <p className="manageProducts">
+                      {' '}
+                      <Link
+                        to="/collection/manageProducts"
+                        data-testid="signup"
+                      >
+                        Manage Products{' '}
+                      </Link>{' '}
+                    </p>
                   </div>
                 </aside>
                 {isLoading === 'loading' ? (
