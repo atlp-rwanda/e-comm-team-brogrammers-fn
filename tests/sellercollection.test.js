@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-filename-extension */
 import { act } from 'react-dom/test-utils';
 import React from 'react';
@@ -6,9 +5,7 @@ import { render, screen } from '@testing-library/react';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
 import Enzyme, { mount } from 'enzyme';
-
 import MockAdapter from 'axios-mock-adapter';
 import {
   expect,
@@ -26,7 +23,7 @@ import LoginThunk from '../src/redux/features/actions/login';
 import UserThunk from '../src/redux/features/actions/user';
 import axios from '../src/redux/configs/axios';
 import { store } from '../src/redux/store';
-import ProductItem from '../src/components/ProductItem';
+import ProductItem from '../src/components/productitem';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -166,7 +163,7 @@ describe('SellerCollection', () => {
       </Provider>
     );
 
-    expect(wrapper.find('.sellerInfo p').at(0).text()).toEqual(
+    expect(wrapper.find('.sellerInfo h2').at(0).text()).toEqual(
       testUser.username
     );
     expect(wrapper.find('.sellerInfo p.email').text()).toEqual(testUser.email);

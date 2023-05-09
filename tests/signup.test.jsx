@@ -1,8 +1,4 @@
 /* eslint-disable no-promise-executor-return */
-/* eslint-disable react/jsx-filename-extension */
-// _ eslint-disable no-promise-executor-return _/
-// _ eslint-disable import/no-extraneous-dependencies _/
-// _ eslint-disable react/jsx-filename-extension _/
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { test, expect, describe, beforeEach } from '@jest/globals';

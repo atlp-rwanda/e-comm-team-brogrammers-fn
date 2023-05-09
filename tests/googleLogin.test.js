@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-filename-extension */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'mock-local-storage';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -16,7 +15,7 @@ describe('Google Login', () => {
         <GoogleLogin />
       </BrowserRouter>
     );
-    const linkElement = screen.getByText(/Google Login/i);
+    const linkElement = screen.getByTestId('google-auth');
     expect(linkElement).toHaveProperty('href');
   });
 

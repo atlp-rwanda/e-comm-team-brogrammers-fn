@@ -1,14 +1,18 @@
+/* eslint-disable no-promise-executor-return */
 import React from 'react';
-import { afterEach, beforeEach, describe, test } from '@jest/globals';
-import { render } from '@testing-library/react';
-import MockAdapter from 'axios-mock-adapter';
-import { BrowserRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { afterEach, beforeEach, describe, expect, test } from '@jest/globals';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import ProductList from '../../src/components/productList';
-import axios from '../../src/redux/configs/axios';
+import { BrowserRouter } from 'react-router-dom';
+import MockAdapter from 'axios-mock-adapter';
+import Searchbox from '../../src/components/search';
 import { store } from '../../src/redux/store';
+import axios from '../../src/redux/configs/axios';
+import { setSearchParams } from '../../src/redux/features/slices/searchslice';
 
 const mock = new MockAdapter(axios);
+const value = 'shoe';
 
 const users = [
   {
@@ -95,14 +99,23 @@ const products = [
   },
 ];
 
-describe('testing products', () => {
+describe('search testing', () => {
   afterEach(() => {
     mock.reset();
   });
 
   beforeEach(() => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <Searchbox />
+        </BrowserRouter>
+      </Provider>
+    );
+  });
+
+  test('render', async () => {
     mock.onAny().reply(200, {
-      message: 'All products retrieved successfully',
       allproducts: {
         next: {
           page: 2,
@@ -113,15 +126,44 @@ describe('testing products', () => {
         results: [...products],
       },
     });
-  });
 
-  test('rendering', async () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <ProductList />
-        </BrowserRouter>
-      </Provider>
+    const input = screen.getByTestId('search-input');
+
+    act(() => {
+      fireEvent.change(input, {
+        target: { value },
+      });
+    });
+
+    const { q } = store.getState().search.searchForm;
+    expect(input).toHaveValue(value);
+    expect(q).toEqual(value);
+
+    const button = screen.getByTestId('button-search');
+
+    act(async () => {
+      fireEvent.click(button);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    });
+
+    const {
+      error: { isError },
+      isLoading,
+    } = store.getState().search;
+
+    expect(isLoading).toEqual(false);
+    expect(isError).toEqual(false);
+
+    mock.reset();
+    mock.onAny().networkError();
+
+    await store.dispatch(
+      setSearchParams({ q: value, min: 10, max: 100, category: 'me' })
     );
+
+    act(async () => {
+      fireEvent.click(button);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    });
   });
 });

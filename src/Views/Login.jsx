@@ -40,16 +40,16 @@ function Login() {
   const dispatch = useDispatch();
 
   const submit = async (data) => {
-    const response = await dispatch(LoginThunk(data)).unwrap();
-    if (
-      response.error &&
-      response.error.response &&
-      response.error.response.status === 401
-    ) {
-      showErrorMessage(response.error.response.data.message);
-    } else {
+    try {
+      await dispatch(LoginThunk(data)).unwrap();
       showSuccessMessage('Login successful');
       reset();
+    } catch (e) {
+      if (e.error.message.toLowerCase() === 'network error') {
+        showErrorMessage('Network Error');
+        return;
+      }
+      showErrorMessage(e.error.response.data.message);
     }
   };
   return (
@@ -94,7 +94,7 @@ function Login() {
           )}
         </form>
         <Link to="/reset-pass">Forgot password?</Link>
-        <GoogleLoginButton />
+        <GoogleLoginButton text="Login with google" />
         <p>
           Don’t have account?{' '}
           <b>

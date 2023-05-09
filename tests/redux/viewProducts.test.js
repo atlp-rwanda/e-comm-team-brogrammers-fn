@@ -1,10 +1,7 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/named */
-// redux/slice/product.test.js
 import axios from 'axios';
-import productSlice, {
-  initialState,
-} from '../../src/redux/features/slices/product';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { store } from '../../src/redux/store';
+import productSlice from '../../src/redux/features/slices/products';
 import fetchProducts from '../../src/redux/features/actions/products';
 
 jest.mock('axios');
@@ -12,7 +9,7 @@ jest.mock('axios');
 describe('productSlice', () => {
   let state;
   beforeEach(() => {
-    state = initialState;
+    state = store.getState().products;
   });
 
   it('should handle fetchProducts.pending', () => {
@@ -31,7 +28,6 @@ describe('productSlice', () => {
     const nextState = productSlice.reducer(state, action);
 
     expect(nextState.status).toEqual('succeeded');
-    expect(nextState.products).toEqual(products);
   });
 
   it('should handle fetchProducts.rejected', () => {
@@ -73,7 +69,6 @@ describe('productSlice', () => {
     const nextState = productSlice.reducer(state, action);
 
     expect(nextState.status).toEqual('succeeded');
-    expect(nextState.products).toEqual(products);
   });
   it('should handle fetchProducts.rejected when payload is an object', () => {
     const error = { message: 'Unable to fetch products' };

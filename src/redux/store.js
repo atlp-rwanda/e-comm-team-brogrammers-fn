@@ -5,14 +5,15 @@ import userReducer from './features/slices/user';
 import signupReducer from './features/slices/signup';
 import logoutReducer from './features/slices/logout';
 import passwordReducer from './features/slices/password';
-import productSlice from './features/slices/product';
+import productSlice from './features/slices/products';
 import categoriesReducer from './features/slices/categories';
 import addItemReducer from './features/slices/additem';
-
+import searchReducer from './features/slices/searchslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
 import statusSlice from './features/slices/sellerStatus';
 import reviewSlice from './features/slices/productReview';
+
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -29,5 +30,6 @@ export const store = configureStore({
     statistics: statusSlice.reducer,
     oneproduct: oneProductSlice.reducer,
     review: reviewSlice.reducer,
+    search: searchReducer,
   },
 });

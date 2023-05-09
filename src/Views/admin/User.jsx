@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,6 +46,7 @@ function AdminDashboard() {
       <div className="sidebar">
         <h2>Admin Dashboard</h2>
         <button
+          type="button"
           className="menu-btn"
           onClick={handleMenuClick}
           data-testid="menu-button"
@@ -108,7 +107,7 @@ function AdminDashboard() {
         <div className="upper">
           <h2>Users</h2>
           <Link to="/add-user">
-            <button>Add User</button>
+            <button type="button">Add User</button>
           </Link>
         </div>
         {error && <div className="error">{error}</div>}
@@ -145,8 +144,10 @@ function AdminDashboard() {
                     {user.disabledUser ? 'True' : 'False'}
                   </td>
                   <td data-label="Action" className="action">
-                    <button>Edit</button>
-                    <button className="delete">Delete</button>
+                    <button type="button">Edit</button>
+                    <button type="button" className="delete">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

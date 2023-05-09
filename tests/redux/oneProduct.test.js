@@ -5,14 +5,9 @@ import { jest, expect, describe, beforeEach, it } from '@jest/globals';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
-
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member, import/no-unresolved
 import OneProduct from '../../src/components/OneProduct';
-
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import { store } from '../../src/redux/store';
 import oneProductThunk from '../../src/redux/features/actions/oneProduct';
-// eslint-disable-next-line import/named
 import oneProductSlice, {
   initialState,
 } from '../../src/redux/features/slices/oneProduct';

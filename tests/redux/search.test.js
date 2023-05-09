@@ -1,12 +1,12 @@
-import React from 'react';
-import { afterEach, beforeEach, describe, test } from '@jest/globals';
-import { render } from '@testing-library/react';
+/* eslint-disable no-promise-executor-return */
+import { afterEach, describe, expect, test } from '@jest/globals';
 import MockAdapter from 'axios-mock-adapter';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import ProductList from '../../src/components/productList';
+import { act } from '@testing-library/react';
+import fetchProducts from '../../src/redux/features/actions/products';
+import searchThunk from '../../src/redux/features/actions/search';
 import axios from '../../src/redux/configs/axios';
 import { store } from '../../src/redux/store';
+import { setSearchParams } from '../../src/redux/features/slices/searchslice';
 
 const mock = new MockAdapter(axios);
 
@@ -95,13 +95,15 @@ const products = [
   },
 ];
 
-describe('testing products', () => {
+describe('testing search products', () => {
   afterEach(() => {
     mock.reset();
   });
 
-  beforeEach(() => {
-    mock.onAny().reply(200, {
+  test('should return all products', async () => {
+    const page = 1;
+
+    mock.onGet(`/products?limit=10&page=${page}`).reply(200, {
       message: 'All products retrieved successfully',
       allproducts: {
         next: {
@@ -113,15 +115,47 @@ describe('testing products', () => {
         results: [...products],
       },
     });
+
+    await act(async () => {
+      store.dispatch(fetchProducts(page));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    });
+
+    const allProducts = store.getState().products.products;
+
+    expect(Array.isArray(allProducts.results)).toBe(true);
+    expect(allProducts.results.length).toEqual(products.length);
   });
 
-  test('rendering', async () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <ProductList />
-        </BrowserRouter>
-      </Provider>
-    );
+  test('should return all searched products', async () => {
+    const page = 1;
+    const limit = 10;
+    const q = 'shoe';
+
+    store.dispatch(setSearchParams({ q }));
+
+    mock
+      .onGet(`/products/search/query?q=${q}&limit=${limit}&page=${page}`)
+      .reply(200, {
+        allproducts: {
+          next: {
+            page: 2,
+            limit: 4,
+          },
+          totalCount: 19,
+          totalPages: 5,
+          results: [...products],
+        },
+      });
+
+    await act(async () => {
+      store.dispatch(searchThunk({ page, q }));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    });
+
+    const allProducts = store.getState().products.products;
+
+    expect(Array.isArray(allProducts.results)).toBe(true);
+    expect(allProducts.results.length).toEqual(products.length);
   });
 });
