@@ -25,6 +25,8 @@ import AddItem from './Views/products/addItem';
 import User from './Views/admin/User';
 // eslint-disable-next-line import/no-unresolved
 import SellerCollection from './Views/SellerCollection';
+import UpdateProductForm from './Views/updateProductForm';
+
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import OneProduct from './components/OneProduct';
 // eslint-disable-next-line import/no-unresolved
@@ -56,6 +58,9 @@ function App() {
           <Route path="/oneProduct/:id" element={<OneProduct />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/collection" element={<SellerCollection />} />
+
+          <Route path="/products/available" element={<UpdateProductForm />} />
+
           <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
