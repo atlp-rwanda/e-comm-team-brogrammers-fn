@@ -171,6 +171,7 @@ function AdminDashboard() {
                     <td data-label="Action" className="action">
                       <button onClick={() => handleEditUser(user)}>Edit</button>
                       <button className="delete">Delete</button>
+                      <button className="Disable">Disable</button>
                     </td>
                   </tr>
                 ))}
@@ -178,8 +179,13 @@ function AdminDashboard() {
             </table>
             <div className="pagination">
               {users.currentPage > 1 && (
-                <button onClick={() => handlePageChange(users.currentPage - 1)}>
-                  Prev
+                <button
+                  data-testid="prev-btn"
+                  id="prev-btn"
+                  disabled
+                  onClick={() => handlePageChange(users.currentPage - 1)}
+                >
+                  Previous
                 </button>
               )}
               {Array(Math.ceil(users.data.length / users.rowsPerPage))
@@ -228,7 +234,11 @@ function AdminDashboard() {
                 })}
               {users.currentPage <
                 Math.ceil(users.data.length / users.rowsPerPage) && (
-                <button onClick={() => handlePageChange(users.currentPage + 1)}>
+                <button
+                  data-testid="next-btn"
+                  id="next-btn"
+                  onClick={() => handlePageChange(users.currentPage + 1)}
+                >
                   Next
                 </button>
               )}

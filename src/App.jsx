@@ -21,6 +21,12 @@ import PrivateRoute from './components/PrivateRoute';
 import Products from './Views/viewProducts';
 import AddItem from './Views/products/addItem';
 import User from './Views/admin/User';
+// eslint-disable-next-line import/no-unresolved
+import SellerCollection from './Views/SellerCollection';
+// eslint-disable-next-line import/no-unresolved, import/extensions
+import OneProduct from './components/OneProduct';
+// eslint-disable-next-line import/no-unresolved
+import Statistics from './Views/UserStatistics';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -45,6 +51,9 @@ function App() {
           <Route path="/verifypass" element={<ResetVerify />} />
           <Route path="/verifyfail" element={<Resetfail />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/oneProduct/:id" element={<OneProduct />} />
+          <Route path="/statistics" element={<Statistics />} />
+          <Route path="/collection" element={<SellerCollection />} />
           <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />

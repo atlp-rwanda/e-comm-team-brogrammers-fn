@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Signup from '../src/Views/Signup';
 import { store } from '../src/redux/store';
 
@@ -124,7 +125,7 @@ describe('testing signup form', () => {
       });
       fireEvent.select(male);
       fireEvent.submit(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     });
 
     const formError = screen.getByTestId('form-error');
@@ -149,7 +150,8 @@ describe('testing signup form', () => {
         target: { value: user.confirmPassword },
       });
       fireEvent.select(male);
-      fireEvent.click(submitButton);
+      fireEvent.submit(submitButton);
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     });
   });
 });

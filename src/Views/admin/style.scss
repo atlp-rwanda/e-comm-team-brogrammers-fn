@@ -10,6 +10,7 @@
 
     .active {
       color: rgb(14, 183, 81);
+      background-color: #f1f1f1;
     }
 
     h2 {
@@ -116,7 +117,7 @@
 
         td.action {
           text-align: center;
-          justify-content: space-evenly;
+          justify-content: center;
 
           button {
             padding: 5px 10px;
@@ -126,6 +127,7 @@
             cursor: pointer;
             font-size: 14px;
             border-radius: 5px;
+            margin-left: 20px;
 
             &:hover {
               background-color: #3e8e41;
@@ -136,6 +138,12 @@
             background-color: #ff0000;
             &:hover {
               background-color: #490b0b;
+            }
+          }
+          button.Disable {
+            background-color: rgb(14, 14, 135);
+            &:hover {
+              background-color: rgb(27, 27, 233);
             }
           }
         }
