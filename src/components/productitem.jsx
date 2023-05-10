@@ -21,6 +21,15 @@ function ProductItem({ product }) {
           </b>
         </Link>
         <p className="seller"> {product && product?.seller?.username}</p>
+        <p className="seller">
+          {' '}
+          <Link to={`/collection/update/${product && product?.id}`}>
+            <b>
+              <button type="submit">Edit</button>
+            </b>
+          </Link>{' '}
+        </p>
+
         <div className="price-cart">
           <p>
             <b>${product && product?.price}</b>

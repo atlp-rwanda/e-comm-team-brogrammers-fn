@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { configureStore } from '@reduxjs/toolkit';
 import booleanReducer from './features/slices/sample';
 import loginReducer from './features/slices/login';
@@ -12,6 +14,9 @@ import productReducer from './features/slices/productslice';
 import searchReducer from './features/slices/searchslice';
 
 import collectionSlice from './features/slices/sellerCollection';
+
+import updatesellerStatusReducer from './features/slices/updateSellerCollectionStatus';
+
 import oneProductSlice from './features/slices/oneProduct';
 import statusSlice from './features/slices/sellerStatus';
 import reviewSlice from './features/slices/productReview';
@@ -33,5 +38,6 @@ export const store = configureStore({
     review: reviewSlice.reducer,
     product: productReducer,
     search: searchReducer,
+    updatesellerStatus: updatesellerStatusReducer,
   },
 });

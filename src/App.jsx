@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import './App.scss';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,8 +25,14 @@ import Products from './Views/products/viewProducts';
 import AddItem from './Views/products/addItem';
 import User from './Views/admin/User';
 import SellerCollection from './Views/SellerCollection';
+
+import UpdateProductForm from './Views/updateProductForm';
+
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
+
+// import ProductPage from "./components/ProductPage"
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -53,7 +60,15 @@ function App() {
           <Route path="/oneProduct/:id" element={<OneProduct />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/collection" element={<SellerCollection />} />
-          <Route path="/" element={<PrivateRoute />}>
+
+          <Route
+            path="/collection/update/:id"
+            element={<UpdateProductForm />}
+          />
+
+          {/* <Route path="/collection/available" component={ProductPage} /> */}
+
+          <Route path="/" element={<PrivateRoute path="/change-password" />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
           </Route>

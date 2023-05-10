@@ -12,7 +12,7 @@ import {
   AiFillInstagram,
   AiFillGithub,
 } from 'react-icons/ai';
-import ViewProducts from '../viewProducts';
+import ViewProducts from '../products/viewProducts';
 
 function Home() {
   return (
