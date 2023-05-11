@@ -10,4 +10,13 @@ const LoginThunk = createAsyncThunk('user/login', async (data) => {
   }
 });
 
+export const ProductsThunk = createAsyncThunk('products', async () => {
+  try {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products`);
+    return res.data.response.data.allproduct.results;
+  } catch (error) {
+    return { error };
+  }
+});
+
 export default LoginThunk;

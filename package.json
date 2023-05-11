@@ -27,7 +27,9 @@
     "mock-local-storage": "^1.1.23",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-chartjs-2": "^5.2.0",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
@@ -36,6 +38,7 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
+    "reactstrap": "^9.1.9",
     "redux": "^4.2.1",
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.4.2",
@@ -121,9 +124,10 @@
     "webpack": "^5.79.0"
   },
   "lint-staged": {
-    "*.{js,jsx,.json}": [
+    "*.{js,jsx,.json,.scss}": [
       "npm run lint",
-      "npm run format"
+      "npm run format",
+      "git add ."
     ],
     "*.--write": "npm run format"
   }

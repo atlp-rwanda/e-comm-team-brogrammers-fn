@@ -115,6 +115,18 @@ function Header() {
           <span className="sec-color">B</span>rogrammers Mall
         </span>
       </h2>
+      <div className="header">
+        <nav className="menu">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Shop</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <nav>
         <div>
           <svg

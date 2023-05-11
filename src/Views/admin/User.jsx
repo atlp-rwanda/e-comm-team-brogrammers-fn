@@ -1,4 +1,4 @@
-/* eslint-disable no-else-return */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
@@ -15,17 +15,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import EditUserForm from './EditUserForm';
+import deleteUser from './DeleteUser';
+import disableUser from './Disable';
+import Pagination from './Pagination';
+import CreateUserForm from './CreateUser';
 
 function AdminDashboard() {
   const [users, setUsers] = useState({
     data: [],
     currentPage: 1,
-    rowsPerPage: 13,
+    rowsPerPage: 10,
   });
   const [error, setError] = useState('');
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -40,7 +45,7 @@ function AdminDashboard() {
           setUsers({
             data: response.data.results,
             currentPage: 1,
-            rowsPerPage: 13,
+            rowsPerPage: 10,
           });
         })
         .catch((err) => {
@@ -64,6 +69,19 @@ function AdminDashboard() {
     setEditingUser(user);
   };
 
+  const handleDeleteUser = (user) => {
+    deleteUser(user);
+  };
+  const handleDisableUser = (user) => {
+    disableUser(user);
+  };
+  const handleAddUserClick = () => {
+    setShowCreateUserForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowCreateUserForm(false);
+  };
   return (
     <div className="containerx">
       <div className="sidebar">
@@ -127,13 +145,14 @@ function AdminDashboard() {
       </div>
       <div className="content">
         <div className="upper">
-          <h2>Users</h2>
-          <Link to="/add-user">
-            <button>Add User</button>
-          </Link>
+          {!showCreateUserForm && <h2>Users</h2>}
+          {!showCreateUserForm && (
+            <button onClick={handleAddUserClick}>Add User</button>
+          )}
         </div>
+        {showCreateUserForm && <CreateUserForm onClose={handleCloseForm} />}
         {error && <div className="error">{error}</div>}
-        {editingUser ? (
+        {showCreateUserForm ? null : editingUser ? (
           <EditUserForm user={editingUser} />
         ) : (
           <div className="table-wrapper">
@@ -170,79 +189,24 @@ function AdminDashboard() {
                     </td>
                     <td data-label="Action" className="action">
                       <button onClick={() => handleEditUser(user)}>Edit</button>
-                      <button className="delete">Delete</button>
-                      <button className="Disable">Disable</button>
+                      <button
+                        className="delete"
+                        onClick={() => handleDeleteUser(user)}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="Disable"
+                        onClick={() => handleDisableUser(user)}
+                      >
+                        Disable
+                      </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <div className="pagination">
-              {users.currentPage > 1 && (
-                <button
-                  data-testid="prev-btn"
-                  id="prev-btn"
-                  disabled
-                  onClick={() => handlePageChange(users.currentPage - 1)}
-                >
-                  Previous
-                </button>
-              )}
-              {Array(Math.ceil(users.data.length / users.rowsPerPage))
-                .fill()
-                .map((_, index) => {
-                  const minPage = Math.max(users.currentPage - 1, 1);
-                  const maxPage = Math.min(
-                    users.currentPage + 1,
-                    Math.ceil(users.data.length / users.rowsPerPage)
-                  );
-                  const showLeftEllipsis = minPage > 1;
-                  const showRightEllipsis =
-                    maxPage < Math.ceil(users.data.length / users.rowsPerPage);
-                  if (
-                    index + 1 === 1 ||
-                    index + 1 ===
-                      Math.ceil(users.data.length / users.rowsPerPage) ||
-                    (index + 1 >= minPage && index + 1 <= maxPage)
-                  ) {
-                    return (
-                      <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={
-                          users.currentPage === index + 1 ? 'active' : ''
-                        }
-                        style={{ marginLeft: '5px', marginRight: '5px' }}
-                      >
-                        {index + 1}
-                      </button>
-                    );
-                  } else if (
-                    (index + 1 === minPage - 1 && showLeftEllipsis) ||
-                    (index + 1 === maxPage + 1 && showRightEllipsis)
-                  ) {
-                    return (
-                      <span
-                        key={index}
-                        style={{ marginLeft: '5px', marginRight: '5px' }}
-                      >
-                        ...
-                      </span>
-                    );
-                  }
-                  return null;
-                })}
-              {users.currentPage <
-                Math.ceil(users.data.length / users.rowsPerPage) && (
-                <button
-                  data-testid="next-btn"
-                  id="next-btn"
-                  onClick={() => handlePageChange(users.currentPage + 1)}
-                >
-                  Next
-                </button>
-              )}
-            </div>
+            <Pagination users={users} handlePageChange={handlePageChange} />
           </div>
         )}
       </div>
