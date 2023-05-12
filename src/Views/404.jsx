@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
-import SearchBox from '../components/search';
+import { Link } from 'react-router-dom';
+import SearchPage from '../components/search';
 
 function NotFound() {
   return (
@@ -12,7 +12,7 @@ function NotFound() {
         can search our products using the box below or return to{' '}
         <Link to="/">home page</Link>
       </p>
-      <SearchBox />
+      <SearchPage />
     </div>
   );
 }

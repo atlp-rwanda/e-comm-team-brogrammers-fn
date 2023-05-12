@@ -194,24 +194,32 @@
       display: block;
       width: 100%;
     }
-    .table tr td {
-      border: 1.2px solid #444;
-    }
 
     .table tr {
       margin-bottom: 40px;
     }
 
-    .table td {
-      text-align: right;
-      padding-left: 50%;
+    .table tr td {
+      border: 1px solid var(--light-gray-color);
       position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+
+      &:not(:last-child) {
+        border-bottom: none;
+      }
+      &:nth-child(2n) {
+        background-color: #00000009;
+      }
+      &:hover {
+        background-color: #00000016;
+      }
     }
 
-    .table tbody tr ::before {
+    .table tbody tr > *::before {
       content: attr(data-label);
-      position: absolute;
-      left: 0;
+      flex: 1;
       font-weight: bold;
       color: black;
       padding-left: 4px;

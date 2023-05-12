@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { FaGoogle } from 'react-icons/fa';
+import googleLogo from '../images/google-logo.png';
 
-function GoogleLoginButton() {
+function GoogleLoginButton({ text }) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const params = Object.fromEntries(searchParams.entries());
@@ -20,10 +19,11 @@ function GoogleLoginButton() {
   return (
     <a
       href={`${process.env.REACT_APP_SERVER_URL}/users/auth/google`}
-      className="google-login-button"
+      className="google-button"
+      data-testid="google-auth"
     >
-      <FaGoogle className="google-login-button__icon" />
-      Google Login
+      <img className="logo" alt="google logo" src={googleLogo} />
+      {text}
     </a>
   );
 }

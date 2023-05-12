@@ -6,7 +6,8 @@
     "\\.(png)$": "jest-transform-stub"
   },
   "moduleNameMapper": {
-    "^axios$": "<rootDir>/node_modules/axios/dist/axios.js"
+    "^axios$": "<rootDir>/node_modules/axios/dist/axios.js",
+    "\\.(css|sass|scss)$": "identity-obj-proxy"
   },
   "moduleFileExtensions": ["js", "jsx", "json", "node"],
   "testMatch": [

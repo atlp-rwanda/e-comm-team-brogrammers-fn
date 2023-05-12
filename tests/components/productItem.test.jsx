@@ -1,7 +1,9 @@
 import React from 'react';
 import { describe, test } from '@jest/globals';
-import { render } from '@testing-library/react';
-import ProductItem from '../../src/components/ProductItem';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
+import ProductItem from '../../src/components/productitem';
 
 const product = {
   id: 'e0f5d2a9-7bd2-4446-9c46-5453cf7d4080',
@@ -28,6 +30,15 @@ const product = {
 };
 describe('testing rendering product', () => {
   test('rendering product Item', () => {
-    render(<ProductItem product={product} />);
+    render(
+      <BrowserRouter basename="/">
+        <ProductItem product={product} />
+      </BrowserRouter>
+    );
+
+    const item = screen.getByTestId('product-item');
+    act(() => {
+      fireEvent.dblClick(item);
+    });
   });
 });

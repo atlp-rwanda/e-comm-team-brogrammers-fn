@@ -1,8 +1,5 @@
-/* eslint-disable no-promise-executor-return */
 /* eslint-disable react/jsx-filename-extension */
-// _ eslint-disable no-promise-executor-return _/
-// _ eslint-disable import/no-extraneous-dependencies _/
-// _ eslint-disable react/jsx-filename-extension _/
+/* eslint-disable no-promise-executor-return */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { test, expect, describe, beforeEach } from '@jest/globals';
@@ -10,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Signup from '../src/Views/Signup';
 import { store } from '../src/redux/store';
 

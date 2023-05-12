@@ -22,19 +22,17 @@ export const loginSlice = createSlice({
       .addCase(LoginThunk.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = true;
-        state.errorMessage = { ...payload };
+        if (payload.error.message.toLowerCase() === 'network error')
+          state.errorMessage = 'Network Error';
+        else
+          state.errorMessage =
+            payload?.error?.response?.data?.message || 'error';
       })
       .addCase(LoginThunk.fulfilled, (state, { payload }) => {
         state.loading = false;
-        if (payload.error) {
-          state.error = true;
-          state.errorMessage =
-            payload?.error?.response?.data?.message || 'error';
-        } else if (payload.token) {
-          localStorage.setItem('token', payload.token);
-          state.error = false;
-          state.token = payload.token;
-        }
+        localStorage.setItem('token', payload.token);
+        state.error = false;
+        state.token = payload.token;
       })
       .addCase(LogoutThunk.fulfilled, (state, { payload }) => {
         if (payload.status === 200) state.token = null;
