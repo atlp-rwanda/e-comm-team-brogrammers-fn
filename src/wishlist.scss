@@ -1,0 +1,124 @@
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wishlist {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .all-wishlist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .container3 {
+      width: 300px;
+      margin: 8px;
+      height: 330px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      position: relative;
+
+      .name {
+        font-size: 1.2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+        box-orient: vertical;
+        -webkit-box-orient: vertical;
+        color: var(--main-color);
+        margin-top: 5px;
+      }
+
+      // Image styling
+      .image {
+        width: 100%;
+        aspect-ratio: 1.2/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        contain: content;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: 1s ease;
+        }
+      }
+
+      // Price and cart section styling
+      .price-cart {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        p {
+          font-weight: bold;
+
+          b {
+            font-size: 1.2em;
+            color: var(--sec-color);
+          }
+        }
+      }
+
+      // Clear wishlist button styling
+      button[type='button'] {
+        background-color: transparent;
+        border-radius: 10000px;
+        border: 1px solid var(--light-gray-color);
+        padding: 0.3rem;
+        @include flex-center();
+        cursor: pointer;
+
+        i {
+          font-size: 1.5em;
+        }
+
+        &:hover {
+          border-style: dashed;
+
+          i {
+            color: var(--sec-color);
+          }
+        }
+      }
+    }
+  }
+
+  .fa-trash {
+    color: rgb(249, 98, 98);
+  }
+
+  .hed {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 20px 10px 100px;
+
+    // Clear wishlist button styling
+    button[type='submit'] {
+      background-color: var(--sec-color);
+      color: var(--back-color);
+      border: none;
+      border-radius: var(--xsm-space);
+      padding: var(--sm-box-padding);
+      font-size: 1em;
+      font-weight: bold;
+
+      &:hover {
+        background-color: var(--dark-sec-color);
+      }
+    }
+  }
+}

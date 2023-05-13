@@ -30,6 +30,7 @@ import Settings from './components/Settings/Settings';
 import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
+import ViewWishlist from './Views/ViewWishlist';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -75,6 +76,7 @@ function App() {
           <Route path="/payment-success" element={<PaymentSuccessPage />} />
           <Route path="/payment-failed" element={<PaymentFailurePage />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/wishlist" element={<ViewWishlist />} />
         </Routes>
       </main>
       <Footer />

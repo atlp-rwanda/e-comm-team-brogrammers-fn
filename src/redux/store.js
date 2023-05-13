@@ -13,8 +13,13 @@ import productReducer from './features/slices/productslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
 import notificationSlice from './features/slices/notifications';
-
+// import statusSlice from './features/slices/sellerStatus';
 import reviewSlice from './features/slices/productReview';
+import viewWishlistSlice from './features/slices/wishlistslice';
+import clearWishlistSlice from './features/slices/clearwishlist';
+import addToWishlistSlice from './features/slices/addWishlistslice';
+import DeleteToWishlistSlice from './features/slices/deleteWishlistslice';
+
 import deleteItemSlice from './features/slices/deleteItem';
 import availablitySlice from './features/slices/changeAvailability';
 import ClearCartReducer from './features/slices/clearCart';
@@ -45,5 +50,9 @@ export const store = configureStore({
     addToCart: addToCartReducer,
     clearCart: ClearCartReducer,
     removeToCart: removeToCartReducer,
+    wishlist: viewWishlistSlice.reducer,
+    clearWishlist: clearWishlistSlice.reducer,
+    addWishlist: addToWishlistSlice,
+    deleteTowishlist: DeleteToWishlistSlice,
   },
 });
