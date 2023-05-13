@@ -11,6 +11,7 @@ import {
   faNewspaper,
   faBars,
   faTimes,
+  faHistory,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import EditUserForm from './EditUserForm';
@@ -140,6 +141,14 @@ function AdminDashboard() {
               className={location.pathname === '/newsletter' ? 'active' : ''}
             >
               <FontAwesomeIcon icon={faNewspaper} /> Newsletter
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/logs"
+              className={location.pathname === '/logs' ? 'active' : ''}
+            >
+              <FontAwesomeIcon icon={faHistory} /> Activity Logs
             </Link>
           </li>
         </ul>

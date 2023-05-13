@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import { configureStore } from '@reduxjs/toolkit';
 import booleanReducer from './features/slices/sample';
 import loginReducer from './features/slices/login';
@@ -27,6 +28,7 @@ import cartReducer from './features/slices/cart';
 import addToCartReducer from './features/slices/addToCartReducer';
 import removeToCartReducer from './features/slices/removeToCart';
 import { orderSlice } from './features/slices/orders';
+import logsSlice from './features/slices/logsSlice';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -57,5 +59,6 @@ export const store = configureStore({
     clearWishlist: clearWishlistSlice.reducer,
     addWishlist: addToWishlistSlice,
     deleteTowishlist: DeleteToWishlistSlice,
+    logs: logsSlice,
   },
 });

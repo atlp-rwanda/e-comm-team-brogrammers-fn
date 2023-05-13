@@ -1,0 +1,49 @@
+.logs-container {
+  overflow-x: auto;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.logs-table th,
+.logs-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.logs-table th {
+  background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 600px) {
+  .logs-table {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .logs-table thead,
+  .logs-table tbody,
+  .logs-table th,
+  .logs-table td,
+  .logs-table tr {
+    display: block;
+  }
+
+  .logs-table th {
+    text-align: center;
+    padding: 8px;
+    border-bottom: none;
+  }
+
+  .logs-table td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .logs-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}
