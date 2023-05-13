@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import { expect, describe, beforeEach, afterEach, it } from '@jest/globals';
+/* eslint-disable no-undef */
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';

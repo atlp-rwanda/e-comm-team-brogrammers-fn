@@ -151,14 +151,14 @@ function Header() {
                   <span>View Shop</span>
                   <span>Cart</span>
                   <span>Edit Profile</span>
-                  <Link to="/change-password">change password</Link>
+                  <Link to="/change-password">Change password</Link>
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <span>
                       <Link to="collection" data-testid="signup">
-                        your collection
+                        Your Collection
                       </Link>
                     </span>
                   )}
