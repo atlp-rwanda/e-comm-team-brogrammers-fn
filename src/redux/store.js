@@ -11,9 +11,12 @@ import addItemReducer from './features/slices/additem';
 import searchReducer from './features/slices/searchslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
-import statusSlice from './features/slices/sellerStatus';
+import addReviewSlice from './features/slices/addReview';
 import reviewSlice from './features/slices/productReview';
-
+import deleteReviewSlice from './features/slices/deleteReview';
+import deleteItemSlice from './features/slices/deleteItem';
+import availablitySlice from './features/slices/changeAvailability';
+import editReviewSlice from './features/slices/editReview';
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -27,9 +30,13 @@ export const store = configureStore({
     categories: categoriesReducer,
     addedItem: addItemReducer,
     collection: collectionSlice.reducer,
-    statistics: statusSlice.reducer,
+    addReview: addReviewSlice,
+    editReview: editReviewSlice.reducer,
     oneproduct: oneProductSlice.reducer,
-    review: reviewSlice.reducer,
+    reviews: reviewSlice.reducer,
     search: searchReducer,
+    deleteReview: deleteReviewSlice,
+    deleteItem: deleteItemSlice.reducer,
+    availablity: availablitySlice.reducer,
   },
 });

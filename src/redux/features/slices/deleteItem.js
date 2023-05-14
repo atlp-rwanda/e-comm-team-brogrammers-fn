@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import oneProductThunk from '../actions/oneProduct';
+import deleteItemThunk from '../actions/deleteItem';
 
 const initialState = {
   data: null,
@@ -7,25 +7,25 @@ const initialState = {
   error: null,
 };
 
-const oneProductSlice = createSlice({
+const deleteItemSlice = createSlice({
   name: 'oneProduct',
   initialState,
   reducers: {},
 
   extraReducers: (builder) => {
     builder
-      .addCase(oneProductThunk.fulfilled, (state, { payload }) => {
+      .addCase(deleteItemThunk.fulfilled, (state, { payload }) => {
         state.status = 'succeeded';
         state.data = payload;
       })
-      .addCase(oneProductThunk.pending, (state) => {
+      .addCase(deleteItemThunk.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(oneProductThunk.rejected, (state, { payload }) => {
+      .addCase(deleteItemThunk.rejected, (state, { payload }) => {
         state.status = 'failed';
         state.error = payload.payload;
       });
   },
 });
 
-export default oneProductSlice;
+export default deleteItemSlice;

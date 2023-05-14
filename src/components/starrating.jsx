@@ -5,8 +5,8 @@ function StarRating({ rate }) {
   return (
     <Rating
       initialRating={rate}
-      emptySymbol="far fa-star fa-sm text-[#d6a445] border-[#d6a445]"
-      fullSymbol="fas fa-star fa-sm text-[#d6a445] border-[#d6a445]"
+      emptySymbol={<i className="fa-regular fa-star" />}
+      fullSymbol={<i className="fa-solid fa-star" />}
       readonly="true"
     />
   );

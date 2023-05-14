@@ -13,7 +13,11 @@ function ProductItem({ product }) {
       onDoubleClick={() => navigate(`/oneProduct/${product.id}`)}
     >
       <div className="image back-angular">
-        <img src={product && product?.images[0]} alt="productImage" />
+        <img
+          src={product && product?.images[0]}
+          alt="productImage"
+          data-testid="image"
+        />
       </div>
       <div className="productDes">
         <Link to={`/oneProduct/${product && product?.id}`}>

@@ -23,6 +23,7 @@ import User from './Views/admin/User';
 import SellerCollection from './Views/SellerCollection';
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
+import ManageProducts from './Views/products/ManageProducts';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -54,6 +55,10 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
           </Route>
+          <Route
+            path="/collection/manageProducts"
+            element={<ManageProducts />}
+          />
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
