@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import deleteItemThunk from '../redux/features/actions/deleteItem';
 import availabilityThunk from '../redux/features/actions/changeAvailability';
 import { showSuccessMessage } from '../utils/toast';
+import { updateSellerCollection } from '../redux/features/actions/updateSellerCollection';
 
 function ManageItem({ product }) {
   const dispatch = useDispatch();
@@ -14,6 +16,13 @@ function ManageItem({ product }) {
       showSuccessMessage('product deleted successfuly');
     });
   };
+
+  const handleEdit = (id) => {
+    dispatch(updateSellerCollection(id)).then(() => {
+      showSuccessMessage('product updated successfuly');
+    });
+  };
+
   const { status: loading } = useSelector((state) => state.availablity);
 
   const handleAvailable = (id) => {
@@ -76,9 +85,25 @@ function ManageItem({ product }) {
                 <p>delete</p>
               )}
             </button>
-            <button type="button" className="btn">
-              edit
+
+            <button
+              type="button"
+              onClick={() => handleEdit(product.id)}
+              className="btn"
+            >
+              {/* <p className="seller"> */}
+              {/* {' '} */}
+              <Link
+                to={`/collection/manageProducts/update/${
+                  product && product?.id
+                }`}
+              >
+                <p>edit</p>
+              </Link>
+              {/* {' '} */}
+              {/* </p> */}
             </button>
+
             {disAbled ? (
               <button
                 type="button"

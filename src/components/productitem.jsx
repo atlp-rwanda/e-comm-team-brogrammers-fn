@@ -26,6 +26,7 @@ function ProductItem({ product }) {
           </b>
         </Link>
         <p className="seller"> {product && product?.seller?.username}</p>
+
         <div className="price-cart">
           <p>
             <b>${product && product?.price}</b>

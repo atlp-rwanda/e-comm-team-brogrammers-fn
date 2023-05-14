@@ -24,6 +24,7 @@ import SellerCollection from './Views/SellerCollection';
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
 import ManageProducts from './Views/products/ManageProducts';
+import UpdateProductForm from './Views/updateProductForm';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -55,6 +56,12 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
           </Route>
+
+          <Route
+            path="/collection/manageProducts/update/:id"
+            element={<UpdateProductForm />}
+          />
+
           <Route
             path="/collection/manageProducts"
             element={<ManageProducts />}
