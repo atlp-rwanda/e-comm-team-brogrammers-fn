@@ -26,7 +26,7 @@ function CartIcon({ product }) {
 
   return (
     <>
-      <dialog ref={dialog} className="add-cart-dialog">
+      <dialog ref={dialog} className="add-cart-dialog" data-testid="dialog">
         <div>
           <h3>
             Comfirm to add:{' '}
@@ -38,7 +38,10 @@ function CartIcon({ product }) {
             <p>
               <span>Product Name:</span>
               <b>
-                <Link to={`/oneProduct/${product && product.id}`}>
+                <Link
+                  to={`/oneProduct/${product && product.id}`}
+                  data-testid="name"
+                >
                   {product && product.name}
                 </Link>
               </b>
@@ -60,7 +63,9 @@ function CartIcon({ product }) {
             </label>
             <p>
               <span>Price</span>
-              <b>${(product && product.price) * quantity}</b>
+              <b data-testid="price">
+                ${(product && product.price) * quantity}
+              </b>
             </p>
             <div>
               <button formMethod="dialog" type="submit" className="btn1 cancel">
@@ -73,7 +78,11 @@ function CartIcon({ product }) {
           </form>
         </div>
       </dialog>
-      <button type="button" onClick={() => dialog.current.showModal()}>
+      <button
+        type="button"
+        onClick={() => dialog.current.showModal()}
+        data-testid="cart-plus"
+      >
         <i className="fa-solid fa-cart-plus" />
       </button>
     </>

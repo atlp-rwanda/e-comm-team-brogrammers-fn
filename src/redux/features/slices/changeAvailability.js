@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import oneProductThunk from '../actions/oneProduct';
+import availabilityThunk from '../actions/changeAvailability';
 
 const initialState = {
   data: null,
@@ -7,25 +7,25 @@ const initialState = {
   error: null,
 };
 
-const oneProductSlice = createSlice({
+const availablitySlice = createSlice({
   name: 'oneProduct',
   initialState,
   reducers: {},
 
   extraReducers: (builder) => {
     builder
-      .addCase(oneProductThunk.fulfilled, (state, { payload }) => {
+      .addCase(availabilityThunk.fulfilled, (state, { payload }) => {
         state.status = 'succeeded';
         state.data = payload;
       })
-      .addCase(oneProductThunk.pending, (state) => {
+      .addCase(availabilityThunk.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(oneProductThunk.rejected, (state, { payload }) => {
+      .addCase(availabilityThunk.rejected, (state, { payload }) => {
         state.status = 'failed';
         state.error = payload.payload;
       });
   },
 });
 
-export default oneProductSlice;
+export default availablitySlice;

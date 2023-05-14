@@ -15,13 +15,8 @@ const reviewSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(reviewthunk.fulfilled, (state, { payload }) => {
-        if (payload.error) {
-          state.status = 'failed';
-          state.error = payload.payload;
-        } else {
-          state.status = 'succeeded';
-          state.review = payload;
-        }
+        state.status = 'succeeded';
+        state.review = payload;
       })
       .addCase(reviewthunk.pending, (state) => {
         state.status = 'loading';
