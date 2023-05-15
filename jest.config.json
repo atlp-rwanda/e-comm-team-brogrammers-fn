@@ -1,6 +1,7 @@
 {
   "testEnvironment": "jsdom",
   "setupFiles": ["dotenv/config"],
+
   "transform": {
     "^.+\\.(js|jsx)$": "babel-jest",
     "\\.(png)$": "jest-transform-stub"

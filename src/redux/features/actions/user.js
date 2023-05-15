@@ -8,6 +8,7 @@ const UserThunk = createAsyncThunk('user', async () => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
+
     return res.data;
   } catch (error) {
     return { error };

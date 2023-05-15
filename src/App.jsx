@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import UserThunk from './redux/features/actions/user';
+
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Home from './Views/Home/Home';
 import Login from './Views/Login';
 import Signup from './Views/Signup';
@@ -24,6 +27,7 @@ import SellerCollection from './Views/SellerCollection';
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
 import ManageProducts from './Views/products/ManageProducts';
+import Settings from './components/Settings/Settings';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -40,6 +44,7 @@ function App() {
       <Header />
       <main>
         <ToastContainer />
+        <Toaster position="bottom-left" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
@@ -63,6 +68,7 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ToastContainer />
