@@ -132,6 +132,11 @@ $fr-vw: calc(100vw / 12);
     }
   }
 }
+.landing-page {
+  .products-list {
+    display: block !important;
+  }
+}
 
 footer {
   border-bottom: 1px solid $back-color;

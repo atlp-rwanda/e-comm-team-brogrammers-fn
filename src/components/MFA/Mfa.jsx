@@ -46,7 +46,7 @@ function Mfa({ email }) {
 
   return (
     <div className="sign back-angular" data-testid="sign_div">
-      <h2>Check Mutli-Factor code from you email.</h2>
+      <h2 data-testid="mfa">Check Mutli-Factor code from you email.</h2>
       <form
         className="login"
         onSubmit={handleSubmit(submit)}

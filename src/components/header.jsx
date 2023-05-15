@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert2';
 import logo from '../images/logo.png';
@@ -172,6 +172,7 @@ function Header() {
                       </button>
                     </>
                   )}
+                  <NavLink to="/settings">Settings </NavLink>
                 </section>
                 <section>
                   <span

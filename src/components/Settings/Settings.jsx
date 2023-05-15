@@ -8,55 +8,75 @@ import UserThunk from '../../redux/features/actions/user';
 import axios from '../../redux/configs/axios';
 
 function Settings() {
-  //   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token, loading: tokenLoad } = useSelector((s) => s.login);
-  const { loading } = useSelector((s) => s.user);
-  const [enabled, setEnabled] = useState(0);
+
+  function getLoginState(state) {
+    return state.login;
+  }
+  function getUserState(state) {
+    return state.user;
+  }
+
+  const { token, loading: loadingToken } = useSelector(getLoginState);
+  const { loading: loadingUser, user } = useSelector(getUserState);
+  const [isMfaEnabled, setIsMfaEnabled] = useState(false);
 
   useEffect(() => {
-    if (!tokenLoad && token) {
+    const isLoginFinished = !loadingToken && token;
+    if (isLoginFinished) {
       dispatch(UserThunk());
     }
   }, [token]);
 
   useEffect(() => {
-    if (enabled === 0) return;
-    const action = enabled ? 'disable' : 'enable';
-    toast.promise(
-      axios.post(
-        `/users/${action}-mfa`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      ),
-      {
-        success: () => `MFA was ${action}d succesfully.`,
-        error: (err) => `MFA was not ${action}d. ${err?.message}`,
-        loading: `trying ${action} MFA`,
-      }
-    );
-  }, [enabled, token]);
+    const isUserMfaEnabled = Boolean(user && user.mfa_enabled);
+    setIsMfaEnabled(isUserMfaEnabled);
+  }, [user]);
 
-  const handleEnableMfa = () => {
-    setEnabled((p) => (p === 0 ? false : !p));
+  const handleToggleMfa = () => {
+    // This will handle both disabling or enabling MFA
+    const action = isMfaEnabled ? 'disable' : 'enable';
+
+    const onSuccess = () => {
+      setIsMfaEnabled(action === 'enable');
+      return `MFA was ${action}d succesfully.`;
+    };
+    const onError = (err) => `MFA was not ${action}d. ${err?.message}`;
+    const requestData = {};
+    const authenticationHeader = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+
+    const enableOrDisableMfa = axios.post(
+      `/users/${action}-mfa`,
+      requestData,
+      authenticationHeader
+    );
+    toast.promise(enableOrDisableMfa, {
+      success: onSuccess,
+      error: onError,
+      loading: `trying ${action} MFA`,
+    });
   };
+
+  // User or login still loading.
+  const isStillLoading = !token || loadingUser || loadingToken;
 
   return (
     <div className="settings-page" data-testid="settings-page">
       <div className="section">
         <div className="title">Mutli-Factor Authentication</div>
-        {!token || loading || tokenLoad ? (
+        {isStillLoading ? (
           <span className="loader" />
         ) : (
           <div className="option">
             <div className="label">Enable MFA</div>
             <label htmlFor="mfa" className="toggle-switch">
               <input
-                onChange={handleEnableMfa}
+                onChange={handleToggleMfa}
+                defaultChecked={isMfaEnabled}
                 data-testid="mfa"
                 type="checkbox"
                 id="mfa"

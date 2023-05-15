@@ -1,10 +1,10 @@
 /* eslint-disable no-promise-executor-return */
-// _ eslint-disable no-promise-executor-return _/
-// _ eslint-disable import/no-extraneous-dependencies _/
-// _ eslint-disable no-promise-executor-return _/
-// _ eslint-disable import/no-extraneous-dependencies _/
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-promise-executor-return */
+/* eslint-disable import/no-extraneous-dependencies */
 import { act } from '@testing-library/react';
 import { test, describe, expect } from '@jest/globals';
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import signupThunk from '../../src/redux/features/actions/signup';
 import { store } from '../../src/redux/store';
 

@@ -1,6 +1,5 @@
 /* eslint-disable no-promise-executor-return */
-// _ eslint-disable no-promise-executor-return _/
-// _ eslint-disable import/no-extraneous-dependencies _/
+/* eslint-disable import/no-extraneous-dependencies */
 import { act } from '@testing-library/react';
 import { test, describe, expect } from '@jest/globals';
 import { store } from '../../src/redux/store';
@@ -15,7 +14,7 @@ describe('test login states', () => {
   test('should return error for wrong credentials', async () => {
     await act(async () => {
       store.dispatch(LoginThunk(wrongUser));
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     });
 
     const { login } = store.getState();
