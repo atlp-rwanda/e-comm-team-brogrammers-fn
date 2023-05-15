@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CartIcon from './cartIcon';
+import { Rwf } from '../helpers/currency';
 
 function ProductItem({ product }) {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function ProductItem({ product }) {
         <p className="seller"> {product && product?.seller?.username}</p>
         <div className="price-cart">
           <p>
-            <b>${product && product?.price}</b>
+            <b>{product && Rwf.format(product?.price)}</b>
           </p>
           <CartIcon product={product} />
         </div>

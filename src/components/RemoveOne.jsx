@@ -23,7 +23,7 @@ function RemoveOne({ p, quantities, setQuantities }) {
   };
   return (
     <button
-      className="btn btn-primary plus"
+      className="btn btn-primary minus"
       onClick={() => reduceByOne(p.id)}
       disabled={addToCartLoading}
       data-testid="reduce-quantity"

@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-promise-executor-return */
 import { act } from '@testing-library/react';
-import { test, describe, expect, beforeEach, afterEach } from '@jest/globals';
+import { test, describe, expect, afterEach } from '@jest/globals';
 import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
+import axios from '../../src/redux/configs/axios';
 import { store } from '../../src/redux/store';
-import LoginThunk from '../../src/redux/features/actions/login';
 import PasswordThunk from '../../src/redux/features/actions/password';
 import passwordReducer, {
   setSuccessMessage,
@@ -25,36 +23,24 @@ describe('passwordSlice reducer', () => {
   };
   const newPassword = '123@Pass';
 
-  beforeEach(async () => {
-    mock.onPost(`/users/login`).reply(200, {
-      email: validCredentials.email,
-      token: 'token example',
-      message: 'Login Successfully',
-    });
-    await act(async () => {
-      store.dispatch(LoginThunk(validCredentials));
-      await new Promise((resolve) => setTimeout(resolve, 18000));
-    });
-  });
-
-  afterEach(() => {
-    store.dispatch(setSuccessMessage(undefined));
-    store.dispatch(setErrorMessage(undefined));
+  afterEach(async () => {
+    await store.dispatch(setSuccessMessage(undefined));
+    await store.dispatch(setErrorMessage(undefined));
     mock.reset();
   });
 
   test('should update successMessage when password is changed', async () => {
-    mock.onPatch(`/users/change-password`).reply(200, {
+    mock.onAny().reply(200, {
       message: 'Password updated successfully',
     });
     await act(async () => {
-      store.dispatch(
+      await store.dispatch(
         PasswordThunk({
           oldPassword: validCredentials.password,
           newPassword,
         })
       );
-      await new Promise((resolve) => setTimeout(resolve, 15000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     });
 
     const { password } = store.getState();
@@ -66,7 +52,7 @@ describe('passwordSlice reducer', () => {
   });
 
   test('should return error when password change fails', async () => {
-    mock.onPatch(`/users/change-password`).reply(401, {
+    mock.onPatch().reply(401, {
       message: 'Incorrect old password',
     });
     const wrongPassword = 'wrongPass123@';
@@ -78,7 +64,7 @@ describe('passwordSlice reducer', () => {
           newPassword: 'newPass123',
         })
       );
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     });
 
     const { password } = store.getState();

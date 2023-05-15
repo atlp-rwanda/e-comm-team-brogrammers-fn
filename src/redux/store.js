@@ -21,6 +21,8 @@ import ClearCartReducer from './features/slices/clearCart';
 import cartReducer from './features/slices/cart';
 import addToCartReducer from './features/slices/addToCartReducer';
 import removeToCartReducer from './features/slices/removeToCart';
+import { orderSlice } from './features/slices/orders';
+
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -45,5 +47,6 @@ export const store = configureStore({
     addToCart: addToCartReducer,
     clearCart: ClearCartReducer,
     removeToCart: removeToCartReducer,
+    orders: orderSlice.reducer,
   },
 });

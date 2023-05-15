@@ -20,6 +20,7 @@ function RemoveTrash({ p }) {
       <FontAwesomeIcon
         icon={faTrash}
         size="lg"
+        color="red"
         className="text-danger pointer"
         onClick={() => handleRemoveItem(p.id)}
         data-testid="remove-item"

@@ -1,26 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
-import './PaymentSuccess.scss';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import css from './PaymentSuccess.module.scss';
+import oneOrderThunk from '../../redux/features/actions/oneOrder';
+import { resetSelected } from '../../redux/features/slices/orders';
 
 function PaymentSuccessPage() {
-  // Example data
-  const orderNumber = '123456';
-  const totalCost = '$50.00';
-  const deliveryDate = 'May 25, 2023';
-  const paymentConfirmation = 'Payment ID: 987654321';
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const {
+    selected: { value: order, isLoading },
+  } = useSelector((state) => state.orders);
 
-  return (
-    <div className="payment-success-container">
-      <div className="payment-success-icon">
+  useEffect(() => {
+    dispatch(oneOrderThunk(id));
+
+    return () => {
+      dispatch(resetSelected());
+    };
+  }, []);
+
+  return isLoading ? (
+    <span className="loader-2" />
+  ) : (
+    <div className={css.payment_success_container}>
+      <div className={css.payment_success_icon}>
         <FaCheckCircle data-testid="payment-success-icon" />
       </div>
-      <h1 className="payment-success-text">Payment Successful</h1>
-      <ConfirmationBox
-        orderNumber={orderNumber}
-        totalCost={totalCost}
-        deliveryDate={deliveryDate}
-        paymentConfirmation={paymentConfirmation}
-      />
+      <div className={css.confirmation_box}>
+        <h1 className={css.payment_success_text}>Payment Successful</h1>
+        <ConfirmationBox
+          orderNumber={order && order.orderNo}
+          totalCost={order && order.totalAmount}
+          deliveryDate={
+            order && order.expectedDeliveryDate
+              ? moment(order.expectedDeliveryDate).format('LL')
+              : 'Not Set'
+          }
+          paymentConfirmation={searchParams.get('paymentID') || 'undefined'}
+        />
+        <Link to={`/orders/${order && order.id}`}>View order</Link>
+      </div>
     </div>
   );
 }
@@ -32,7 +55,7 @@ export function ConfirmationBox({
   paymentConfirmation,
 }) {
   return (
-    <div className="confirmation-box">
+    <div>
       <h3>Payment Information</h3>
       <ul>
         <li>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AddCartThunk from '../redux/features/actions/addCart';
 import { showErrorMessage, showSuccessMessage } from '../utils/toast';
+import { Rwf } from '../helpers/currency';
 
 function CartIcon({ product }) {
   const dialog = useRef();
@@ -89,7 +90,7 @@ function CartIcon({ product }) {
             <p>
               <span>Price</span>
               <b data-testid="product-price">
-                ${(product && product.price) * quantity}
+                {Rwf.format((product && product.price) * quantity)}
               </b>
             </p>
             <div>

@@ -32,6 +32,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 'off',
+    'consistent-return': 'error',
   },
   ignorePatterns: [
     'coverage',

@@ -4,6 +4,7 @@ import CartThunk from '../actions/cart';
 import RemoveCartThunk from '../actions/removeCart';
 import AddCartThunk from '../actions/addCart';
 import ClearCartThunk from '../actions/clearCart';
+import { createOrder } from '../actions/oneOrder';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -48,6 +49,11 @@ export const cartSlice = createSlice({
         state.total = payload.total;
         state.product = state.product.filter((item) => item.id !== payload.id);
         state.status -= 1;
+      })
+      .addCase(createOrder.fulfilled, (state) => {
+        state.product = [];
+        state.status = 0;
+        state.total = 0;
       })
       .addCase(CartThunk.rejected, (state, { payload }) => {
         state.isLoading = false;

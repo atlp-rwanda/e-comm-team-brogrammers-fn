@@ -1,24 +1,22 @@
+import { afterEach, describe, test } from '@jest/globals';
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, waitFor } from '@testing-library/react';
-import { expect, it, describe } from '@jest/globals';
-import { Provider } from 'react-redux';
+import { render } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from '../src/redux/store';
-import PaymentSuccessPage, {
-  ConfirmationBox,
-} from '../src/Views/payments/Success';
 import axios from '../src/redux/configs/axios';
+import GetOrder from '../src/Views/orders/getOne';
 
 const mock = new MockAdapter(axios);
+
 const order = {
   id: '200011',
   deliveryCountry: 'Cameroon',
   deliveryCity: 'Randyberg',
   deliveryStreet: '930 Christian Dam',
   paymentMethod: 'maestro',
-  orderNo: 12345,
   isPaid: false,
   status: 'Pending',
   statusUpdated: false,
@@ -71,38 +69,28 @@ const order = {
   ],
 };
 
-describe('PaymentSuccessPage', () => {
-  it('should render the payment success page', async () => {
-    mock.onAny().reply(200, order);
-    const { getByText, getByTestId } = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <PaymentSuccessPage />
-        </BrowserRouter>
-      </Provider>
-    );
-    await waitFor(() => {
-      expect(getByText('Payment Successful')).toBeInTheDocument();
-      expect(getByTestId('payment-success-icon')).toBeInTheDocument();
-    });
+describe('Testing one order', () => {
+  afterEach(() => {
     mock.reset();
   });
-});
 
-describe('ConfirmationBox', () => {
-  const props = {
-    orderNumber: order.orderNo,
-    totalCost: order.totalAmount,
-    deliveryDate: order.expectedDeliveryDate,
-    paymentConfirmation: 'sd-2345678i9o',
-  };
-
-  it('testinng success page', () => {
+  test('Should render unpaid order', () => {
     mock.onAny().reply(200, order);
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <ConfirmationBox {...props} />
+        <BrowserRouter basename="/">
+          <GetOrder />
+        </BrowserRouter>
+      </Provider>
+    );
+  });
+
+  test('Should render paid order', () => {
+    mock.onAny().reply(200, { ...order, isPaid: true });
+    render(
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <GetOrder />
         </BrowserRouter>
       </Provider>
     );
