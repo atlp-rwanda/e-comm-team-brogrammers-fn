@@ -7,11 +7,11 @@ import '@testing-library/jest-dom';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
 
-import statusThunk from '../../src/redux/features/actions/sellerStatus';
+import availabilityThunk from '../../src/redux/features/actions/changeAvailability';
 // eslint-disable-next-line import/named
-import statusSlice, {
+import availablitySlice, {
   initialState,
-} from '../../src/redux/features/slices/sellerStatus';
+} from '../../src/redux/features/slices/changeAvailability';
 
 describe('testing statistics slice', () => {
   describe('stattistics slice slice', () => {
@@ -21,44 +21,44 @@ describe('testing statistics slice', () => {
     });
 
     it('should handle statistics.pending', () => {
-      const action = { type: statusThunk.pending.type };
-      const nextState = statusSlice.reducer(state, action);
+      const action = { type: availabilityThunk.pending.type };
+      const nextState = availablitySlice.reducer(state, action);
 
       expect(nextState.status).toEqual('loading');
     });
 
     it('should handle statistics.fulfilled', () => {
-      const statis = [{ products: [], revenue: 12 }];
+      const data = [{ product: [], message: '12' }];
       const action = {
-        type: statusThunk.fulfilled.type,
-        payload: statis,
+        type: availabilityThunk.fulfilled.type,
+        payload: data,
       };
-      const nextState = statusSlice.reducer(state, action);
+      const nextState = availablitySlice.reducer(state, action);
 
       expect(nextState.status).toEqual('succeeded');
-      expect(nextState.statis).toEqual(statis);
+      expect(nextState.data).toEqual(data);
     });
 
     it('should handle statistics.rejected', () => {
       const error = 'Unable to fetch products';
-      const action = { type: statusThunk.rejected.type, payload: error };
-      const nextState = statusSlice.reducer(state, action);
+      const action = { type: availabilityThunk.rejected.type, payload: error };
+      const nextState = availablitySlice.reducer(state, action);
 
       expect(nextState.status).toEqual('failed');
     });
 
     it('should dispatch statistics and update state on successful API call', async () => {
       const dispatch = jest.fn();
-      const getState = jest.fn(() => ({ statis: { status: 'idle' } }));
+      const getState = jest.fn(() => ({ data: { status: 'idle' } }));
 
-      await statusThunk()(dispatch, getState, undefined);
+      await availabilityThunk()(dispatch, getState, undefined);
     });
 
     it('should dispatch productReview and update state on unsuccessful API call', async () => {
       const dispatch = jest.fn();
-      const getState = jest.fn(() => ({ statis: { status: 'idle' } }));
+      const getState = jest.fn(() => ({ data: { status: 'idle' } }));
 
-      await statusThunk()(dispatch, getState, undefined);
+      await availabilityThunk()(dispatch, getState, undefined);
     });
   });
 });

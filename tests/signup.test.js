@@ -129,25 +129,44 @@ describe('testing signup form', () => {
   });
 
   test('signs up successfully', async () => {
-    const male = screen.getByText('Male');
+    const genderSelect = screen.getByPlaceholderText('Gender');
+
     const emailInput = screen.getByPlaceholderText('Enter Your Email');
     const usernameInput = screen.getByPlaceholderText('Enter username');
     const passwordInput = screen.getByPlaceholderText('Enter your Password');
-    const comfirmPasswordInput = screen.getByPlaceholderText(
+    const confirmPasswordInput = screen.getByPlaceholderText(
       'Re-Enter your Password'
     );
     const submitButton = screen.getByTestId('submit');
 
     await act(async () => {
-      fireEvent.change(emailInput, { target: { value: user.email } });
-      fireEvent.change(usernameInput, { target: { value: user.username } });
-      fireEvent.change(passwordInput, { target: { value: user.password } });
-      fireEvent.change(comfirmPasswordInput, {
-        target: { value: user.confirmPassword },
+      fireEvent.change(emailInput, {
+        target: {
+          value: user.email,
+        },
       });
-      fireEvent.select(male);
-      fireEvent.submit(submitButton);
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      fireEvent.change(usernameInput, {
+        target: {
+          value: user.username,
+        },
+      });
+      fireEvent.change(passwordInput, {
+        target: {
+          value: user.password,
+        },
+      });
+      fireEvent.change(confirmPasswordInput, {
+        target: {
+          value: user.confirmPassword,
+        },
+      });
+      // eslint-disable-next-line no-unused-expressions
+      fireEvent.change(genderSelect, {
+        target: {
+          value: 'Male',
+        },
+      });
+      fireEvent.click(submitButton);
     });
   });
 });

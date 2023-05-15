@@ -155,21 +155,22 @@ function Header() {
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
+
                   {user && user.role.toLowerCase() !== 'buyer' && (
-                    <span>
-                      <Link to="collection" data-testid="signup">
-                        Your Collection
-                      </Link>
-                    </span>
-                  )}
-                  {user && user.role.toLowerCase() !== 'buyer' && (
-                    <button
-                      type="button"
-                      className="btn1"
-                      onClick={() => navigate('/products/additem')}
-                    >
-                      Add product
-                    </button>
+                    <>
+                      <span>
+                        <Link to="collection" data-testid="signup">
+                          your collection
+                        </Link>
+                      </span>
+                      <button
+                        type="button"
+                        className="btn1"
+                        onClick={() => navigate('/products/additem')}
+                      >
+                        Add product
+                      </button>
+                    </>
                   )}
                 </section>
                 <section>

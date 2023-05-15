@@ -64,6 +64,7 @@ function Signup() {
 
           <Select
             name="gender"
+            data-testid="gender-select"
             placeholder="Gender"
             register={register('gender')}
           >

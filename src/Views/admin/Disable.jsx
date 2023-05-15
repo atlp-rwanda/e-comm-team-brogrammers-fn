@@ -6,36 +6,29 @@ import { confirmAlert } from 'react-confirm-alert';
 
 const handleDisable = (user) => {
   confirmAlert({
-    title: 'Confirm disable',
-    message: `Are you sure you want to disable ${user.username}?`,
+    title: 'Confirm Update',
+    message: `Are you sure you want to Update ${user.username}?`,
     buttons: [
       {
         label: 'Yes',
         onClick: async () => {
+          let updatingToastId;
           try {
             const token = localStorage.getItem('token');
             if (token) {
-              // Prompt the user to enter a reason for disabling the account
+              // Prompt the user to enter a reason for updating the account
               const reason = window.prompt(
-                'Please enter a reason for disabling this user:'
+                'Please enter a reason for updating this user:'
               );
               if (!reason) {
-                toast.error('You must provide a reason for disabling the user');
+                toast.error('You must provide a reason for updating the user');
                 return;
               }
 
-              // Show a toast message to indicate that the user is being disabled
-              const disablingToastId = toast.info('Disabling user...', {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: false,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+              // Show a toast message to indicate that the user is being updated
+              updatingToastId = toast.info('Updating user...', {});
 
-              await axios.patch(
+              const response = await axios.patch(
                 `${process.env.REACT_APP_SERVER_URL}/users/disable/${user.id}`,
                 { reason },
                 {
@@ -45,23 +38,16 @@ const handleDisable = (user) => {
                 }
               );
 
-              toast.dismiss(disablingToastId);
-              toast.success('User disabled successfully', {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+              toast.dismiss(updatingToastId);
+              toast.success(response.data.message);
 
               setTimeout(() => {
                 window.location.reload();
               }, 3000);
             }
           } catch (error) {
-            toast.error('Error disabling user');
+            toast.dismiss(updatingToastId);
+            toast.error(error.response.data.message);
           }
         },
       },
