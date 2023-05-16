@@ -25,6 +25,9 @@ import SellerCollection from './Views/SellerCollection';
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
 import ManageProducts from './Views/products/ManageProducts';
+import Settings from './components/Settings/Settings';
+import PaymentSuccessPage from './Views/payments/Success';
+import PaymentFailurePage from './Views/payments/Failure';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -64,6 +67,9 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/payment-success" element={<PaymentSuccessPage />} />
+          <Route path="/payment-failed" element={<PaymentFailurePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ToastContainer />

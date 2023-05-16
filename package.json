@@ -106,6 +106,7 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-named-exports-order": "^0.0.2",
     "coveralls": "^3.1.1",
+    "enzyme": "^3.11.0",
     "eslint": "^8.38.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
