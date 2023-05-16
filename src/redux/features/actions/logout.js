@@ -8,7 +8,7 @@ const LogoutThunk = createAsyncThunk('user/logout', async () => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    await localStorage.removeItem('token');
+    localStorage.removeItem('token');
     return res;
   } catch (error) {
     return { error };

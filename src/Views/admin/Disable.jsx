@@ -1,61 +1,84 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-alert */
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
+import { Form, Button } from 'react-bootstrap';
 
-const handleDisable = (user) => {
+const handleDisable = (user, setUsers) => {
   confirmAlert({
-    title: 'Confirm Update',
-    message: `Are you sure you want to Update ${user.username}?`,
-    buttons: [
-      {
-        label: 'Yes',
-        onClick: async () => {
-          let updatingToastId;
+    customUI: ({ onClose }) => {
+      let updatingToastId;
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        const token = localStorage.getItem('token');
+        if (token) {
+          const reason = event.target.reason.value;
+          if (!reason) {
+            toast.error('You must provide a reason for updating the user');
+            return;
+          }
+          onClose();
+
+          updatingToastId = toast.info('Updating user...', {});
+
           try {
-            const token = localStorage.getItem('token');
-            if (token) {
-              // Prompt the user to enter a reason for updating the account
-              const reason = window.prompt(
-                'Please enter a reason for updating this user:'
-              );
-              if (!reason) {
-                toast.error('You must provide a reason for updating the user');
-                return;
+            const response = await axios.patch(
+              `${process.env.REACT_APP_SERVER_URL}/users/disable/${user.id}`,
+              { reason },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
               }
+            );
 
-              // Show a toast message to indicate that the user is being updated
-              updatingToastId = toast.info('Updating user...', {});
+            toast.dismiss(updatingToastId);
+            toast.success(response.data.message);
 
-              const response = await axios.patch(
-                `${process.env.REACT_APP_SERVER_URL}/users/disable/${user.id}`,
-                { reason },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
+            setUsers((prevState) => {
+              const updatedUsers = prevState.data.map((u) => {
+                if (u.id === user.id) {
+                  return {
+                    ...u,
+                    disabledUser: !u.disabledUser,
+                  };
                 }
-              );
-
-              toast.dismiss(updatingToastId);
-              toast.success(response.data.message);
-
-              setTimeout(() => {
-                window.location.reload();
-              }, 3000);
-            }
+                return u;
+              });
+              return {
+                data: updatedUsers,
+              };
+            });
           } catch (error) {
             toast.dismiss(updatingToastId);
             toast.error(error.response.data.message);
           }
-        },
-      },
-      {
-        label: 'No',
-        onClick: () => {},
-      },
-    ],
+        }
+      };
+
+      return (
+        <div className="custom-ui">
+          <h3>Confirm Update</h3>
+          <p>{` You are about to update ${user.username}`}</p>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="reason">
+              <Form.Label>Please Provide Reason for updating:</Form.Label>
+              <Form.Control type="text" placeholder="Enter reason" required />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              style={{ margin: '10px', background: '#d80' }}
+            >
+              Submit
+            </Button>
+            <Button variant="secondary" onClick={onClose}>
+              Cancel
+            </Button>
+          </Form>
+        </div>
+      );
+    },
   });
 };
 

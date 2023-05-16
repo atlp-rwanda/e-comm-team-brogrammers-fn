@@ -18,7 +18,6 @@ const CreateUserForm = () => {
     e.preventDefault();
     const isValid = validateInput();
     if (!isValid) return;
-
     try {
       const token = localStorage.getItem('token');
       toast.info('Creating user...', {
@@ -45,7 +44,15 @@ const CreateUserForm = () => {
         onClose: () => window.location.reload(),
       });
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred while creating the user.');
+      }
     }
   };
 
@@ -113,7 +120,11 @@ const CreateUserForm = () => {
             {showPassword ? (
               <FaEyeSlash className="eye-icon" onClick={toggleShowPassword} />
             ) : (
-              <FaEye className="eye-icon" onClick={toggleShowPassword} />
+              <FaEye
+                className="eye-icon"
+                data-testid="eye-icon"
+                onClick={toggleShowPassword}
+              />
             )}
           </div>
         </div>

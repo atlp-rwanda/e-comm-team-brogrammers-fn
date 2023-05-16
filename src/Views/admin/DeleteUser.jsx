@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 
-const handleDelete = async (user) => {
+const handleDelete = (user, setUsers) => {
   confirmAlert({
     title: 'Confirm deletion',
     message: `Are you sure you want to delete ${user.username}?`,
@@ -45,9 +45,10 @@ const handleDelete = async (user) => {
                 progress: undefined,
               });
 
-              setTimeout(() => {
-                window.location.reload();
-              }, 3000);
+              setUsers((prevUsers) => ({
+                ...prevUsers,
+                data: prevUsers.data.filter((u) => u.id !== user.id),
+              }));
             }
           } catch (error) {
             toast.error('Error deleting user');

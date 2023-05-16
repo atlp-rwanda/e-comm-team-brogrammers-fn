@@ -1,5 +1,4 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -52,7 +51,6 @@ function AdminDashboard() {
     }
   }, []);
 
-  // eslint-disable-next-line no-unused-vars
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -64,16 +62,19 @@ function AdminDashboard() {
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
+
   const handleEditUser = (user) => {
     setEditingUser(user);
   };
 
   const handleDeleteUser = (user) => {
-    deleteUser(user);
+    deleteUser(user, setUsers);
   };
+
   const handleDisableUser = (user) => {
-    disableUser(user);
+    disableUser(user, setUsers);
   };
+
   const handleAddUserClick = () => {
     setShowCreateUserForm(true);
   };
@@ -81,6 +82,7 @@ function AdminDashboard() {
   const handleCloseForm = () => {
     setShowCreateUserForm(false);
   };
+
   return (
     <div className="containerx">
       <div className="sidebar">
@@ -153,68 +155,71 @@ function AdminDashboard() {
         </div>
         {showCreateUserForm && <CreateUserForm onClose={handleCloseForm} />}
         {error && <div className="error">{error}</div>}
-        {showCreateUserForm ? null : editingUser ? (
-          <EditUserForm user={editingUser} />
-        ) : (
-          <div className="table-wrapper">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Gender</th>
-                  <th>Role</th>
-                  <th>Verified</th>
-                  <th>Disabled</th>
-                  <th className="action">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentRows.map((user) => (
-                  <tr key={user.id}>
-                    <td data-label="Username">{user.username}</td>
-                    <td data-label="Email">{user.email}</td>
-                    <td data-label="Gender">{user.gender}</td>
-                    <td data-label="Role">{user.role}</td>
-                    <td
-                      data-label="Verified"
-                      style={{ color: user.verified ? 'green' : 'red' }}
-                    >
-                      {user.verified ? 'True' : 'False'}
-                    </td>
-                    <td
-                      data-label="Disabled"
-                      style={{ color: user.disabledUser ? 'red' : 'green' }}
-                    >
-                      {user.disabledUser ? 'True' : 'False'}
-                    </td>
-                    <td data-label="Action" className="action">
-                      <button onClick={() => handleEditUser(user)}>Edit</button>
-                      <button
-                        className="delete"
-                        onClick={() => handleDeleteUser(user)}
-                        data-testid="delete-button"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="Disable"
-                        onClick={() => handleDisableUser(user)}
-                      >
-                        {user.disabledUser ? 'Enable' : 'Disable'}
-                      </button>
-                    </td>
+        {!showCreateUserForm &&
+          (editingUser ? (
+            <EditUserForm user={editingUser} />
+          ) : (
+            <div className="table-wrapper">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th>Verified</th>
+                    <th>Disabled</th>
+                    <th className="action">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <Pagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalPages={Math.ceil(users.data.length / rowsPerPage)}
-            />
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {currentRows.map((user) => (
+                    <tr key={user.id}>
+                      <td data-label="Username">{user.username}</td>
+                      <td data-label="Email">{user.email}</td>
+                      <td data-label="Gender">{user.gender}</td>
+                      <td data-label="Role">{user.role}</td>
+                      <td
+                        data-label="Verified"
+                        style={{ color: user.verified ? 'green' : 'red' }}
+                      >
+                        {user.verified ? 'True' : 'False'}
+                      </td>
+                      <td
+                        data-label="Disabled"
+                        style={{ color: user.disabledUser ? 'red' : 'green' }}
+                      >
+                        {user.disabledUser ? 'True' : 'False'}
+                      </td>
+                      <td data-label="Action" className="action">
+                        <button onClick={() => handleEditUser(user)}>
+                          Edit
+                        </button>
+                        <button
+                          className="delete"
+                          onClick={() => handleDeleteUser(user)}
+                          data-testid="delete-button"
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="Disable"
+                          onClick={() => handleDisableUser(user)}
+                        >
+                          {user.disabledUser ? 'Enable' : 'Disable'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPages={Math.ceil(users.data.length / rowsPerPage)}
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
