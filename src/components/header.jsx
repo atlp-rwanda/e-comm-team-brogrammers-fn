@@ -160,9 +160,10 @@ function Header() {
                     <>
                       <span>
                         <Link to="collection" data-testid="signup">
-                          your collection
+                          Your collection
                         </Link>
                       </span>
+                      <NavLink to="/settings">Settings </NavLink>
                       <button
                         type="button"
                         className="btn1"
@@ -172,7 +173,6 @@ function Header() {
                       </button>
                     </>
                   )}
-                  <NavLink to="/settings">Settings </NavLink>
                 </section>
                 <section>
                   <span

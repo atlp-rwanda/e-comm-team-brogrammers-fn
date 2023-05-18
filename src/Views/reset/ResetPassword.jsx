@@ -104,7 +104,7 @@ function ResetPassword() {
         );
         if (response.status === 200) {
           toast.success('Please check your email to Reset your Password.', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 5000,
             hideProgressBar: true,
             closeOnClick: true,
@@ -116,7 +116,7 @@ function ResetPassword() {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           toast.error('Email not found in the database.', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 5000,
             hideProgressBar: true,
             closeOnClick: true,
@@ -172,7 +172,7 @@ function ResetPassword() {
           disabled={isLoading}
           className={`btn1 ${isLoading ? 'button-loading' : ''}`}
         >
-          {isLoading ? '' : 'Reset Password'}
+          {isLoading ? 'Loading...' : 'Reset Password'}
         </button>
         <p>
           Back to <Link to="/login">Login</Link>

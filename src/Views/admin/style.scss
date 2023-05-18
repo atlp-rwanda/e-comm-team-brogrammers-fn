@@ -430,7 +430,8 @@
   padding: 20px;
   max-width: 500px;
   text-align: center;
-  border: 1px solid #fff;
+  border: 1px solid #636060;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .react-confirm-alert > h1 {
@@ -539,6 +540,43 @@
   @media only screen and (max-width: 768px) {
     form {
       width: 100%;
+    }
+  }
+}
+
+.custom-ui {
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  form {
+    label {
+      font-weight: bold;
+    }
+
+    input[type='text'] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      margin: 10px;
+      background: #ff9900;
+      border: none;
+      &:hover {
+        background-color: #d90;
+      }
+    }
+
+    .btn-secondary {
+      border: none;
+      background: #888;
     }
   }
 }
