@@ -1,4 +1,5 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +8,6 @@ import SearchTop from './searchTop';
 import StarRating from './starrating';
 import ReviewDistribution from './reviewDistribution';
 import reviewthunk from '../redux/features/actions/productReview';
-import StarRating2 from './starRate2';
 import ReviewDialog from './reviewDialog';
 import ReviewButton from './reviewButton';
 
@@ -84,7 +84,7 @@ function OneProduct() {
           </div>
 
           <div className="reviews">
-            {loading === 'loading' ? (
+            {!product?.reviews ? (
               <span className="loader-2" />
             ) : (
               <>
@@ -96,11 +96,11 @@ function OneProduct() {
                       {!product?.reviews ? (
                         <b>{0}</b>
                       ) : (
-                        <b>{roundOff(review.totalRates.AvRate, 1)}</b>
+                        <b>{roundOff(review.totalRates?.AvRate, 1) || 0}</b>
                       )}
                     </p>
                     <StarRating
-                      rate={roundOff(review.totalRates.AvRate, 1) || 0}
+                      rate={roundOff(review.totalRates?.AvRate, 1) || 0}
                     />
                     <p className="likers">{product?.reviews?.length}</p>{' '}
                   </div>
@@ -112,7 +112,6 @@ function OneProduct() {
                   <div className="reviewThis">
                     <p className="review1">Rate This Product</p>
                     <p className="review2">Tell us what you think</p>
-                    <StarRating2 />
                     <div className="submit-review">
                       <ReviewDialog product={product} />
                     </div>
@@ -131,15 +130,14 @@ function OneProduct() {
                           </div>
                         </div>
                         <div className="ratediv">
-                          <div className="rate-div">
-                            {' '}
-                            <p className="rate">{reviewer.rating}</p>
-                          </div>
                           <div>
                             {' '}
                             <StarRating rate={reviewer.rating} />
                           </div>
-
+                          <div className="rate-div">
+                            {' '}
+                            <p className="rate">{reviewer.rating}</p>
+                          </div>
                           <div className="date-div">
                             {' '}
                             <p className="date">
@@ -159,16 +157,24 @@ function OneProduct() {
                         )}
                       </div>
                     ))}
-                  <div className="next-btn">
-                    <p
-                      type="button"
-                      aria-hidden
-                      className="next"
-                      onClick={handleNextPage}
-                    >
-                      More Reviews
-                    </p>
-                  </div>
+                  {loading === 'loading' ? (
+                    <p className="next-btn">Loading ...</p>
+                  ) : (
+                    <div className="next-btn">
+                      <p
+                        type="button"
+                        aria-hidden
+                        className="next"
+                        onClick={handleNextPage}
+                      >
+                        {review.allReviews.results.length <= 4 ? (
+                          <p>{}</p>
+                        ) : (
+                          'More Reviews'
+                        )}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </>
             )}

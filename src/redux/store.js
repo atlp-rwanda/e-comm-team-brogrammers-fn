@@ -9,6 +9,7 @@ import productSlice from './features/slices/products';
 import categoriesReducer from './features/slices/categories';
 import addItemReducer from './features/slices/additem';
 import searchReducer from './features/slices/searchslice';
+import productReducer from './features/slices/productslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
 import addReviewSlice from './features/slices/addReview';
@@ -17,6 +18,10 @@ import deleteReviewSlice from './features/slices/deleteReview';
 import deleteItemSlice from './features/slices/deleteItem';
 import availablitySlice from './features/slices/changeAvailability';
 import editReviewSlice from './features/slices/editReview';
+import ClearCartReducer from './features/slices/clearCart';
+import cartReducer from './features/slices/cart';
+import addToCartReducer from './features/slices/addToCartReducer';
+import removeToCartReducer from './features/slices/removeToCart';
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -38,5 +43,10 @@ export const store = configureStore({
     deleteReview: deleteReviewSlice,
     deleteItem: deleteItemSlice.reducer,
     availablity: availablitySlice.reducer,
+    product: productReducer,
+    cart: cartReducer,
+    addToCart: addToCartReducer,
+    clearCart: ClearCartReducer,
+    removeToCart: removeToCartReducer,
   },
 });

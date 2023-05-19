@@ -1,8 +1,16 @@
-import React from 'react';
+/* eslint-disable eqeqeq */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CartThunk from '../redux/features/actions/cart';
 
-function CartIcon() {
+function HeaderCart() {
+  const { status } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(CartThunk());
+  }, [dispatch]);
   return (
-    <div className="header-cart">
+    <div className="header-cart" data-testid="cart-icon">
       <svg
         width="57"
         height="57"
@@ -22,9 +30,15 @@ function CartIcon() {
           </clipPath>
         </defs>
       </svg>
-      <div className="number">3</div>
+      {status ? (
+        <div className="number" data-testid="cart-status">
+          {status}
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
 
-export default CartIcon;
+export default HeaderCart;

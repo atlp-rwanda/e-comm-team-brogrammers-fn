@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import googleLogo from '../images/google-logo.png';

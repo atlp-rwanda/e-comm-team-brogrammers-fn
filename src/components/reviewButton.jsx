@@ -16,10 +16,11 @@ function ReviewButton({ reviewer }) {
   return (
     <>
       {isLoading === true ? (
-        <i className="fa fa-spinner fa-spin spinnerDiv" />
+        <i className="fa fa-spinner fa-spin spinnerDiv" data-testid="spinner" />
       ) : (
         <i
           className="fa-solid fa-trash delete-icon"
+          data-testid="delete"
           aria-hidden="true"
           onClick={() => handleDelete(reviewer.id)}
         />

@@ -5,7 +5,12 @@ import deleteReviewThunk from '../actions/deleteReview';
 import editReviewThunk from '../actions/editReview';
 
 const initialState = {
-  review: [], // Initialize as an empty array
+  review: {
+    allReviews: {
+      results: [], // Initialize as an empty array
+    },
+    totalRates: undefined,
+  },
   status: 'idle',
   error: null,
 };
@@ -19,7 +24,11 @@ const reviewSlice = createSlice({
     builder
       .addCase(reviewthunk.fulfilled, (state, { payload }) => {
         state.status = 'succeeded';
-        state.review = payload;
+        state.review.allReviews.results = [
+          ...state.review.allReviews.results,
+          ...payload.allReviews.results,
+        ];
+        state.review.totalRates = payload.totalRates;
       })
       .addCase(addReviewThunk.fulfilled, (state, { payload }) => {
         state.status = 'succeeded';
@@ -28,15 +37,14 @@ const reviewSlice = createSlice({
           ...state.review.allReviews.results,
         ];
         state.review.totalRates = payload.totalRates;
-        // Add the new review to the existing array
       })
       .addCase(deleteReviewThunk.fulfilled, (state, { payload }) => {
         if (!payload.error) {
           state.review.allReviews.results =
             state.review.allReviews.results.filter(
-              (item) => item.id !== payload.review.id,
-              (state.review.totalRates = payload.totalRates)
+              (item) => item.id !== payload.review.id
             );
+          state.review.totalRates = payload.totalRates;
         }
       })
       .addCase(editReviewThunk.fulfilled, (state, { payload }) => {
@@ -51,17 +59,15 @@ const reviewSlice = createSlice({
               rating: payload.rating,
             };
           }
-
           state.review.totalRates = payload.totalRates;
         }
       })
-
       .addCase(reviewthunk.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(reviewthunk.rejected, (state, { payload }) => {
         state.status = 'failed';
-        state.error = payload.payload;
+        state.error = payload;
       });
   },
 });

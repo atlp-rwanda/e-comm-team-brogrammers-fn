@@ -35,6 +35,7 @@ function ProgressBar({ review, status }) {
             <div className="progress-bar">
               <div
                 className="progress-bar-fill"
+                data-testid="progress-bar-5"
                 style={{ width: `${fiveStarPercentage}%` }}
               />
             </div>
@@ -48,6 +49,7 @@ function ProgressBar({ review, status }) {
             <div className="progress-bar">
               <div
                 className="progress-bar-fill"
+                data-testid="progress-bar-4"
                 style={{ width: `${fourStarPercentage}%` }}
               />
             </div>
@@ -60,6 +62,7 @@ function ProgressBar({ review, status }) {
             <div className="progress-bar">
               <div
                 className="progress-bar-fill"
+                data-testid="progress-bar-3"
                 style={{ width: `${threeStarPercentage}%` }}
               />
             </div>
@@ -72,6 +75,7 @@ function ProgressBar({ review, status }) {
             <div className="progress-bar">
               <div
                 className="progress-bar-fill"
+                data-testid="progress-bar-2"
                 style={{ width: `${twoStarPercentage}%` }}
               />
             </div>
@@ -84,6 +88,7 @@ function ProgressBar({ review, status }) {
             <div className="progress-bar">
               <div
                 className="progress-bar-fill"
+                data-testid="progress-bar-1"
                 style={{ width: `${oneStarPercentage}%` }}
               />
             </div>

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,16 +5,20 @@ import { useForm } from 'react-hook-form';
 import Input from './input';
 import Select from './select';
 import ReviewSchema from '../validations/addReview';
-
 import addReviewThunk from '../redux/features/actions/giveReview';
 import { showErrorMessage, showSuccessMessage } from '../utils/toast';
 
 function ReviewDialog({ product }) {
   const { user } = useSelector((state) => state.user);
-
   const dialog = useRef();
   const dispatch = useDispatch();
-
+  const closeModel = () => {
+    if (typeof dialog.current.close === 'function') dialog.current.close();
+  };
+  const openModel = () => {
+    if (typeof dialog.current.showModal === 'function')
+      dialog.current.showModal();
+  };
   const close = (e) => {
     const dialogDimensions = dialog.current?.getBoundingClientRect();
     if (
@@ -24,11 +27,10 @@ function ReviewDialog({ product }) {
       e.clientY < dialogDimensions.top ||
       e.clientY > dialogDimensions.bottom
     ) {
-      dialog.current.close();
+      closeModel();
     }
   };
   const { status } = useSelector((state) => state.addReview);
-
   const {
     register,
     handleSubmit,
@@ -37,7 +39,6 @@ function ReviewDialog({ product }) {
   } = useForm({
     resolver: yupResolver(ReviewSchema),
   });
-
   const submit = async (data) => {
     const { feedback, rating } = data;
     const { id } = product;
@@ -45,21 +46,18 @@ function ReviewDialog({ product }) {
       showErrorMessage("You can't review yourself.");
       return;
     }
-
     dispatch(addReviewThunk({ productId: id, feedback, rating }));
-    dialog.current.close();
+    closeModel();
     reset();
     showSuccessMessage('Review submitted');
     // Close the dialog
   };
-
   useEffect(() => {
     dialog.current?.addEventListener('click', close);
     return () => {
       dialog.current?.removeEventListener('click', close);
     };
   }, [dialog, dialog.current]);
-
   return (
     <>
       <dialog ref={dialog} className="add-cart-dialog" data-testid="dialog">
@@ -109,11 +107,10 @@ function ReviewDialog({ product }) {
           </form>
         </div>
       </dialog>
-      <button type="button" onClick={() => dialog.current.showModal()}>
+      <button type="button" onClick={() => openModel()}>
         Submit Review
       </button>
     </>
   );
 }
-
 export default ReviewDialog;

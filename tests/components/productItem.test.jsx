@@ -2,7 +2,9 @@ import React from 'react';
 import { describe, test } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
+import { store } from '../../src/redux/store';
 import ProductItem from '../../src/components/productitem';
 
 const product = {
@@ -31,9 +33,11 @@ const product = {
 describe('testing rendering product', () => {
   test('rendering product Item', () => {
     render(
-      <BrowserRouter basename="/">
-        <ProductItem product={product} />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <ProductItem product={product} />
+        </BrowserRouter>
+      </Provider>
     );
 
     const item = screen.getByTestId('product-item');
