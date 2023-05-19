@@ -60,7 +60,7 @@ function AddItem() {
         icon: 'warning',
         iconHtml: `<img src="${item.images[0]}" />`,
         confirmButtonText: 'view product',
-      }).then(() => navigate('/'));
+      }).then(() => navigate(`/oneProduct/${item.id}`));
     }
   }, [item, itemLoading, error]);
 
@@ -151,20 +151,21 @@ function AddItem() {
               <Input
                 type="number"
                 placeholder="Quantity in store"
-                register={{ ...register('price') }}
-                errors={errors?.price?.message}
+                register={{ ...register('quantity') }}
+                errors={errors?.quantity?.message}
               />
               <Input
                 type="number"
                 placeholder="Price in USD"
-                register={{ ...register('quantity') }}
-                errors={errors?.quantity?.message}
+                register={{ ...register('price') }}
+                errors={errors?.price?.message}
               />
               <Input
                 type="date"
                 placeholder="Expired date"
                 register={{ ...register('expdate') }}
                 errors={errors?.expdate?.message}
+                label="Expired date"
               />
               <button type="submit" className="btn1" disabled={itemLoading}>
                 {!itemLoading ? (

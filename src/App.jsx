@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import './App.scss';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,8 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import UserThunk from './redux/features/actions/user';
-
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Home from './Views/Home/Home';
 import Login from './Views/Login';
 import Signup from './Views/Signup';
@@ -30,6 +29,7 @@ import ManageProducts from './Views/products/ManageProducts';
 import Settings from './components/Settings/Settings';
 import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
+import Cart from './Views/Cart';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -44,9 +44,9 @@ function App() {
   return (
     <>
       <Header />
+      <ToastContainer />
+      <Toaster position="bottom-left" />
       <main>
-        <ToastContainer />
-        <Toaster position="bottom-left" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
@@ -61,6 +61,7 @@ function App() {
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
+            <Route path="/cart" element={<Cart />} />
           </Route>
           <Route
             path="/collection/manageProducts"
@@ -75,7 +76,6 @@ function App() {
           <Route path="/payment-failed" element={<PaymentFailurePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <ToastContainer />
       </main>
       <Footer />
     </>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import Input from '../../components/input';
+import { showErrorMessage, showSuccessMessage } from '../../utils/toast';
 
 const isValidEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -103,26 +103,12 @@ function ResetPassword() {
           }
         );
         if (response.status === 200) {
-          toast.success('Please check your email to Reset your Password.', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          showSuccessMessage('Please check your email to Reset your Password.');
           clearForm();
         }
       } catch (error) {
         if (error.response && error.response.status === 404) {
-          toast.error('Email not found in the database.', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          showErrorMessage('Email not found in the database.');
           clearForm();
         }
       } finally {

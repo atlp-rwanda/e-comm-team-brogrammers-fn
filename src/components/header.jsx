@@ -116,20 +116,10 @@ function Header() {
           <span className="sec-color">B</span>-Mall
         </span>
       </h2>
-      <div className="header">
-        <nav className="menu">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/products">Shop</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
       <nav>
-        <CartIcon />
+        <Link to="/cart">
+          <CartIcon />
+        </Link>
         {!loading && user ? (
           <div className="user" ref={userDropContainer}>
             <div className="profile" aria-hidden="true" data-testid="profile">
@@ -149,32 +139,29 @@ function Header() {
                 </section>
                 <section>
                   <span>View Shop</span>
-                  <span>Cart</span>
+                  <Link to="/cart">Cart</Link>
                   <span>Edit Profile</span>
                   <Link to="/change-password">change password</Link>
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
-
+                  <span>
+                    <Link to="collection" data-testid="signup">
+                      your collection
+                    </Link>
+                  </span>
                   {user && user.role.toLowerCase() !== 'buyer' && (
-                    <>
-                      <span>
-                        <Link to="collection" data-testid="signup">
-                          your collection
-                        </Link>
-                      </span>
-                      <button
-                        type="button"
-                        className="btn1"
-                        onClick={() => navigate('/products/additem')}
-                      >
-                        Add product
-                      </button>
-                    </>
+                    <button
+                      type="button"
+                      className="btn1"
+                      onClick={() => navigate('/products/additem')}
+                    >
+                      Add product
+                    </button>
                   )}
-                  <NavLink to="/settings">Settings </NavLink>
                 </section>
                 <section>
+                  <NavLink to="/settings">Settings </NavLink>
                   <span
                     className="pointer"
                     data-testid="logout"
