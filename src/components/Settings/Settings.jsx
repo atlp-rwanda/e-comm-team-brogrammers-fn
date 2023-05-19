@@ -1,9 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
-
-import './settings.scss';
-// import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
+import './settings.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import UserThunk from '../../redux/features/actions/user';
 import axios from '../../redux/configs/axios';
 
@@ -34,7 +33,6 @@ function Settings() {
   }, [user]);
 
   const handleToggleMfa = () => {
-    // This will handle both disabling or enabling MFA
     const action = isMfaEnabled ? 'disable' : 'enable';
 
     const onSuccess = () => {
@@ -61,7 +59,6 @@ function Settings() {
     });
   };
 
-  // User or login still loading.
   const isStillLoading = !token || loadingUser || loadingToken;
 
   return (

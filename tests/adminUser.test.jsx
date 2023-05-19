@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-filename-extension */
 import { expect, describe, beforeEach, afterEach, it } from '@jest/globals';
 import React from 'react';
