@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
 function Input({
@@ -9,6 +10,7 @@ function Input({
   register = null,
   name = '',
   errors,
+  label,
   required,
 }) {
   const [inputType, setInputType] = useState(type);
@@ -22,7 +24,8 @@ function Input({
     setInputType('password');
   };
   return (
-    <div className="input">
+    <label className="input">
+      {label && <span className="label">{label}</span>}
       <div className={`input-1 ${className}`}>
         <input
           type={inputType}
@@ -66,7 +69,7 @@ function Input({
           </p>
         </>
       )}
-    </div>
+    </label>
   );
 }
 
