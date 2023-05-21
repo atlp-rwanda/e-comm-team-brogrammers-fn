@@ -30,7 +30,7 @@ import Settings from './components/Settings/Settings';
 import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
-import UserProfile from './Views/UserProfile';
+import UserProfile from './Views/UserProfile/UserProfile';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);

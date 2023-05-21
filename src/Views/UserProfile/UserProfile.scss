@@ -1,0 +1,140 @@
+$back-color: #fff;
+$main-color: #111;
+$sec-color: #f90;
+$gray-color: #888;
+$light-gray-color: #ddd;
+$error-color: #ff003d;
+$fr-vw: calc(100vw / 12);
+
+.edit-profile-page {
+  max-width: 600px;
+  padding: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .profile-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 0.25rem;
+
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    }
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: $sec-color;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($sec-color, $amount: 10);
+    }
+  }
+
+  .image-upload {
+    margin-top: 20px;
+
+    .upload-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #888;
+      gap: 1rem;
+      margin-top: 10px;
+      background-color: rgba($gray-color, $alpha: 0.1);
+      border-radius: 5px;
+      padding: 0.25rem;
+
+      .profile-small-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+      }
+
+      .upload-icon {
+        margin-right: 5px;
+      }
+    }
+
+    input[type='file'] {
+      display: none;
+    }
+  }
+
+  .links {
+    margin-top: 20px;
+
+    a {
+      display: block;
+      color: #888;
+      margin-bottom: 5px;
+      text-decoration: none;
+
+      &:hover {
+        color: #111;
+      }
+    }
+  }
+}
+
+.profile-component {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: $back-color;
+
+    .cover-image {
+      width: 100%;
+      height: 200px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .avatar {
+      margin-top: -75px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid $back-color;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .username {
+      margin-top: 20px;
+      font-size: 24px;
+      color: $main-color;
+    }
+  }
+}

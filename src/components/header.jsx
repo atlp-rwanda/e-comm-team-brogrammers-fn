@@ -140,7 +140,7 @@ function Header() {
                 <section>
                   <span>View Shop</span>
                   <Link to="/cart">Cart</Link>
-                  <span>Edit Profile</span>
+                  <Link to="/userprofile">Edit Profile</Link>
                   <Link to="/change-password">change password</Link>
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
