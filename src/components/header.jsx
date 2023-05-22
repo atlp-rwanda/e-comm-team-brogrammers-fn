@@ -6,6 +6,7 @@ import logo from '../images/logo.png';
 import UserThunk from '../redux/features/actions/user';
 import LogoutThunk from '../redux/features/actions/logout';
 import CartIcon from './headercart';
+import NotificationPane from './NotificationPane/NotificationPane';
 
 function Header() {
   const navigate = useNavigate();
@@ -116,7 +117,20 @@ function Header() {
           <span className="sec-color">B</span>-Mall
         </span>
       </h2>
-      <nav>
+      <div className="header">
+        <nav className="menu">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Shop</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <nav className="menu">
+        <NotificationPane />
         <Link to="/cart">
           <CartIcon />
         </Link>

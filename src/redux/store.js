@@ -12,6 +12,8 @@ import searchReducer from './features/slices/searchslice';
 import productReducer from './features/slices/productslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
+import notificationSlice from './features/slices/notifications';
+
 import reviewSlice from './features/slices/productReview';
 import deleteItemSlice from './features/slices/deleteItem';
 import availablitySlice from './features/slices/changeAvailability';
@@ -29,6 +31,7 @@ export const store = configureStore({
     logout: logoutReducer,
     password: passwordReducer,
     products: productSlice.reducer,
+    notifications: notificationSlice.reducer,
     categories: categoriesReducer,
     addedItem: addItemReducer,
     collection: collectionSlice.reducer,

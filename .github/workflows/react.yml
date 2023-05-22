@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env: 
-  REACT_APP_SERVER_URL: https://brogrammers-ecomerce1.onrender.com
+  REACT_APP_SERVER_URL: https://brogrammers4.onrender.com
 
 jobs:
   build-and-deploy-preview:
