@@ -1,7 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import ClearCartThunk from '../redux/features/actions/clearCart';
 import { showErrorMessage, showSuccessMessage } from '../utils/toast';
 
@@ -16,15 +14,14 @@ function Trash() {
     }
   };
   return (
-    <span>
-      <FontAwesomeIcon
-        icon={faTrash}
-        size="sm"
-        className="text-danger pointer er"
-        onClick={() => RemoveAll()}
-        data-testid="remove-all"
-      />
-    </span>
+    <button
+      className="btn1 inverse"
+      onClick={() => RemoveAll()}
+      data-testid="remove-all"
+      type="button"
+    >
+      Empty cart
+    </button>
   );
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { confirmAlert } from 'react-confirm-alert';
+import Swal from 'sweetalert2';
 import handleDelete from '../src/Views/admin/DeleteUser';
 
 jest.mock('axios');
@@ -15,8 +15,8 @@ jest.mock('react-toastify', () => ({
     },
   },
 }));
-jest.mock('react-confirm-alert', () => ({
-  confirmAlert: jest.fn(),
+jest.mock('sweetalert2', () => ({
+  fire: jest.fn(),
 }));
 
 describe('handleDelete', () => {
@@ -32,9 +32,8 @@ describe('handleDelete', () => {
   });
 
   it('should delete the user and show success message', async () => {
-    // Mock confirmAlert to invoke the "Yes" button onClick callback
-    const mockConfirmAlert = jest.fn(({ buttons }) => buttons[0].onClick());
-    confirmAlert.mockImplementation(mockConfirmAlert);
+    // Mock SweetAlert2 to resolve with the "Confirmed" result
+    Swal.fire.mockResolvedValueOnce({ isConfirmed: true });
 
     // Mock axios.delete to simulate successful deletion
     axios.delete.mockResolvedValueOnce();
@@ -44,19 +43,15 @@ describe('handleDelete', () => {
 
     // Assertions
     expect(localStorage.getItem).toHaveBeenCalledWith('token');
-    expect(mockConfirmAlert).toHaveBeenCalledWith({
+    expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Confirm deletion',
-      message: 'Are you sure you want to delete JohnDoe?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: expect.any(Function),
-        },
-        {
-          label: 'No',
-          onClick: expect.any(Function),
-        },
-      ],
+      text: 'Are you sure you want to delete JohnDoe?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ff9900',
+      cancelButtonColor: '#888',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
     });
     expect(axios.delete).toHaveBeenCalledWith(
       `${process.env.REACT_APP_SERVER_URL}/users/userId`,
@@ -90,9 +85,8 @@ describe('handleDelete', () => {
   });
 
   it('should handle an error while deleting the user', async () => {
-    // Mock confirmAlert to invoke the "Yes" button onClick callback
-    const mockConfirmAlert = jest.fn(({ buttons }) => buttons[0].onClick());
-    confirmAlert.mockImplementation(mockConfirmAlert);
+    // Mock SweetAlert2 to resolve with the "Confirmed" result
+    Swal.fire.mockResolvedValueOnce({ isConfirmed: true });
 
     // Mock axios.delete to simulate an error
     const mockError = new Error('Failed to delete user');
@@ -103,19 +97,15 @@ describe('handleDelete', () => {
 
     // Assertions
     expect(localStorage.getItem).toHaveBeenCalledWith('token');
-    expect(mockConfirmAlert).toHaveBeenCalledWith({
+    expect(Swal.fire).toHaveBeenCalledWith({
       title: 'Confirm deletion',
-      message: 'Are you sure you want to delete JohnDoe?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: expect.any(Function),
-        },
-        {
-          label: 'No',
-          onClick: expect.any(Function),
-        },
-      ],
+      text: 'Are you sure you want to delete JohnDoe?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ff9900',
+      cancelButtonColor: '#888',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
     });
     expect(axios.delete).toHaveBeenCalledWith(
       `${process.env.REACT_APP_SERVER_URL}/users/userId`,

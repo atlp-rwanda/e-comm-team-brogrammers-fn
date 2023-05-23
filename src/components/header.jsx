@@ -7,6 +7,7 @@ import UserThunk from '../redux/features/actions/user';
 import LogoutThunk from '../redux/features/actions/logout';
 import CartIcon from './headercart';
 import NotificationPane from './NotificationPane/NotificationPane';
+import ordersThunk from '../redux/features/actions/orders';
 
 function Header() {
   const navigate = useNavigate();
@@ -32,6 +33,13 @@ function Header() {
       setTimeout(() => dispatch(UserThunk()), 1000);
     }
   }, [token]);
+
+  const { allOrders, isLoading } = useSelector((state) => state.orders);
+
+  useEffect(() => {
+    if (!isLoading && (!allOrders?.results || allOrders?.results.length === 0))
+      dispatch(ordersThunk());
+  }, []);
 
   useEffect(() => {
     if (isLogout)
@@ -154,6 +162,7 @@ function Header() {
                 <section>
                   <span>View Shop</span>
                   <Link to="/cart">Cart</Link>
+                  {user && <Link to="/orders">My Orders</Link>}
                   <span>Edit Profile</span>
                   <Link to="/change-password">Change password</Link>
                   {user.role === 'admin' && (
