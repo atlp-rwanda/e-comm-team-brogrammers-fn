@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-promise-executor-return */
 import { act } from '@testing-library/react';
 import { test, describe, expect, beforeEach, afterEach } from '@jest/globals';

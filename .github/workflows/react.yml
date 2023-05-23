@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env: 
-  REACT_APP_SERVER_URL: https://brogrammers-ecomerce1.onrender.com
+  REACT_APP_SERVER_URL: https://brogrammers4.onrender.com
 
 jobs:
   build-and-deploy-preview:
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: npm i
       - run: npm test
       - run: npm run build
       - name: Deploy Preview
