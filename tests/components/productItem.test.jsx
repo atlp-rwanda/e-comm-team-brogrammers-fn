@@ -30,7 +30,8 @@ const product = {
     email: 'john@gmail.com',
   },
 };
-describe('testing rendering product', () => {
+
+describe('Testing rendering product', () => {
   test('rendering product Item', () => {
     render(
       <Provider store={store}>
@@ -42,7 +43,22 @@ describe('testing rendering product', () => {
 
     const item = screen.getByTestId('product-item');
     act(() => {
-      fireEvent.dblClick(item);
+      fireEvent.doubleClick(item);
+    });
+  });
+
+  test('rendering product Item with Redux store', () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <ProductItem product={product} />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    const item = screen.getByTestId('product-item');
+    act(() => {
+      fireEvent.doubleClick(item);
     });
   });
 });

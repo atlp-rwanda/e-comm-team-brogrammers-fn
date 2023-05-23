@@ -168,11 +168,14 @@ function Header() {
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
-                  <span>
-                    <Link to="collection" data-testid="signup">
-                      your collection
-                    </Link>
-                  </span>
+                  {user && user.role.toLowerCase() !== 'buyer' && (
+                    <span>
+                      <Link to="collection" data-testid="signup">
+                        your collection
+                      </Link>
+                    </span>
+                  )}
+                  <Link to="/wishlist">My Wishlist</Link>
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <button
                       type="button"

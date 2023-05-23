@@ -32,6 +32,7 @@ import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
 import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
+import ViewWishlist from './Views/ViewWishlist';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -87,6 +88,7 @@ function App() {
           </Route>
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/wishlist" element={<ViewWishlist />} />
         </Routes>
       </main>
       <Footer />
