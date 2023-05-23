@@ -94,9 +94,9 @@ describe('Cart', () => {
       </Provider>
     );
     await waitFor(() => {
-      expect(screen.getByTestId('remove-all')).toBeInTheDocument();
+      expect(screen.getAllByTestId('remove-all')[0]).toBeInTheDocument();
     });
-    const addButton = screen.getByTestId('remove-all');
+    const addButton = screen.getAllByTestId('remove-all')[0];
     act(() => {
       fireEvent.click(addButton);
     });

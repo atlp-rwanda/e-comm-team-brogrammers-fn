@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 :root {
   --back-color: #fff;
   --main-color: #111;
@@ -12,7 +12,9 @@
 
 $sec-color: #f90;
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -45,7 +47,7 @@ dialog {
 #root {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  min-height: 100dvh;
 
   > main {
     position: relative;
@@ -66,16 +68,21 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   flex-direction: column;
   gap: 1rem;
 }
 /*  styles on get all products*/
 
 .container {
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 1rem;
+}
+
+.Toastify {
+  height: 0;
+  position: absolute;
 }
 .Toastify {
   height: 0;

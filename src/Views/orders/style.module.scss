@@ -1,0 +1,95 @@
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  padding-block: 1rem;
+}
+
+.sum {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  .summary {
+    flex-grow: 1;
+    flex-basis: 45%;
+    min-width: min(30rem, 100%);
+    height: fit-content;
+    position: sticky;
+    top: 1rem;
+    z-index: 1;
+    background: var(--back-color);
+  }
+  .items {
+    flex-basis: 1fr;
+    flex-grow: 999999999;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    button {
+      flex-grow: 1;
+      flex-basis: fit-content;
+    }
+  }
+}
+
+.head {
+  margin-bottom: 1rem;
+
+  .dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+  }
+}
+
+.summary {
+  @include flex-column();
+  gap: 1rem;
+  padding: 1.5rem 2rem 2rem;
+  max-width: 100%;
+  box-shadow: 0 0 10px -7px #111;
+  border-radius: 0.5rem;
+
+  h2 {
+    font-size: 2em;
+    font-weight: 400;
+  }
+
+  h2,
+  h3 {
+    flex-basis: fit-content;
+    flex-grow: 9999999;
+  }
+
+  > div {
+    @include flex-column();
+    gap: 0.5rem;
+
+    h3 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.items {
+  @include flex-column();
+  gap: 0.5rem;
+
+  .list {
+    @include flex-column();
+    gap: 1rem;
+  }
+}

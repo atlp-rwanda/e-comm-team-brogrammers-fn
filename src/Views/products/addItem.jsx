@@ -162,10 +162,10 @@ function AddItem() {
               />
               <Input
                 type="date"
+                label="Expired date"
                 placeholder="Expired date"
                 register={{ ...register('expdate') }}
                 errors={errors?.expdate?.message}
-                label="Expired date"
               />
               <button type="submit" className="btn1" disabled={itemLoading}>
                 {!itemLoading ? (
