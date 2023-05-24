@@ -71,30 +71,15 @@ function PaginationButtons({ currentPage, setCurrentPage, totalPages }) {
 
   return (
     <div className="pages">
-      {currentPage > 1 ? (
-        <button
-          type="button"
-          className="b2"
-          onClick={handlePrevPage}
-          data-testid="prev-button"
-        >
-          {' '}
-          Previous
-        </button>
-      ) : (
-        <button
-          type="button"
-          className="b2"
-          style={{
-            color: 'grey',
-            cursor: 'not-allowed',
-            ':hover': { color: 'grey', cursor: 'not-allowed' },
-          }}
-        >
-          {' '}
-          Previous
-        </button>
-      )}
+      <button
+        type="button"
+        className="b2"
+        onClick={handlePrevPage}
+        disabled={currentPage <= 1}
+        data-testid="prev-button"
+      >
+        Previous
+      </button>
 
       {getPageNumbers({ pages: totalPages })}
 
@@ -102,6 +87,7 @@ function PaginationButtons({ currentPage, setCurrentPage, totalPages }) {
         type="button"
         className="b2"
         onClick={handleNextPage}
+        disabled={currentPage >= totalPages}
         data-testid="next-button"
       >
         Next

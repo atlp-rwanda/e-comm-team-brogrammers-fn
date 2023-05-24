@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.png';
+import Subscribe from './subscribeform';
 
 function Footer() {
   return (
@@ -10,7 +11,10 @@ function Footer() {
           <span className="sec-color">B</span>rogrammers Mall
         </span>
       </h2>
-      <div>Powered by Brogrammers © 2023</div>
+      <article>
+        <p>Powered by Brogrammers © 2023</p>
+        <Subscribe />
+      </article>
     </footer>
   );
 }

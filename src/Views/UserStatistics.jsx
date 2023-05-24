@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import BarChart from '../components/barGrath';
+import { Rwf } from '../helpers/currency';
 
 const server = process.env.REACT_APP_SERVER;
 // const token = process.env.REACT_APP_TOKEN;
@@ -102,11 +103,15 @@ function Statistics() {
             <h3>Overview</h3>
             <p>
               Total Sold Amount:{' '}
-              <b>${productsApidata && productsApidata.revenue.total}</b>
+              <b>
+                {productsApidata && Rwf.format(productsApidata?.revenue?.total)}
+              </b>
             </p>
             <p>
               Total Sold Amount:{' '}
-              <b>${productsApidata && productsApidata.revenue.items}</b>
+              <b>
+                {productsApidata && Rwf.format(productsApidata?.revenue?.items)}
+              </b>
             </p>
           </div>
           <ul className="top">
@@ -121,7 +126,7 @@ function Statistics() {
                     <div>
                       <h4>{p.name}</h4>
                       <span>
-                        Sold Amount: <b>${p.soldAmount}</b>
+                        Sold Amount: <b>{Rwf.format(p?.soldAmount)}</b>
                       </span>
                       <span>
                         Sold Items: <b>{p.soldQuantity}</b>

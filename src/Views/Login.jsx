@@ -26,7 +26,7 @@ function Login() {
         showErrorMessage('Your password has expired update it');
         setTimeout(() => navigate('/change-password'), 5000);
       } else {
-        setTimeout(() => navigate('/'), 5000);
+        setTimeout(() => navigate('/'), 500);
       }
     }
   }, [error, errorMessage, loading, token]);

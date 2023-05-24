@@ -1,33 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import CartIcon from './cartIcon';
 import { Rwf } from '../helpers/currency';
-import AddWishlistThunk from '../redux/features/actions/addWishlist';
-import { showErrorMessage, showSuccessMessage } from '../utils/toast';
+import WishlistIcon from './wishlistIcon';
 
 function ProductItem({ product }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const token = localStorage.getItem('token');
-  const isLoggedIn = Boolean(token);
-
-  const handleAddWishlist = async (id) => {
-    if (!isLoggedIn) {
-      showErrorMessage('Please login to add the product to your wishlist.');
-      return;
-    }
-
-    try {
-      const res = await dispatch(AddWishlistThunk(id)).unwrap();
-      showSuccessMessage(res.message);
-    } catch (err) {
-      showErrorMessage(
-        err?.data?.message || 'Oops! This product is already in your wishlist.'
-      );
-    }
-  };
 
   const handleImageDoubleClick = () => {
     navigate(`/oneProduct/${product.id}`);
@@ -37,6 +15,7 @@ function ProductItem({ product }) {
     <div className="productItem" data-testid="product-item" aria-hidden>
       <div
         className="image back-angular"
+        data-testid="image-holder"
         onDoubleClick={handleImageDoubleClick}
       >
         <img
@@ -56,24 +35,10 @@ function ProductItem({ product }) {
           <p>
             <b>{product && Rwf.format(product?.price)}</b>
           </p>
-          {isLoggedIn && (
-            <button type="button" onClick={() => handleAddWishlist(product.id)}>
-              <i className="fa-solid fa-heart" />
-            </button>
-          )}
-          {!isLoggedIn && (
-            <button
-              type="button"
-              onClick={() =>
-                showErrorMessage(
-                  'Please login to add the product to your wishlist.'
-                )
-              }
-            >
-              <i className="fa-solid fa-heart" />
-            </button>
-          )}
-          <CartIcon product={product} />
+          <div className="buttons">
+            <WishlistIcon product={product} />
+            <CartIcon product={product} />
+          </div>
         </div>
       </div>
     </div>

@@ -21,9 +21,10 @@ function Select({
           id={id}
           {...register}
           data-testid="select-element"
+          defaultValue={placeholder && ''}
         >
           {placeholder && (
-            <option value="" selected disabled className="placeholder">
+            <option value="" disabled className="placeholder">
               {placeholder}
             </option>
           )}

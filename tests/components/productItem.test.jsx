@@ -1,5 +1,5 @@
 import React from 'react';
-import { describe, test } from '@jest/globals';
+import { afterEach, beforeEach, describe, test } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -32,6 +32,13 @@ const product = {
 };
 
 describe('Testing rendering product', () => {
+  beforeEach(() => {
+    localStorage.setItem('token', 'damy_token_example');
+  });
+  afterEach(() => {
+    localStorage.removeItem('token');
+  });
+
   test('rendering product Item', () => {
     render(
       <Provider store={store}>
@@ -56,9 +63,9 @@ describe('Testing rendering product', () => {
       </Provider>
     );
 
-    const item = screen.getByTestId('product-item');
+    const itemImage = screen.getByTestId('image-holder');
     act(() => {
-      fireEvent.doubleClick(item);
+      fireEvent.doubleClick(itemImage);
     });
   });
 });
