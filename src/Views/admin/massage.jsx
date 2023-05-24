@@ -15,15 +15,10 @@ import {
   faHistory,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
-import EditUserForm from './EditUserForm';
-import deleteUser from './DeleteUser';
-import disableUser from './Disable';
 import Pagination from '../../components/paginationbuttons';
-import CreateUserForm from './CreateUser';
-import Links from './links';
 
-function AdminDashboard() {
-  const [users, setUsers] = useState({
+function Adminmessage() {
+  const [contacts, setcontacts] = useState({
     data: [],
   });
   const [error, setError] = useState('');
@@ -38,14 +33,14 @@ function AdminDashboard() {
     const token = localStorage.getItem('token');
     if (token) {
       axios
-        .get(`${process.env.REACT_APP_SERVER_URL}/users/all`, {
+        .get(`${process.env.REACT_APP_SERVER_URL}/contact`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
-          setUsers({
-            data: response.data.results,
+          setcontacts({
+            data: response.data.contacts,
           });
         })
         .catch((err) => {
@@ -60,24 +55,11 @@ function AdminDashboard() {
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = users.data.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = contacts.data.slice(indexOfFirstRow, indexOfLastRow);
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
-
-  const handleEditUser = (user) => {
-    setEditingUser(user);
-  };
-
-  const handleDeleteUser = (user) => {
-    deleteUser(user, setUsers);
-  };
-
-  const handleDisableUser = (user) => {
-    disableUser(user, setUsers);
-  };
-
   const handleAddUserClick = () => {
     setShowCreateUserForm(true);
   };
@@ -132,12 +114,11 @@ function AdminDashboard() {
           <li>
             <Link
               to="/admin/orders"
-              className={location.pathname === '/admin/orders' ? 'active' : ''}
+              className={location.pathname === '/admin/orders'}
             >
               <FontAwesomeIcon icon={faCalendarDays} /> Orders
             </Link>
           </li>
-
           <li>
             <Link
               to="/admin/message"
@@ -168,83 +149,49 @@ function AdminDashboard() {
       </div>
       <div className="content">
         <div className="upper">
-          {!showCreateUserForm && <h2>Users</h2>}
-          {!showCreateUserForm && (
-            <button onClick={handleAddUserClick} data-testid="add-user-button">
-              Add User
-            </button>
-          )}
+          <h2>messages</h2>
         </div>
-        {showCreateUserForm && <CreateUserForm onClose={handleCloseForm} />}
         {error && <div className="error">{error}</div>}
-        {!showCreateUserForm &&
-          (editingUser ? (
-            <EditUserForm user={editingUser} />
-          ) : (
-            <div className="table-wrapper">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Role</th>
-                    <th>Verified</th>
-                    <th>Disabled</th>
-                    <th className="action">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentRows.map((user) => (
-                    <tr key={user.id}>
-                      <td data-label="Username">{user.username}</td>
-                      <td data-label="Email">{user.email}</td>
-                      <td data-label="Gender">{user.gender}</td>
-                      <td data-label="Role">{user.role}</td>
-                      <td
-                        data-label="Verified"
-                        style={{ color: user.verified ? 'green' : 'red' }}
-                      >
-                        {user.verified ? 'True' : 'False'}
-                      </td>
-                      <td
-                        data-label="Disabled"
-                        style={{ color: user.disabledUser ? 'red' : 'green' }}
-                      >
-                        {user.disabledUser ? 'True' : 'False'}
-                      </td>
-                      <td data-label="Action" className="action">
-                        <button onClick={() => handleEditUser(user)}>
-                          Edit
-                        </button>
-                        <button
-                          className="delete"
-                          onClick={() => handleDeleteUser(user)}
-                          data-testid="delete-button"
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className="Disable"
-                          onClick={() => handleDisableUser(user)}
-                        >
-                          {user.disabledUser ? 'Enable' : 'Disable'}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPages={Math.ceil(users.data.length / rowsPerPage)}
-              />
-            </div>
-          ))}
+        <div className="table-wrapper">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>email</th>
+                <th>message</th>
+                <th className="action">Action</th>
+              </tr>
+            </thead>
+            {/* {console.log(orders)} */}
+            <tbody>
+              {currentRows.map((contact) => (
+                <tr key={contact.id}>
+                  <td data-label="User">{contact.username}</td>
+                  <td data-label="email">{contact.email}</td>
+                  <td data-label="message">{contact.message}</td>
+                  <td data-label="Action" className="action">
+                    <button onClick={() => contact}>reply</button>
+                    <button
+                      className="delete"
+                      onClick={() => contact}
+                      data-testid="delete-button"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={Math.ceil(contacts.data.length / rowsPerPage)}
+          />
+        </div>
       </div>
     </div>
   );
 }
 
-export default AdminDashboard;
+export default Adminmessage;

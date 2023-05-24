@@ -9,6 +9,7 @@ import Moment from 'react-moment';
 import './ChatIcon.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+// eslint-disable-next-line import/no-named-as-default
 import AddMessageThunk from '../redux/features/actions/addMessage';
 import { addMessage } from '../redux/features/slices/getMessage';
 import MessagesThunk from '../redux/features/actions/getMessage';

@@ -2623,3 +2623,48 @@ nav.filter-nav {
     border-radius: 0.5rem;
   }
 }
+
+.buttonCustomer {
+  width: 80%;
+  font-size: 1.5rem;
+  margin: 2rem 8rem auto;
+  display: inline-block;
+  border-radius: 0.6rem;
+  outline: none;
+  border: none;
+  color: #fff;
+  background-color: #f90;
+  padding: 1.2rem;
+}
+.feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 30px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.olivier {
+  width: 500px;
+  gap: 20px;
+}
+.feedback button {
+  width: 500px;
+  font-weight: bold;
+}
+.feedback__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.button-2 {
+  color: white;
+  background-color: #fa9c23;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}

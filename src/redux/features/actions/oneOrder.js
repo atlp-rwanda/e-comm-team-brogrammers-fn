@@ -33,6 +33,24 @@ export const updateSingleOrder = createAsyncThunk(
   }
 );
 
+export const updateSingleOrderStatus = createAsyncThunk(
+  'order/single/update/status',
+  // eslint-disable-next-line no-unused-vars, arrow-body-style
+  async ({ id, data }, { rejectWithValue, getState }) => {
+    // console.log(getState);
+    try {
+      const res = await axios.patch(`/order/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return res.data;
+    } catch (error) {
+      return rejectWithValue({ error });
+    }
+  }
+);
+
 export const createOrder = createAsyncThunk(
   'order/create',
   async ({ data }, { rejectWithValue }) => {
