@@ -7,7 +7,7 @@ on:
     branches: ['develop']
     types: [opened, synchronize, reopened]
 
-env: 
+env:
   REACT_APP_SERVER_URL: https://brogrammers4.onrender.com
 
 jobs:

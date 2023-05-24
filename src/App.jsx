@@ -30,9 +30,10 @@ import Settings from './components/Settings/Settings';
 import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
+import UserProfile from './Views/UserProfile/UserProfile';
 import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
-import UserProfile from './Views/UserProfile';
+import ViewWishlist from './Views/ViewWishlist';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -88,7 +89,7 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
-
+          <Route path="/wishlist" element={<ViewWishlist />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

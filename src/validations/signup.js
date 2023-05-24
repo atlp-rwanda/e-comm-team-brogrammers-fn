@@ -6,7 +6,7 @@ const signupSchema = yup.object().shape({
     .required('Email is required')
     .email('Email must be valid')
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Email must be valid'),
-  username: yup.string().required('Password is required'),
+  username: yup.string().required('Username is required'),
   password: yup
     .string()
     .required('Password is required')
