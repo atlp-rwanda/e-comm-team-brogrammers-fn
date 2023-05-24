@@ -31,6 +31,9 @@ import PaymentSuccessPage from './Views/payments/Success';
 import PaymentFailurePage from './Views/payments/Failure';
 import Cart from './Views/Cart';
 import UserProfile from './Views/UserProfile/UserProfile';
+import GetOrder from './Views/orders/getOne';
+import Orders from './Views/orders';
+import ViewWishlist from './Views/ViewWishlist';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -46,7 +49,7 @@ function App() {
     <>
       <Header />
       <ToastContainer />
-      <Toaster position="bottom-left" />
+      <Toaster position="top-right" />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -70,12 +73,23 @@ function App() {
             path="/collection/manageProducts"
             element={<ManageProducts />}
           />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/orders/:id" element={<GetOrder />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route
+              path="/orders/:id/payment-success"
+              element={<PaymentSuccessPage />}
+            />
+            <Route
+              path="/orders/payment-failed"
+              element={<PaymentFailurePage />}
+            />
+          </Route>
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/admin/user" element={<User />} />
           </Route>
-          <Route path="/payment-success" element={<PaymentSuccessPage />} />
-          <Route path="/payment-failed" element={<PaymentFailurePage />} />
+          <Route path="/wishlist" element={<ViewWishlist />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

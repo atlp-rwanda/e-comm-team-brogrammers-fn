@@ -6,6 +6,8 @@ import logo from '../images/logo.png';
 import UserThunk from '../redux/features/actions/user';
 import LogoutThunk from '../redux/features/actions/logout';
 import CartIcon from './headercart';
+import NotificationPane from './NotificationPane/NotificationPane';
+import ordersThunk from '../redux/features/actions/orders';
 
 function Header() {
   const navigate = useNavigate();
@@ -31,6 +33,13 @@ function Header() {
       setTimeout(() => dispatch(UserThunk()), 1000);
     }
   }, [token]);
+
+  const { allOrders, isLoading } = useSelector((state) => state.orders);
+
+  useEffect(() => {
+    if (!isLoading && (!allOrders?.results || allOrders?.results.length === 0))
+      dispatch(ordersThunk());
+  }, []);
 
   useEffect(() => {
     if (isLogout)
@@ -116,7 +125,20 @@ function Header() {
           <span className="sec-color">B</span>-Mall
         </span>
       </h2>
-      <nav>
+      <div className="header">
+        <nav className="menu">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Shop</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <nav className="menu">
+        <NotificationPane />
         <Link to="/cart">
           <CartIcon />
         </Link>
@@ -138,18 +160,24 @@ function Header() {
                   <h2>{user?.username}</h2>
                 </section>
                 <section>
-                  <span>View Shop</span>
+                  <Link to="/products">View Shop</Link>
                   <Link to="/cart">Cart</Link>
                   <Link to="/userprofile">Edit Profile</Link>
                   <Link to="/change-password">change password</Link>
+                  {user && <Link to="/orders">My Orders</Link>}
+                  <span>Edit Profile</span>
+                  <Link to="/change-password">Change password</Link>
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
-                  <span>
-                    <Link to="collection" data-testid="signup">
-                      your collection
-                    </Link>
-                  </span>
+                  {user && user.role.toLowerCase() !== 'buyer' && (
+                    <span>
+                      <Link to="collection" data-testid="signup">
+                        Your collection
+                      </Link>
+                    </span>
+                  )}
+                  <Link to="/wishlist">My Wishlist</Link>
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <button
                       type="button"

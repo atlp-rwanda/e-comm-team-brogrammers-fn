@@ -158,7 +158,7 @@ function ResetPassword() {
           disabled={isLoading}
           className={`btn1 ${isLoading ? 'button-loading' : ''}`}
         >
-          {isLoading ? '' : 'Reset Password'}
+          {isLoading ? 'Loading...' : 'Reset Password'}
         </button>
         <p>
           Back to <Link to="/login">Login</Link>

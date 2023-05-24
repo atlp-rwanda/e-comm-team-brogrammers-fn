@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import oneProductThunk from '../redux/features/actions/oneProduct';
 import SearchTop from './searchTop';
 import StarRating from './starrating';
+import { Rwf } from '../helpers/currency';
 
 function OneProduct() {
   const { id } = useParams();
@@ -81,7 +82,7 @@ function OneProduct() {
                 </p>
                 <p className="desc">{product?.description}</p>
                 <p className="price">
-                  <b>${product?.price}</b> per each
+                  <b>{Rwf.format(product?.price)}</b> per each
                 </p>
               </div>
               <div className="buttons">

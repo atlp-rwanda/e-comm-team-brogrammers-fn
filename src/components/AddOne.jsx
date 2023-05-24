@@ -19,7 +19,7 @@ function AddOne({ p, quantities, setQuantities }) {
   };
   return (
     <button
-      className="btn btn-danger minus"
+      className="btn btn-danger plus"
       onClick={() => addByOne(p.id)}
       disabled={addToCartLoading}
       data-testid="increase-quantity"

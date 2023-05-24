@@ -12,7 +12,14 @@ import searchReducer from './features/slices/searchslice';
 import productReducer from './features/slices/productslice';
 import collectionSlice from './features/slices/sellerCollection';
 import oneProductSlice from './features/slices/oneProduct';
+import notificationSlice from './features/slices/notifications';
+// import statusSlice from './features/slices/sellerStatus';
 import reviewSlice from './features/slices/productReview';
+import viewWishlistSlice from './features/slices/wishlistslice';
+import clearWishlistSlice from './features/slices/clearwishlist';
+import addToWishlistSlice from './features/slices/addWishlistslice';
+import DeleteToWishlistSlice from './features/slices/deleteWishlistslice';
+
 import deleteItemSlice from './features/slices/deleteItem';
 import availablitySlice from './features/slices/changeAvailability';
 import ClearCartReducer from './features/slices/clearCart';
@@ -20,6 +27,8 @@ import cartReducer from './features/slices/cart';
 import addToCartReducer from './features/slices/addToCartReducer';
 import removeToCartReducer from './features/slices/removeToCart';
 import updateProfile from './features/slices/updateProfile';
+import { orderSlice } from './features/slices/orders';
+
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -31,6 +40,7 @@ export const store = configureStore({
     logout: logoutReducer,
     password: passwordReducer,
     products: productSlice.reducer,
+    notifications: notificationSlice.reducer,
     categories: categoriesReducer,
     addedItem: addItemReducer,
     collection: collectionSlice.reducer,
@@ -44,5 +54,10 @@ export const store = configureStore({
     addToCart: addToCartReducer,
     clearCart: ClearCartReducer,
     removeToCart: removeToCartReducer,
+    orders: orderSlice.reducer,
+    wishlist: viewWishlistSlice.reducer,
+    clearWishlist: clearWishlistSlice.reducer,
+    addWishlist: addToWishlistSlice,
+    deleteTowishlist: DeleteToWishlistSlice,
   },
 });
