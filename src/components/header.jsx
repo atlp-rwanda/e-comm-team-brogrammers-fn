@@ -160,7 +160,7 @@ function Header() {
                   <h2>{user?.username}</h2>
                 </section>
                 <section>
-                  <span>View Shop</span>
+                  <Link to="/products">View Shop</Link>
                   <Link to="/cart">Cart</Link>
                   {user && <Link to="/orders">My Orders</Link>}
                   <span>Edit Profile</span>
@@ -168,11 +168,14 @@ function Header() {
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>
                   )}
-                  <span>
-                    <Link to="collection" data-testid="signup">
-                      your collection
-                    </Link>
-                  </span>
+                  {user && user.role.toLowerCase() !== 'buyer' && (
+                    <span>
+                      <Link to="collection" data-testid="signup">
+                        Your collection
+                      </Link>
+                    </span>
+                  )}
+                  <Link to="/wishlist">My Wishlist</Link>
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <button
                       type="button"

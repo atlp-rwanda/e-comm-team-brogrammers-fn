@@ -9,9 +9,9 @@ const handleDisable = (user, setUsers) => {
     showCancelButton: true,
     html: `
       <div>
-        <p>You are going to change the availability of ${user.username}.</p>
+        <p>You are about to modify the availability status of ${user.username}.</p>
         <form id="disableForm">
-          <label for="reason">Please Provide Reason for changing availability:</label>
+          <label for="reason">Please Provide Reason for modifying availability:</label>
           <input type="text" id="reason" class="swal2-input" placeholder="Enter reason" required>
         </form>
       </div>
