@@ -3,7 +3,7 @@ import axios from '../../configs/axios';
 
 const addReviewThunk = createAsyncThunk(
   'review/add',
-  async ({ productId, feedback, rating }) => {
+  async ({ productId, feedback, rating }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         '/reviews',
@@ -17,7 +17,7 @@ const addReviewThunk = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return error.message;
+      return rejectWithValue(error.message);
     }
   }
 );

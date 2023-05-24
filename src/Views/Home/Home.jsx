@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './LandingPage.scss';
+
 import { Link } from 'react-router-dom';
 import {
   AiFillFacebook,
@@ -12,6 +13,7 @@ import SearchTop from '../../components/searchTop';
 import fashionImage from '../../images/fashion.png';
 import fetchProducts from '../../redux/features/actions/products';
 import ProductsArray from '../../components/productArray';
+import ChatIcon from '../../components/ChatIcon';
 
 function Home() {
   const dispatch = useDispatch();
@@ -64,6 +66,9 @@ function Home() {
                 loading={status === 'loading'}
               />
             </div>
+            <div className="chat-icon">
+              <ChatIcon />
+            </div>
           </section>
         </div>
         <section className="contact">
@@ -76,7 +81,6 @@ function Home() {
             </form>
           </div>
         </section>
-
         <footer>
           <div className="footer-container">
             <div className="footer-links">

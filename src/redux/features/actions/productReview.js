@@ -7,7 +7,7 @@ const reviewthunk = createAsyncThunk(
     // Destructure the arguments
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/products/${id}/reviews?limit=5&page=${page}`,
+        `products/${id}/reviews?limit=5&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

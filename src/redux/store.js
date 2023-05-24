@@ -17,6 +17,8 @@ import deleteReviewSlice from './features/slices/deleteReview';
 import deleteItemSlice from './features/slices/deleteItem';
 import availablitySlice from './features/slices/changeAvailability';
 import editReviewSlice from './features/slices/editReview';
+import chatReducer from './features/slices/getMessage';
+import addMessageReducer from './features/slices/addMessage';
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
   reducer: {
@@ -38,5 +40,7 @@ export const store = configureStore({
     deleteReview: deleteReviewSlice,
     deleteItem: deleteItemSlice.reducer,
     availablity: availablitySlice.reducer,
+    chat: chatReducer,
+    addMessage: addMessageReducer,
   },
 });

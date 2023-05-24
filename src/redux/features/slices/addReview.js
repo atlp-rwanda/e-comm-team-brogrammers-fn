@@ -23,7 +23,7 @@ const addReviewSlice = createSlice({
       })
       .addCase(addReviewThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload.error.message;
+        state.error = payload;
         state.data = null;
       });
   },

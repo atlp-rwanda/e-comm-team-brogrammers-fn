@@ -61,7 +61,7 @@ const reviewSlice = createSlice({
       })
       .addCase(reviewthunk.rejected, (state, { payload }) => {
         state.status = 'failed';
-        state.error = payload.payload;
+        state.error = payload;
       });
   },
 });

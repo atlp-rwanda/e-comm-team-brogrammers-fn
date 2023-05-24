@@ -24,6 +24,8 @@ import SellerCollection from './Views/SellerCollection';
 import OneProduct from './components/OneProduct';
 import Statistics from './Views/UserStatistics';
 import ManageProducts from './Views/products/ManageProducts';
+import Chat from './Views/Chat';
+import ChatIcon from './components/ChatIcon';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -38,12 +40,14 @@ function App() {
   return (
     <>
       <Header />
+      <ChatIcon />
       <main>
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/reset-pass" element={<ResetPassword />} />
           <Route path="/verifypass" element={<ResetVerify />} />
           <Route path="/verifyfail" element={<Resetfail />} />
