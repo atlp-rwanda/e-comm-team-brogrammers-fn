@@ -25,6 +25,7 @@ export const userSlice = createSlice({
         state.errorMessage = { ...payload };
       })
       .addCase(UserThunk.fulfilled, (state, { payload }) => {
+        console.log({ payload });
         state.loading = false;
         if (payload.error) {
           state.error = true;

@@ -33,6 +33,9 @@ import Cart from './Views/Cart';
 import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
+import ChatIcons from './components/Chat/ChatIcons';
+import Chat from './Views/Chat/Chat';
+import Tail from './Views/Tail';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -49,9 +52,11 @@ function App() {
       <Header />
       <ToastContainer />
       <Toaster position="top-right" />
+      <ChatIcons />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/pk" element={<Tail />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-pass" element={<ResetPassword />} />
@@ -65,6 +70,7 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/products/addItem" element={<AddItem />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/chat" element={<Chat />} />
           </Route>
           <Route
             path="/collection/manageProducts"
