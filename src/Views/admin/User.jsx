@@ -2,23 +2,13 @@
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChartSimple,
-  faTruck,
-  faUser,
-  faCalendarDays,
-  faNewspaper,
-  faBars,
-  faTimes,
-  faHistory,
-} from '@fortawesome/free-solid-svg-icons';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import EditUserForm from './EditUserForm';
 import deleteUser from './DeleteUser';
 import disableUser from './Disable';
 import Pagination from '../../components/paginationbuttons';
 import CreateUserForm from './CreateUser';
+import Links from './links';
 
 function AdminDashboard() {
   const [users, setUsers] = useState({
@@ -86,73 +76,7 @@ function AdminDashboard() {
 
   return (
     <div className="containerx">
-      <div className="sidebar">
-        <h2>Admin Dashboard</h2>
-        <button
-          className="menu-btn"
-          onClick={handleMenuClick}
-          data-testid="menu-button"
-        >
-          {showMenu ? (
-            <FontAwesomeIcon icon={faTimes} />
-          ) : (
-            <FontAwesomeIcon icon={faBars} />
-          )}
-        </button>
-        <ul
-          className={`menu-list ${showMenu ? 'show' : ''}`}
-          data-testid="menu-list"
-        >
-          <li>
-            <Link
-              to="/home"
-              className={location.pathname === '/home' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faChartSimple} /> Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/product"
-              className={location.pathname === '/product' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faTruck} /> Product
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/admin/user"
-              className={location.pathname === '/admin/user' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faUser} /> Users
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/orders"
-              className={location.pathname === '/orders' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faCalendarDays} /> Orders
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/newsletter"
-              className={location.pathname === '/newsletter' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faNewspaper} /> Newsletter
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/logs"
-              className={location.pathname === '/logs' ? 'active' : ''}
-            >
-              <FontAwesomeIcon icon={faHistory} /> Activity Logs
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <Links />
       <div className="content">
         <div className="upper">
           {!showCreateUserForm && <h2>Users</h2>}

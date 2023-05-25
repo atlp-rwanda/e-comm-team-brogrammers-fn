@@ -85,12 +85,12 @@ function App() {
           </Route>
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
+            <Route path="/logs" element={<LogsComponent />} />
             <Route path="/admin/user" element={<User />} />
           </Route>
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/wishlist" element={<ViewWishlist />} />
-          <Route path="/logs" element={<LogsComponent />} />
         </Routes>
       </main>
       <Footer />
