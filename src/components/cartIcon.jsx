@@ -10,9 +10,11 @@ function CartIcon({ product }) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.addToCart);
+
   const closeModel = () => {
     if (typeof dialog.current.close === 'function') dialog.current.close();
   };
+
   const openModel = () => {
     if (typeof dialog.current.showModal === 'function')
       dialog.current.showModal();
@@ -31,7 +33,7 @@ function CartIcon({ product }) {
     }
   };
 
-  const close = (e) => {
+  const closeDialog = (e) => {
     const dialogDimensions = dialog.current?.getBoundingClientRect();
     if (
       e.clientX < dialogDimensions.left ||
@@ -44,11 +46,11 @@ function CartIcon({ product }) {
   };
 
   useEffect(() => {
-    dialog.current?.addEventListener('click', close);
+    dialog.current?.addEventListener('click', closeDialog);
     return () => {
-      dialog.current?.removeEventListener('click', close);
+      dialog.current?.removeEventListener('click', closeDialog);
     };
-  }, [dialog, dialog.current]);
+  }, []);
 
   return (
     <>
@@ -60,17 +62,13 @@ function CartIcon({ product }) {
         <div>
           <h3>
             Comfirm to add:{' '}
-            <Link to={`/oneProduct/${product && product.id}`}>
-              {product && product.name}
-            </Link>
+            <Link to={`/oneProduct/${product?.id}`}>{product?.name}</Link>
           </h3>
           <form>
             <p>
               <span>Product Name:</span>
               <b data-testid="product-name">
-                <Link to={`/oneProduct/${product && product.id}`}>
-                  {product && product.name}
-                </Link>
+                <Link to={`/oneProduct/${product?.id}`}>{product?.name}</Link>
               </b>
             </p>
             <label htmlFor="number">
@@ -84,13 +82,13 @@ function CartIcon({ product }) {
                 placeholder="Quantity"
               />
               <span className="grey" data-testid="product-quantity">
-                / {product && product.quantity} items
+                / {product?.quantity} items
               </span>
             </label>
             <p>
               <span>Price</span>
               <b data-testid="product-price">
-                {Rwf.format((product && product.price) * quantity)}
+                {Rwf.format((product?.price || 0) * quantity)}
               </b>
             </p>
             <div>
@@ -98,7 +96,7 @@ function CartIcon({ product }) {
                 type="submit"
                 className="btn1"
                 disabled={isLoading}
-                onClick={(e) => addToCartHandler(e, product.id, quantity)}
+                onClick={(e) => addToCartHandler(e, product?.id, quantity)}
                 data-testid="confirm-button"
               >
                 Confirm
@@ -107,11 +105,7 @@ function CartIcon({ product }) {
           </form>
         </div>
       </dialog>
-      <button
-        type="button"
-        onClick={() => openModel()}
-        data-testid="cart-button"
-      >
+      <button type="button" onClick={openModel} data-testid="cart-button">
         <i className="fa-solid fa-cart-plus" />
       </button>
     </>

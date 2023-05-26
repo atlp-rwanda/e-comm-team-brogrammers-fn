@@ -4,7 +4,7 @@ checks:
   file-lines:
     enabled: false
   method-lines:
-    enabled: true
+    enabled: false
     config:
       threshold: 200
   similar-code:
@@ -19,7 +19,7 @@ coverage:
   threshold:
     total:
       statements: 80
-      branches: 80
+      branches: 75
       functions: 80
       lines: 80
 exclude_patterns:

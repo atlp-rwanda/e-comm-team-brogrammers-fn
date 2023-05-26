@@ -34,7 +34,6 @@ describe('test signup states', () => {
     expect(signup.data.user.username).toEqual(validUser.username);
     expect(signup.data.user.gender).toEqual(validUser.gender);
   });
-
   const invalidUser = {
     email: 'invalidemail',
     password: 'weakpassword',

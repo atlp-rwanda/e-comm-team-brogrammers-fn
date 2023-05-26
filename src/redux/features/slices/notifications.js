@@ -37,4 +37,4 @@ const notificationSlice = createSlice({
   },
 });
 
-export default notificationSlice;
+export default notificationSlice.reducer;
