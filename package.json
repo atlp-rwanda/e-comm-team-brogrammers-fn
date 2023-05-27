@@ -21,6 +21,7 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.0",
+    "chartjs-adapter-moment": "^1.0.1",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
     "har-validator": "^5.1.5",

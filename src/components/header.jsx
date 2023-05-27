@@ -165,9 +165,7 @@ function Header() {
                   {user && <Link to="/orders">My Orders</Link>}
                   <span>Edit Profile</span>
                   <Link to="/change-password">Change password</Link>
-                  {user.role === 'admin' && (
-                    <Link to="/admin/user">Dashboard</Link>
-                  )}
+                  {user.role === 'admin' && <Link to="/home">Dashboard</Link>}
                   {user && user.role.toLowerCase() !== 'buyer' && (
                     <span>
                       <Link to="collection" data-testid="signup">
