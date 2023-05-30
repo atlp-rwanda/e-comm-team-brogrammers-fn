@@ -27,6 +27,8 @@ import cartReducer from './features/slices/cart';
 import addToCartReducer from './features/slices/addToCartReducer';
 import removeToCartReducer from './features/slices/removeToCart';
 import { orderSlice } from './features/slices/orders';
+import chatReducer from './features/slices/getMessage';
+import addMessageReducer from './features/slices/addMessage';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -57,5 +59,7 @@ export const store = configureStore({
     clearWishlist: clearWishlistSlice.reducer,
     addWishlist: addToWishlistSlice,
     deleteTowishlist: DeleteToWishlistSlice,
+    chat: chatReducer,
+    addMessage: addMessageReducer,
   },
 });

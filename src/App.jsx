@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import './App.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { io } from 'socket.io-client';
 import UserThunk from './redux/features/actions/user';
 import Home from './Views/Home/Home';
 import Login from './Views/Login';
@@ -33,10 +34,16 @@ import Cart from './Views/Cart';
 import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
+import ChatIcon from './components/ChatIcon';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const room = 'brogrammers';
+  const socket = io.connect('https://brogrammers-ecomerce1.onrender.com');
+  socket.emit('join_room', room);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     if (!tokenLoad && token) {
@@ -44,11 +51,22 @@ function App() {
     }
   }, [token]);
 
+  const shouldRenderChatbot = () => {
+    const allowedRoutes = ['/', '/cart', '/change-password', '/products'];
+    const currentRoute = location.pathname;
+    return allowedRoutes.includes(currentRoute);
+  };
+
+  useEffect(() => {
+    setIsChatOpen(shouldRenderChatbot());
+  }, [location.pathname]);
+
   return (
     <>
       <Header />
       <ToastContainer />
       <Toaster position="top-right" />
+      {isChatOpen && <ChatIcon socket={socket} />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
