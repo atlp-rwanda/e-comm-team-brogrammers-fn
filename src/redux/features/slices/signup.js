@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import signupThunk from '../actions/signup';
 
-export const signupSlice = createSlice({
+const signupSlice = createSlice({
   name: 'signup',
   initialState: {
     data: null,
