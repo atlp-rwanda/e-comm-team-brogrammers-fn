@@ -35,6 +35,7 @@ import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
 import LogsComponent from './Views/Logs';
+import Dash from './Views/admin/Dash';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -90,6 +91,7 @@ function App() {
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/logs" element={<LogsComponent />} />
             <Route path="/admin/user" element={<User />} />
+            <Route path="/home" element={<Dash />} />
           </Route>
           <Route path="/wishlist" element={<ViewWishlist />} />
           <Route path="*" element={<NotFound />} />

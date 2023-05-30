@@ -79,7 +79,7 @@ function ViewWishlist() {
                     </Link>
                     <div className="price-cart">
                       <p>
-                        <b>RWf{wishlist && wishlist.price}</b>
+                        <b>RWF {wishlist && wishlist.price}</b>
                       </p>
                       <button
                         type="button"

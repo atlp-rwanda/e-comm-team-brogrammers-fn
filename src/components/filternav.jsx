@@ -83,7 +83,7 @@ function FilterNav() {
               aria-hidden
               onClick={() => dispatch(setSearchParams({ min: 0, max: 100 }))}
             >
-              $0 - $100
+              0 - RWF 100
             </li>
             <li
               className={
@@ -95,7 +95,7 @@ function FilterNav() {
               aria-hidden
               onClick={() => dispatch(setSearchParams({ min: 100, max: 1000 }))}
             >
-              $100 - $1000
+              RWF 100 - RWF 1000
             </li>
             <li
               className={
@@ -109,7 +109,7 @@ function FilterNav() {
                 dispatch(setSearchParams({ min: 1000, max: 5000 }))
               }
             >
-              $1000 - $5000
+              RWF 1000 - RWF 5000
             </li>
             <li
               className={
@@ -122,7 +122,7 @@ function FilterNav() {
                 dispatch(setSearchParams({ min: 5000, max: undefined }))
               }
             >
-              above $5000
+              Above RWF 5000
             </li>
           </ul>
         </div>
