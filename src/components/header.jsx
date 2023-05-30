@@ -162,8 +162,10 @@ function Header() {
                 <section>
                   <Link to="/products">View Shop</Link>
                   <Link to="/cart">Cart</Link>
+                  <Link to="/userprofile">Edit Profile</Link>
+                  <Link to="/change-password">change password</Link>
                   {user && <Link to="/orders">My Orders</Link>}
-                  <span>Edit Profile</span>
+
                   <Link to="/change-password">Change password</Link>
                   {user.role === 'admin' && (
                     <Link to="/admin/user">Dashboard</Link>

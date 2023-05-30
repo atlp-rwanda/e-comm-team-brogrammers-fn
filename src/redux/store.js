@@ -26,6 +26,7 @@ import ClearCartReducer from './features/slices/clearCart';
 import cartReducer from './features/slices/cart';
 import addToCartReducer from './features/slices/addToCartReducer';
 import removeToCartReducer from './features/slices/removeToCart';
+import updateProfile from './features/slices/updateProfile';
 import { orderSlice } from './features/slices/orders';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -34,6 +35,7 @@ export const store = configureStore({
     user: userReducer,
     boolean: booleanReducer,
     login: loginReducer,
+    updateProfile: updateProfile.reducer,
     signup: signupReducer,
     logout: logoutReducer,
     password: passwordReducer,
