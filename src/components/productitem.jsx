@@ -29,14 +29,16 @@ function ProductItem({ product }) {
     }
   };
 
+  const handleImageDoubleClick = () => {
+    navigate(`/oneProduct/${product.id}`);
+  };
+
   return (
-    <div
-      className="productItem"
-      data-testid="product-item"
-      aria-hidden
-      onDoubleClick={() => navigate(`/oneProduct/${product.id}`)}
-    >
-      <div className="image back-angular">
+    <div className="productItem" data-testid="product-item" aria-hidden>
+      <div
+        className="image back-angular"
+        onDoubleClick={handleImageDoubleClick}
+      >
         <img
           src={product && product?.images[0]}
           alt="productImage"

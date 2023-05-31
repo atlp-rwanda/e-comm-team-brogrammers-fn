@@ -2,11 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../configs/axios';
 
 const reviewthunk = createAsyncThunk(
-  'user/collection',
-  async (id, { rejectWithValue }) => {
+  'products/reviews',
+  async ({ id, page }, { rejectWithValue }) => {
+    // Destructure the arguments
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/products/${id}/reviews`,
+        `${process.env.REACT_APP_SERVER_URL}/products/${id}/reviews?limit=5&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

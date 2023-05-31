@@ -30,6 +30,10 @@ import removeToCartReducer from './features/slices/removeToCart';
 import updateProfile from './features/slices/updateProfile';
 import { orderSlice } from './features/slices/orders';
 import logsSlice from './features/slices/logsSlice';
+import addReviewSlice from './features/slices/addReview';
+
+import deleteReviewSlice from './features/slices/deleteReview';
+import editReviewSlice from './features/slices/editReview';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -42,12 +46,12 @@ export const store = configureStore({
     logout: logoutReducer,
     password: passwordReducer,
     products: productSlice.reducer,
-    notifications: notificationSlice.reducer,
+    notifications: notificationSlice,
     categories: categoriesReducer,
     addedItem: addItemReducer,
     collection: collectionSlice.reducer,
     oneproduct: oneProductSlice.reducer,
-    review: reviewSlice.reducer,
+    reviews: reviewSlice.reducer,
     search: searchReducer,
     deleteItem: deleteItemSlice.reducer,
     availablity: availablitySlice.reducer,
@@ -62,5 +66,8 @@ export const store = configureStore({
     addWishlist: addToWishlistSlice,
     deleteTowishlist: DeleteToWishlistSlice,
     logs: logsSlice,
+    deleteReview: deleteReviewSlice,
+    editReview: editReviewSlice.reducer,
+    addReview: addReviewSlice,
   },
 });
