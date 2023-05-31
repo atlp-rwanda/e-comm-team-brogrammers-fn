@@ -30,6 +30,7 @@ import removeToCartReducer from './features/slices/removeToCart';
 import updateProfile from './features/slices/updateProfile';
 import { orderSlice } from './features/slices/orders';
 import logsSlice from './features/slices/logsSlice';
+import updatesellerStatusSlice from './features/slices/updateSellerCollectionStatus';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -62,5 +63,6 @@ export const store = configureStore({
     addWishlist: addToWishlistSlice,
     deleteTowishlist: DeleteToWishlistSlice,
     logs: logsSlice,
+    updateSellerStatus: updatesellerStatusSlice,
   },
 });
