@@ -47,7 +47,8 @@ function Dashboard() {
           const { totalCount: usersCount } = usersResponse.data;
           const { totalCount: productsCount } =
             productsResponse.data.allproducts;
-          const subscribersCount = subscribersResponse.data.subscribers.length;
+          const { totalCount: subscribersCount } =
+            subscribersResponse.data.subscribers;
           const ordersCount = ordersResponse.data.orders.results.length;
 
           setTotalUsersCount(usersCount);
