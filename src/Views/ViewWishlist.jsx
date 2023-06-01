@@ -9,6 +9,7 @@ import { showSuccessMessage, showErrorMessage } from '../utils/toast';
 import DeleteWishlistThunk from '../redux/features/actions/deleteWishlist';
 import EmptyWishlist from '../components/emptyWishlist';
 import '../wishlist.scss';
+import { Rwf } from '../helpers/currency';
 
 function ViewWishlist() {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ function ViewWishlist() {
                     </Link>
                     <div className="price-cart">
                       <p>
-                        <b>RWF {wishlist && wishlist.price}</b>
+                        <b>{Rwf.format(wishlist && wishlist.price)}</b>
                       </p>
                       <button
                         type="button"

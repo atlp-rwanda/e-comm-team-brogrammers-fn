@@ -5,6 +5,7 @@ import categoriesThunk from '../redux/features/actions/categories';
 import { setSearchParams } from '../redux/features/slices/searchslice';
 import searchThunk from '../redux/features/actions/search';
 import removeEmpty from '../helpers/removeEmpty';
+import { Rwf } from '../helpers/currency';
 
 function FilterNav() {
   const {
@@ -83,7 +84,7 @@ function FilterNav() {
               aria-hidden
               onClick={() => dispatch(setSearchParams({ min: 0, max: 100 }))}
             >
-              0 - RWF 100
+              {Rwf.format(0)} - {Rwf.format(100)}
             </li>
             <li
               className={
@@ -95,7 +96,7 @@ function FilterNav() {
               aria-hidden
               onClick={() => dispatch(setSearchParams({ min: 100, max: 1000 }))}
             >
-              RWF 100 - RWF 1000
+              {Rwf.format(100)} - {Rwf.format(1000)}
             </li>
             <li
               className={
@@ -109,7 +110,7 @@ function FilterNav() {
                 dispatch(setSearchParams({ min: 1000, max: 5000 }))
               }
             >
-              RWF 1000 - RWF 5000
+              {Rwf.format(1000)} - {Rwf.format(5000)}
             </li>
             <li
               className={
@@ -122,7 +123,7 @@ function FilterNav() {
                 dispatch(setSearchParams({ min: 5000, max: undefined }))
               }
             >
-              Above RWF 5000
+              above {Rwf.format(5000)}
             </li>
           </ul>
         </div>

@@ -6,6 +6,7 @@ import { setSearchParams } from '../redux/features/slices/searchslice';
 import searchThunk from '../redux/features/actions/search';
 import PaginationButtons from './paginationbuttons';
 import ProductsArray from './productArray';
+import { Rwf } from '../helpers/currency';
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -69,8 +70,8 @@ function ProductList() {
     <section className="allProduct-list">
       <div className="head">
         <span>{category || 'All categories'}</span>
-        {min && <span>minimum: ${min}</span>}
-        {max && <span>maximum: ${max}</span>}
+        {min && <span>minimum: {Rwf.format(min)}</span>}
+        {max && <span>maximum: {Rwf.format(max)}</span>}
         <span>
           {allProduct?.totalCount !== 1
             ? `${allProduct?.totalCount || 0} results`

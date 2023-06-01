@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import './App.scss';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,6 +35,8 @@ import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
 import LogsComponent from './Views/Logs';
 import Dash from './Views/admin/Dash';
+import SuccessSubscription from './Views/subscribe/success-subscription';
+import AdminSubscribe from './Views/admin/subscribers';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -87,11 +88,18 @@ function App() {
               element={<PaymentFailurePage />}
             />
           </Route>
+          <Route path="/" element={<PrivateRoute />}>
+            <Route
+              path="/subscribe/success"
+              element={<SuccessSubscription />}
+            />
+          </Route>
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<PrivateRoute path="/admin/user" />}>
             <Route path="/logs" element={<LogsComponent />} />
             <Route path="/admin/user" element={<User />} />
             <Route path="/home" element={<Dash />} />
+            <Route path="/admin/subscribes" element={<AdminSubscribe />} />
           </Route>
           <Route path="/wishlist" element={<ViewWishlist />} />
           <Route path="*" element={<NotFound />} />

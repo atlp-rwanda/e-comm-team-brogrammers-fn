@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './style.module.scss';
 import ordersThunk from '../../redux/features/actions/orders';
 import OrderCard from '../../components/orders/orderCard';
+import EmptyOrders from './noOrders';
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -16,8 +17,10 @@ export default function Orders() {
     if (!isLoading && (!orders || orders.length === 0)) dispatch(ordersThunk());
   }, []);
 
-  return isLoading ? (
-    <span className="loader-2" />
+  if (isLoading) return <span className="loader-2" />;
+
+  return !orders || orders.length === 0 ? (
+    <EmptyOrders />
   ) : (
     <section className={`${css.container} container`}>
       <div className={css.head}>

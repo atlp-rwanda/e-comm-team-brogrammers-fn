@@ -1,0 +1,24 @@
+.container {
+  max-width: min(70ch, 90%);
+  padding: 20px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+
+  h1 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+}
+
+.all {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}

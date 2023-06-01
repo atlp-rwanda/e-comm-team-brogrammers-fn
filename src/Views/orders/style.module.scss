@@ -93,3 +93,37 @@
     gap: 1rem;
   }
 }
+
+.emptyList {
+  width: min(70ch, 95%);
+  margin: 1rem auto;
+  padding: 2.5rem 0;
+  text-align: center;
+  border-radius: 1rem;
+
+  h1 {
+    margin-bottom: 1.25rem;
+  }
+
+  svg {
+    width: 5rem;
+    height: 5rem;
+    fill: #555;
+    margin-bottom: 1.25rem;
+  }
+
+  .message {
+    line-height: 1.5;
+    color: var(--gray-color, #555);
+    margin-bottom: 1.875rem;
+
+    a {
+      color: var(--active-color, #fa0);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
