@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import * as axios from 'axios';
 import thunk from 'redux-thunk';
-
 import updateprofileThunk from '../src/redux/features/actions/UpdateProfile';
 import updateProfile from '../src/redux/features/slices/updateProfile';
 import UserProfile, {

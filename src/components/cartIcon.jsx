@@ -10,6 +10,9 @@ function CartIcon({ product }) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.addToCart);
+  const {
+    user: { user },
+  } = useSelector((state) => state);
 
   const closeModel = () => {
     if (typeof dialog.current.close === 'function') dialog.current.close();
@@ -105,11 +108,18 @@ function CartIcon({ product }) {
           </form>
         </div>
       </dialog>
-      <button type="button" onClick={openModel} data-testid="cart-button">
+      <button
+        type="button"
+        onClick={() =>
+          user
+            ? openModel()
+            : showErrorMessage('Please login to add the product to your cart.')
+        }
+        data-testid="cart-button"
+      >
         <i className="fa-solid fa-cart-plus" />
       </button>
     </>
   );
 }
-
 export default CartIcon;
