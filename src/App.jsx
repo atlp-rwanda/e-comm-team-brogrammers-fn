@@ -36,6 +36,7 @@ import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
 import LogsComponent from './Views/Logs';
 import Dash from './Views/admin/Dash';
+import UpdateProductForm from './Views/updateProductForm';
 
 function App() {
   const { token, loading: tokenLoad } = useSelector((s) => s.login);
@@ -74,6 +75,10 @@ function App() {
           <Route
             path="/collection/manageProducts"
             element={<ManageProducts />}
+          />
+          <Route
+            path="/collection/manageProducts/update/:id"
+            element={<UpdateProductForm />}
           />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/orders/:id" element={<GetOrder />} />

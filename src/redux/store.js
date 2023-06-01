@@ -34,6 +34,7 @@ import addReviewSlice from './features/slices/addReview';
 
 import deleteReviewSlice from './features/slices/deleteReview';
 import editReviewSlice from './features/slices/editReview';
+import updatesellerStatusSlice from './features/slices/updateSellerCollectionStatus';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -69,5 +70,6 @@ export const store = configureStore({
     deleteReview: deleteReviewSlice,
     editReview: editReviewSlice.reducer,
     addReview: addReviewSlice,
+    updateSellerStatus: updatesellerStatusSlice,
   },
 });
