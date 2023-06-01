@@ -33,6 +33,7 @@ import editReviewSlice from './features/slices/editReview';
 import subscribersSlice from './features/slices/subscribers';
 import chatReducer from './features/slices/getMessage';
 import addMessageReducer from './features/slices/addMessage';
+import updatesellerStatusSlice from './features/slices/updateSellerCollectionStatus';
 
 // eslint-disable-next-line import/prefer-default-export
 export const store = configureStore({
@@ -70,5 +71,6 @@ export const store = configureStore({
     addReview: addReviewSlice,
     chat: chatReducer,
     addMessage: addMessageReducer,
+    updateSellerStatus: updatesellerStatusSlice,
   },
 });
