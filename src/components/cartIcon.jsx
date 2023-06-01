@@ -14,8 +14,14 @@ function CartIcon({ product }) {
   const closeModel = () => {
     if (typeof dialog.current.close === 'function') dialog.current.close();
   };
+  const token = localStorage.getItem('token');
+  const isLoggedIn = Boolean(token);
 
   const openModel = () => {
+    if (!isLoggedIn) {
+      showErrorMessage('Please login to add the product to your Cart.');
+      return;
+    }
     if (typeof dialog.current.showModal === 'function')
       dialog.current.showModal();
   };
