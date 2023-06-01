@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import Links from './links';
 import ButtonSts from './Buttonsts';
+import Select from '../../components/select';
 
 function Dashboard() {
   const [totalCount, setTotalUsersCount] = useState(0);
@@ -188,7 +189,7 @@ function Dashboard() {
         <div className="chart-container">
           <h2> Sales Chart</h2>
           <div className="filter-container">
-            <select
+            <Select
               className="filter-select"
               value={selectedYear}
               onChange={handleYearChange}
@@ -198,8 +199,8 @@ function Dashboard() {
               <option value="2024">2024</option>
               <option value="2025">2025</option>
               <option value="2026">2026</option>
-            </select>
-            <select
+            </Select>
+            <Select
               className="filter-select"
               value={selectedMonth}
               onChange={handleMonthChange}
@@ -217,7 +218,7 @@ function Dashboard() {
               <option value="10">October</option>
               <option value="11">November</option>
               <option value="12">December</option>
-            </select>
+            </Select>
           </div>
           <div className="chart">{renderChart()}</div>
         </div>

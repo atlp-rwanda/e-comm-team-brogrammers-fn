@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import LogsThunk from '../redux/features/actions/logs';
-import '../LogsComponent.scss';
 import PaginationButtons from '../components/paginationbuttons';
 import Links from './admin/links';
 

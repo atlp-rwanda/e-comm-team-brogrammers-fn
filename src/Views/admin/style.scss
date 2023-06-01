@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     .active {
-      color: rgb(14, 183, 81);
+      color: var(--sec-color);
       background-color: #f1f1f1;
     }
     h2 {
@@ -44,13 +44,14 @@
         margin-bottom: 20%;
         a {
           text-decoration: none;
+          color: inherit;
         }
       }
     }
   }
   .content {
     flex: 1;
-    background-color: #fff;
+    background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -291,16 +292,6 @@
       label {
         font-weight: bold;
       }
-      input[type='text'],
-      input[type='email'],
-      select {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        &:focus {
-          outline: none;
-        }
-      }
     }
     .form-actions {
       display: flex;
@@ -394,21 +385,10 @@
     border-radius: 5px;
     width: 50%;
     div {
-      display: flex;
-      flex-direction: column;
       margin-bottom: 1rem;
       label {
         font-weight: bold;
         margin-bottom: 0.5rem;
-      }
-      input[type='text'],
-      input[type='email'],
-      input[type='password'],
-      select {
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
       }
       .password-input-wrapper {
         position: relative;
@@ -461,12 +441,6 @@
   form {
     label {
       font-weight: bold;
-    }
-    input[type='text'] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
     .btn-primary {
       margin: 10px;
@@ -535,10 +509,9 @@
   }
   .info {
     width: 20%;
-  }
-  .info h3 {
-    padding-bottom: 7px;
-    padding-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
   .dashtruck-icon {
     margin-right: 5px;
@@ -611,13 +584,16 @@
     padding-top: 4%;
     padding-bottom: 2%;
   }
+  .filter-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
   .filter-select {
     width: 20vh;
-    height: 5vh;
-    margin-right: 10px;
-    border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 2%;
+    border: 1px solid var(--gray-color);
   }
   .filter-button {
     width: 20vh;
@@ -633,7 +609,6 @@
 
 .chart {
   width: 90%;
-  height: 100%;
 }
 
 .year-month-selection {

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment';
 import axios from 'axios';
 import BarChart from '../components/barGrath';
 import { Rwf } from '../helpers/currency';
 
-const server = process.env.REACT_APP_SERVER;
 // const token = process.env.REACT_APP_TOKEN;
 
 function Statistics() {
@@ -38,13 +36,17 @@ function Statistics() {
     setEnd(moment().format('LLL'));
     setStart(moment().subtract(1, graphRange).format('LLL'));
     axios
-      .get(`${server}/users/stats/graph/${graphRange}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_SERVER_URL}/users/stats/graph/${graphRange}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((data) => {
         setApidata(data.data);
+        console.log({ data: data.data });
       });
   }, [graphRange, token]);
 
@@ -55,14 +57,12 @@ function Statistics() {
         {
           label: 'sold amount',
           data: apidata.map((data) => data.totalAmount),
-          lineTension: 0,
           backgroundColor: '#0a4',
           borderColor: '#0a4',
         },
         {
           label: 'sold items',
           data: apidata.map((data) => data.items),
-          lineTension: 0,
           backgroundColor: '#fa0',
           borderColor: '#fa0',
         },

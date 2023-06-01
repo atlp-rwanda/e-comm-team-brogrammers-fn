@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Children } from 'react';
 
 function Select({
   placeholder,
+  onChange,
   className = '',
   register = null,
   name = '',
@@ -10,14 +12,17 @@ function Select({
   options = [],
   required,
   children,
+  label,
 }) {
   return (
-    <div className="input">
+    <label className="input">
+      {label && <span className="label">{label}</span>}
       <div className={`input-1 ${className}`}>
         <select
           placeholder={placeholder}
           required={required}
           name={name}
+          onChange={onChange}
           id={id}
           {...register}
           data-testid="select-element"
@@ -49,7 +54,7 @@ function Select({
           {errors}
         </p>
       )}
-    </div>
+    </label>
   );
 }
 

@@ -29,6 +29,8 @@
   --md-space: 5rem;
   --xsm-space: 10px;
   --sm-box-padding: 0.6rem 1rem;
+  --light-black-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.25);
+  --sm-light-black-shadow: 0 0 5px -4px var(--main-color);
 }
 
 a {
@@ -1494,6 +1496,7 @@ form .success {
   .data {
     width: fit-content;
     gap: 1rem;
+    flex: 1;
     max-width: 50%;
     @include flex-column();
 
@@ -1570,7 +1573,7 @@ form .success {
   .graph {
     border-left: 1px solid #eee6;
     padding-left: 2rem;
-    flex: 1;
+    flex: 99;
     max-width: 75%;
   }
 }

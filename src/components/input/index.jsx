@@ -1,17 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import css from './style.module.scss';
 
 function Input({
+  flat,
+  inset,
+  pill,
   type = 'text',
   placeholder,
   onChange,
   className = '',
   defaultValue = '',
   register = null,
-  name = '',
+  name,
   errors,
   label,
   required,
+  id,
 }) {
   const [inputType, setInputType] = useState(type);
 
@@ -24,22 +29,16 @@ function Input({
     setInputType('password');
   };
   return (
-    <label className="input">
-      {label && <span className="label">{label}</span>}
-      <div className={`input-1 ${className}`}>
-        <input
-          type={inputType}
-          defaultValue={defaultValue}
-          placeholder={placeholder}
-          required={required}
-          onChange={onChange}
-          name={name}
-          {...register}
-          data-testid="input-element"
-        />
+    <label className={`${css.input} ${pill && css.pill}`}>
+      {label && <span className={css.label}>{label}</span>}
+      <div
+        className={`${css.input_1} ${inset && css.inset} ${
+          flat && css.flat
+        } ${className}`}
+      >
         {type.toLowerCase() === 'password' && (
           <span
-            className="icon"
+            className={css.icon}
             onClick={seePassword}
             role="presentation"
             data-testid="see-button"
@@ -58,16 +57,22 @@ function Input({
             </svg>
           </span>
         )}
+        <input
+          id={id}
+          type={inputType}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          required={required}
+          onChange={onChange}
+          name={name}
+          {...register}
+          data-testid="input-element"
+        />
       </div>
       {errors && (
-        <>
-          <p className="error" data-testid="errors">
-            {errors}
-          </p>
-          <p className="success" data-testid="success">
-            {}
-          </p>
-        </>
+        <p className={`${css.error} errors`} data-testid="errors">
+          {errors}
+        </p>
       )}
     </label>
   );

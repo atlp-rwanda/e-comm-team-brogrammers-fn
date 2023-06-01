@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable no-unused-vars */
 import { Line } from 'react-chartjs-2';
-// eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 
 export default function LineChart({ data, options }) {
