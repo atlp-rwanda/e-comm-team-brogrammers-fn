@@ -8,6 +8,7 @@ import {
   faTruck,
   faUser,
   faHistory,
+  faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
@@ -54,8 +55,13 @@ function Links() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/orders">
+          <NavLink to="/admin/orders">
             <FontAwesomeIcon icon={faCalendarDays} /> Orders
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/admin/message">
+            <FontAwesomeIcon icon={faMessage} /> message
           </NavLink>
         </li>
         <li>

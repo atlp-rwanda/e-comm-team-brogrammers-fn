@@ -1,12 +1,10 @@
 import React, { useCallback } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { showErrorMessage, showSuccessMessage } from '../../utils/toast';
 import { deleteOrder as deleteOrderThunk } from '../../redux/features/actions/oneOrder';
 
 export default function DeleteOrder({ order }) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const deletePopup = Swal.mixin({
@@ -21,7 +19,6 @@ export default function DeleteOrder({ order }) {
     try {
       await dispatch(deleteOrderThunk({ id: order.id })).unwrap();
       showSuccessMessage('order deleted successful');
-      navigate(`/orders`);
     } catch (e) {
       if (e.error.message.toLowerCase() === 'network error') {
         showErrorMessage('Network Error');

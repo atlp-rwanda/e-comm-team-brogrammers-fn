@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import oneOrderThunk, {
+  updateSingleOrderStatus,
   createOrder,
   deleteOrder,
   updateSingleOrder,
@@ -33,6 +34,15 @@ export const orderSlice = createSlice({
   reducers: {
     resetSelected: (state) => {
       state.selected = initialState.selected;
+    },
+    updateOrderStatus: (state, action) => {
+      state.allOrders.results = state.allOrders.results.map((order) => {
+        if (order.id === action.payload.orders[0].id) {
+          return { ...order, ...action.payload.orders[0] };
+        }
+        return order;
+      });
+      return state;
     },
   },
 
@@ -94,9 +104,17 @@ export const orderSlice = createSlice({
         state.allOrders.results = state.allOrders.results.filter(
           (item) => item.id !== payload.id
         );
+      })
+      .addCase(updateSingleOrderStatus.fulfilled, (state, { payload }) => {
+        state.allOrders.results = state.allOrders.results.map((order) => {
+          if (order.id === payload.data.id) {
+            return { ...order, ...payload.data };
+          }
+          return order;
+        });
       });
   },
 });
 
-export const { resetSelected } = orderSlice.actions;
+export const { resetSelected, updateOrderStatus } = orderSlice.actions;
 export default orderSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 import css from './style.module.scss';
 import oneOrderThunk from '../../redux/features/actions/oneOrder';
@@ -90,6 +90,11 @@ export default function GetOrder() {
                 ))}
             </div>
           </div>
+          <Link to="/customer-support">
+            <button className="buttonCustomer" type="button">
+              Customer support
+            </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -35,6 +35,9 @@ import UserProfile from './Views/UserProfile/UserProfile';
 import GetOrder from './Views/orders/getOne';
 import Orders from './Views/orders';
 import ViewWishlist from './Views/ViewWishlist';
+import CustomerSupport from './components/CustomerSupport';
+import AdminOrders from './Views/admin/Orders';
+import Adminmessage from './Views/admin/massage';
 import LogsComponent from './Views/Logs';
 import Dash from './Views/admin/Dash';
 import SuccessSubscription from './Views/subscribe/success-subscription';
@@ -88,6 +91,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/customer-support" element={<CustomerSupport />} />
           <Route path="/reset-pass" element={<ResetPassword />} />
           <Route path="/verifypass" element={<ResetVerify />} />
           <Route path="/verifyfail" element={<Resetfail />} />
@@ -130,6 +134,12 @@ function App() {
             <Route path="/admin/user" element={<User />} />
             <Route path="/home" element={<Dash />} />
             <Route path="/admin/subscribes" element={<AdminSubscribe />} />
+          </Route>
+          <Route path="/" element={<PrivateRoute path="/admin/orders" />}>
+            <Route path="/admin/orders" element={<AdminOrders />} />
+          </Route>
+          <Route path="/" element={<PrivateRoute path="/admin/orders" />}>
+            <Route path="/admin/message" element={<Adminmessage />} />
           </Route>
           <Route path="/wishlist" element={<ViewWishlist />} />
           <Route path="*" element={<NotFound />} />
