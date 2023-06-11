@@ -2623,3 +2623,104 @@ nav.filter-nav {
     border-radius: 0.5rem;
   }
 }
+// update product by seller
+.sellerupdateItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 50px;
+
+  .image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 50px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain; /* Add this line to maintain aspect ratio */
+      width: 50%;
+    }
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-right: 200px;
+
+    .sellerupdatelabel {
+      display: flex;
+      width: 100%;
+      margin-top: 20px;
+
+      input[type='text'],
+      input[type='number'],
+      input[type='date'],
+      textarea,
+      select {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: flex-start;
+
+    .updatebuttonproduct {
+      background-color: #f90;
+      color: #fff;
+      gap: 5px;
+      margin-top: 10px;
+      padding: 5px 50px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .sellerupdateItem {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .image-preview {
+      flex-basis: 30%;
+
+      img {
+        max-width: 150px;
+      }
+    }
+
+    .form-fields {
+      flex-basis: 70%;
+    }
+
+    .updatebuttonproduct {
+      margin-left: 50px;
+      padding: 1px 10px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Styles for desktop screen and above */
+  .sellerupdateItem {
+    .image-preview {
+      img {
+        max-width: 200px;
+      }
+    }
+  }
+}

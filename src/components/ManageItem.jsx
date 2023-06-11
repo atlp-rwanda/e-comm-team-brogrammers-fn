@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import deleteItemThunk from '../redux/features/actions/deleteItem';
 import availabilityThunk from '../redux/features/actions/changeAvailability';
@@ -77,7 +78,13 @@ function ManageItem({ product }) {
               )}
             </button>
             <button type="button" className="btn">
-              edit
+              <Link
+                to={`/collection/manageProducts/update/${
+                  product && product?.id
+                }`}
+              >
+                <p>edit</p>
+              </Link>
             </button>
             {disAbled ? (
               <button

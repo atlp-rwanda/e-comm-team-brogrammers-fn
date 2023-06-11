@@ -40,6 +40,7 @@ import Dash from './Views/admin/Dash';
 import SuccessSubscription from './Views/subscribe/success-subscription';
 import AdminSubscribe from './Views/admin/subscribers';
 import ChatIcon from './components/ChatIcon';
+import UpdateProductForm from './Views/updateProductForm';
 
 function App() {
   const room = 'brogrammers';
@@ -105,6 +106,10 @@ function App() {
           <Route
             path="/collection/manageProducts"
             element={<ManageProducts />}
+          />
+          <Route
+            path="/collection/manageProducts/update/:id"
+            element={<UpdateProductForm />}
           />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/orders/:id" element={<GetOrder />} />
